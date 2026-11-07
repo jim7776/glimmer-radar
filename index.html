@@ -280,7 +280,8 @@ function switchTab(name, push){
   });
   // 寫入歷史紀錄 → 滑鼠側鍵 / 瀏覽器返回鍵可退回上一個分頁
   if(push && history.pushState){
-    history.pushState({tab:name}, "", "#"+name);
+    history.pushState({tab:name, app:true}, "", "#"+name);
+    inAppDepth++;
   }
   updateBackBtn(name);
   window.scrollTo(0, 0);
@@ -292,14 +293,16 @@ function updateBackBtn(name){
   if(b) b.style.display = show ? "" : "none";
 }
 
-// 返回：回到上一個分頁；若無歷史紀錄則回首頁
+// 返回：只在「站內分頁歷史」內退回；沒有站內歷史時回首頁分頁，絕不跳出網站
+let inAppDepth = 0;   // 站內已推入的歷史筆數
 function goBack(){
-  if(history.length > 1){ history.back(); }
+  if(inAppDepth > 0){ history.back(); }
   else{ switchTab("radar"); }
 }
 
 // 瀏覽器返回鍵 / 滑鼠側鍵（Alt+←）觸發時，回到對應分頁
 window.addEventListener("popstate", e=>{
+  if(inAppDepth > 0) inAppDepth--;
   const name = (e.state && e.state.tab) || (location.hash || "#radar").replace("#","");
   const safe = ["radar","detail","feedback"].includes(name) ? name : "radar";
   switchTab(safe, false);
