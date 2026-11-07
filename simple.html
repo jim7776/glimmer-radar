@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>微光雷達｜升溫雷達榜</title>
+<style>body{font-family:sans-serif;padding:20px;max-width:900px;margin:0 auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left}th{background:#f0f0f0}.pv{background:#e8f5e9}.tag{background:#e8f5e9;color:#2e7d32;padding:2px 6px;border-radius:4px;font-size:.8em}</style></head>
+<body>
+<h1>微光雷達｜升溫雷達榜</h1>
+<p>更新：2026/11/07｜資料：PTT、YouTube、Google Trends（合規公開資料）</p>
+<table id="tbl"><thead><tr><th>排名</th><th>議題</th><th>升溫分</th><th>今日篇數</th><th>近3日</th><th>成長%</th><th>類型</th><th>樣本標題</th></tr></thead><tbody></tbody></table>
+<script>
+const data=[
+["都更危老",10.15,11,16,1440,true,"Fw: [新聞] 沈伯洋無限都更6步驟曝光!老屋住戶可換屋"],
+["AI 科技",3.88,3,6,600,false,"Re: [問卦] 為啥東方人接受AI比西方人快？"],
+["租屋居住",0.00,0,0,0,true,""],
+["長照高齡",0.00,1,1,0,true,"[閒聊] 老人、8+9或外勞會選擇哪個當鄰居？"],
+["兒少家庭",0.00,2,2,0,true,"[新聞] 蔣萬安掃水餃店爆霸凌！王鴻薇致歉 目"],
+["交通安全",0.00,0,1,-100,true,""],
+["電價能源",0.00,0,0,0,false,""],
+["房市政策",0.00,1,5,75,false,"Re: [請益] 一堆人哭暈在廁所 是不是房價利多？"]
+];
+const tb=document.querySelector("#tbl tbody");
+data.forEach((d,i)=>{
+  const tr=document.createElement("tr");
+  if(d[4]) tr.className="pv";
+  tr.innerHTML=`<td>${i+1}</td><td>${d[0]}${d[4]?' <span class="tag">公共價值</span>':''}</td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}</td><td>${d[4]}%</td><td>${d[4]?'公共價值':'一般'}</td><td>${d[6]}</td>`;
+  tb.appendChild(tr);
+});
+</script>
+</body></html>

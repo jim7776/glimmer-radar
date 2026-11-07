@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>微光雷達｜議題詳情</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--ink:#1a1a1a;--muted:#666;--primary:#0066cc;--bg:#fafafa;--card:#fff;--border:#e0e0e0;--pv:#e8f5e9;--pv-text:#2e7d32}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:10}
+h1{margin:0;font-size:1.2rem;font-weight:700}
+.back{display:inline-block;margin-bottom:12px;padding:8px 12px;background:#fff;border:1px solid var(--border);border-radius:6px;color:var(--primary);text-decoration:none;font-size:.9rem}
+.back:hover{background:var(--primary);color:#fff}
+main{max-width:800px;margin:0 auto;padding:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600}
+.tag-pv{background:var(--pv);color:var(--pv-text)}
+.badge{display:inline-block;padding:1px 6px;background:#fff3e0;color:#e65100;border-radius:3px;font-size:.65rem;font-weight:600;margin-left:8px}
+.section{margin-top:20px}
+.section h3{font-size:1rem;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.meta-item{background:#f5f5f5;padding:12px;border-radius:8px}
+.meta-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
+.meta-value{font-weight:600;font-size:1.1rem}
+.kw-list{display:flex;flex-wrap:wrap;gap:6px}
+.kw{background:#f0f0f0;padding:4px 10px;border-radius:999px;font-size:.85rem}
+.angle{background:#fffbe6;border-left:3 solid #ffb300;padding:10px 12px;margin:8px 0;border-radius:0 6px 6px 0}
+.source{background:#f5f5f5;padding:10px 12px;margin:8px 0;border-radius:6px}
+.ai-note{font-size:.8rem;color:var(--muted);margin-top:12px}
+footer{text-align:center;padding:24px;font-size:.75rem;color:var(--muted)}
+</style></head>
+<body>
+<header>
+  <h1>微光雷達 <span class="badge">Beta</span></h1>
+</header>
+<main>
+  <a class="back" href="simple.html">← 返回升溫榜</a>
+  <article class="card" id="headerCard">
+    <div class="row" style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px">
+      <div style="width:40px;height:40px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;color:#666" id="rankBadge">1</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span id="groupTitle" style="font-weight:600;font-size:1.1rem"></span>
+          <span id="pvTag" class="tag tag-pv" style="display:none">公共價值</span>
+        </div>
+        <div id="sampleTitle" style="color:var(--muted);font-size:.9rem"></div>
+      </div>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-item"><div class="meta-label">升溫分</div><div class="meta-value" id="score">-</div></div>
+      <div class="meta-item"><div class="meta-label">今日篇數</div><div class="meta-value" id="today">-</div></div>
+      <div class="meta-item"><div class="meta-label">近 3 日</div><div class="meta-value" id="last3">-</div></div>
+      <div class="meta-item"><div class="meta-label">成長幅度</div><div class="meta-value" id="growth">-</div></div>
+    </div>
+  </article>
+  <article class="card">
+    <div class="section">
+      <h3>推薦關鍵字群組</h3>
+      <div class="kw-list" id="keywords"></div>
+    </div>
+    <div class="section">
+      <h3>建議切入角度 <span class="badge">AI 生成</span></h3>
+      <div id="angles"></div>
+      <p class="ai-note">※ 以上由 LLM 依議題關鍵字自動生成，供記者參考發掘，請自行判斷核實</p>
+    </div>
+    <div class="section">
+      <h3>建議訪問對象</h3>
+      <div id="sources"></div>
+    </div>
+  </article>
+  <article class="card" style="text-align:center">
+    <a href="feedback.html" style="display:inline-block;padding:12px 24px;background:var(--primary);color:#fff;border-radius:6px;text-decoration:none;font-weight:600">
+      我有感，想回饋給記者 →
+    </a>
+  </article>
+</main>
+<footer>微光雷達｜2026 永續智慧創新黑客松｜資料來源：PTT、YouTube、Google Trends（合規公開資料）</footer>
+<script>
+const KNOWLEDGE = {"都更危老": {"keywords": ["都更", "危老", "重建", "容積", "建蔽", "無限都更", "門檻"], "angles": ["老屋住戶「換屋不換人」能否落地？", "都更門檻降至 50% 後，誰來蓋？", "無限都更是否只是選前支票？"], "sources": ["都市更新業者、都市計畫委員、老屋住戶代表、都發局官員"]}, "AI 科技": {"keywords": ["AI", "人工智慧", "ChatGPT", "機器人", "晶片", "生成式AI"], "angles": ["台灣 AI 人才缺口有多大？", "生成式 AI 讓哪些職位先消失？", "政府 AI 預算流向哪裡？"], "sources": ["產學界 AI 研究者、受影響產業從業者、數發部官員"]}, "交通安全": {"keywords": ["酒駕", "行人", "地雷", "交通事故", "肇逃", "捷運"], "angles": ["酒駕重罰後死亡率是否下降？", "行人天橋與地下道誰來管？", "捷運延遲對通勤族的隱形成本"], "sources": ["交通部專家、酒駕受害者家屬、捷運局工程師"]}, "長照高齡": {"keywords": ["長照", "老人", "高齡", "照護", "失智", "安養", "虐老"], "angles": ["長照機構檢查機制為何失靈？", "失智友善社區推展進度？", "外籍看護工權益保障現況"], "sources": ["長照機構負責人、失智照顧者家屬、衛福部長照司"]}, "租屋居住": {"keywords": ["租屋", "房租", "押金", "房東", "租約", "社會宅"], "angles": ["租屋合約版本統一化進度？", "房東任意漲租法律救濟？", "社會宅分配公平性？"], "sources": ["租屋權益團體、不動產仲介、內政部營建署"]}, "兒少家庭": {"keywords": ["兒少", "幼兒", "托育", "幼稚園", "營養午餐", "霸凌"], "angles": ["營養午餐標準為何十年不變？", "托育缺額地圖在哪裡？", "霸凌通報後處理流程透明度"], "sources": ["教育部國教署、營養師公會、家長會代表"]}, "電價能源": {"keywords": ["電價", "台電", "核電", "光電", "漲價", "能源"], "angles": ["電價調漲對產業鏈衝擊？", "核廢料最終置放方案？", "再生能源佔比能否達標？"], "sources": ["台電董事、經發會委員、綠能業者"]}, "房市政策": {"keywords": ["房價", "打炒房", "囤房", "房貸", "升息", "實價登錄"], "angles": ["打炒房新政實施半年成效？", "實價登錄 2.0 上路時間？", "青年安心成屋實際獲配率"], "sources": ["金管會官員、建商公會、不動產經紀人"]}};
+const RANK_DATA = [{"group": "都更危老", "score": "10.15", "today": "11", "last3": "16", "growth_pct": "1440.0", "public_value": "✓", "push_today": "76", "sample": "Fw: [新聞] 沈伯洋無限都更6步驟曝光!老屋住戶可換屋"}, {"group": "AI 科技", "score": "3.88", "today": "3", "last3": "6", "growth_pct": "600.0", "public_value": "", "push_today": "6", "sample": "Re: [問卦] 為啥東方人接受AI比西方人快？"}, {"group": "租屋居住", "score": "0.0", "today": "0", "last3": "0", "growth_pct": "0.0", "public_value": "✓", "push_today": "0", "sample": ""}, {"group": "長照高齡", "score": "0.0", "today": "1", "last3": "1", "growth_pct": "0.0", "public_value": "✓", "push_today": "4", "sample": "[閒聊] 老人、8+9或外勞會選擇哪個當鄰居？"}, {"group": "兒少家庭", "score": "0.0", "today": "2", "last3": "2", "growth_pct": "0.0", "public_value": "✓", "push_today": "41", "sample": "[新聞] 蔣萬安掃水餃店爆霸凌！王鴻薇致歉 目"}, {"group": "交通安全", "score": "0.0", "today": "0", "last3": "1", "growth_pct": "-100.0", "public_value": "✓", "push_today": "0", "sample": ""}, {"group": "電價能源", "score": "0.0", "today": "0", "last3": "0", "growth_pct": "0.0", "public_value": "", "push_today": "0", "sample": ""}, {"group": "房市政策", "score": "0.0", "today": "1", "last3": "5", "growth_pct": "75.0", "public_value": "", "push_today": "0", "sample": "Re: [請益] 一堆人哭暈在廁所 是不是房價利多？"}];
+const params = new URLSearchParams(location.search);
+const group = params.get("group") || "都更危老";
+const rank = RANK_DATA.findIndex(d => d.group === group) + 1;
+function render(){
+  const d = RANK_DATA.find(x => x.group === group) || RANK_DATA[0];
+  const k = KNOWLEDGE[group] || {keywords:[],angles:[],sources:[]};
+  document.getElementById("rankBadge").textContent = rank || "—";
+  document.getElementById("groupTitle").textContent = d.group;
+  document.getElementById("pvTag").style.display = d.public_value ? "inline-block" : "none";
+  document.getElementById("sampleTitle").textContent = d.sample;
+  document.getElementById("score").textContent = d.score;
+  document.getElementById("today").textContent = d.today + " 篇";
+  document.getElementById("last3").textContent = d.last3 + " 篇";
+  document.getElementById("growth").textContent = d.growth_pct + "%";
+  const kwEl = document.getElementById("keywords");
+  kwEl.innerHTML = k.keywords.map(w => `<span class="kw">${w}</span>`).join("");
+  const angEl = document.getElementById("angles");
+  angEl.innerHTML = k.angles.map(a => `<div class="angle">• ${a}</div>`).join("");
+  const srcEl = document.getElementById("sources");
+  srcEl.innerHTML = k.sources.map(s => `<div class="source">${s}</div>`).join("");
+}
+render();
+</script>
+</body></html>

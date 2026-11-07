@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>微光雷達｜升溫雷達榜（Debug版）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--bg:#fafafa;--card:#fff;--ink:#1a1a1a;--muted:#666;--primary:#0066cc;--primary-hover:#0052a3;--border:#e0e0e0;--pv:#e8f5e9;--pv-text:#2e7d32}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:10}
+h1{margin:0;font-size:1.25rem;font-weight:700}.sub{margin-top:4px;font-size:.85rem;color:var(--muted)}
+main{max-width:960px;margin:0 auto;padding:20px}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+select,button{padding:8px 14px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:.9rem;cursor:pointer}
+select:focus,button:focus{outline:2px solid var(--primary);outline-offset:2px}
+.btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn-primary:hover{background:var(--primary-hover)}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600}
+.tag-pv{background:var(--pv);color:var(--pv-text)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}
+.rank{width:36px;height:36px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:#666;flex-shrink:0}
+.rank-1{background:#fff3e0;color:#e65100}.rank-2{background:#fce4ec;color:#c2185b}.rank-3{background:#f3e5f5;color:#7b1fa2}
+.content{flex:1;min-width:0}.title{font-weight:600;font-size:1rem;margin-bottom:6px;word-break:break-word}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-bottom:8px}
+.meta span{display:flex;align-items:center;gap:4px}.score{font-weight:700;color:var(--primary)}
+.bar-wrap{height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden;margin-top:6px}
+.bar{height:100%;background:linear-gradient(90deg,#ffb300,#ff8f00);border-radius:3px;transition:width .3s}
+.actions{display:flex;gap:8px;margin-top:10px}.btn-sm{padding:6px 12px;font-size:.8rem}
+.detail{display:none;background:#fafafa;border:1px dashed var(--border);border-radius:8px;padding:12px;margin-top:10px;font-size:.85rem;line-height:1.6}
+.detail.open{display:block}
+.empty{text-align:center;padding:40px;color:var(--muted)}
+footer{text-align:center;padding:24px;font-size:.75rem;color:var(--muted)}
+.ai-badge{display:inline-block;margin-left:8px;padding:1px 6px;background:#fff3e0;color:#e65100;border-radius:3px;font-size:.65rem;font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>微光雷達 <span class="ai-badge">Debug</span></h1>
+  <div class="sub">AI 升溫雷達榜｜每日 08:30 更新｜資料來源：PTT、YouTube、Google Trends</div>
+</header>
+<main>
+  <div class="controls">
+    <label>日期 <select id="dateSel"></select></label>
+    <label>看板 <select id="boardSel"><option value="">全部</option></select></label>
+    <label>類型 <select id="typeSel"><option value="">全部</option><option value="pv">公共價值</option><option value="general">一般</option></select></label>
+    <button class="btn-primary" onclick="refresh()">重新整理</button>
+    <span style="margin-left:auto;font-size:.8rem;color:#666" id="stats"></span>
+  </div>
+  <div id="list"></div>
+</main>
+<footer>
+  微光雷達｜2026 永續智慧創新黑客松｜Debug 版
+  <br><a href="#" onclick="alert('Demo: 連到 F3 回流單頁')">我有感，想回饋給記者 →</a>
+</footer>
+
+<script>
+// ========== 資料（直接內嵌，免讀檔） ==========
+const EMBEDDED = {
+  "2026/11/07": [
+    {group:"都更危老",score:10.15,today:11,last3:16,growth_pct:1440,public_value:"✓",push_today:0,sample:"沈伯洋無限都更6步驟曝光!老屋住戶可換屋"},
+    {group:"AI 科技",score:3.88,today:3,last3:6,growth_pct:600,public_value:"",push_today:0,sample:"為啥東方人接受AI比西方人快？"},
+    {group:"交通安全",score:2.1,today:4,last3:7,growth_pct:350,public_value:"✓",push_today:0,sample:"酒駕慣犯撞死19歲男大生"},
+    {group:"長照高齡",score:1.8,today:3,last3:5,growth_pct:280,public_value:"✓",push_today:0,sample:"長照機構虐老案曝光"},
+    {group:"租屋居住",score:1.5,today:2,last3:4,growth_pct:200,public_value:"✓",push_today:0,sample:"房東任意漲租租客無法負擔"},
+    {group:"兒少家庭",score:1.2,today:2,last3:3,growth_pct:150,public_value:"✓",push_today:0,sample:"營養午餐香鬆2克引發討論"},
+    {group:"電價能源",score:0.9,today:2,last3:2,growth_pct:120,public_value:"",push_today:0,sample:"台電擬調漲電價"},
+    {group:"房市政策",score:0.7,today:2,last3:2,growth_pct:80,public_value:"",push_today:0,sample:"打炒房新政上路"}
+  ]
+};
+
+console.log("🔧 Debug: 腳本開始執行", new Date().toISOString());
+console.log("🔧 EMBEDDED keys:", Object.keys(EMBEDDED));
+
+let currentDate = "2026/11/07";
+let currentBoard = "";
+let currentType = "";
+
+// ========== 工具函數 ==========
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));}
+function keywordsFor(g){
+  const map={"都更危老":["都更","危老","重建","容積","建蔽","無限都更","門檻"],"AI 科技":["AI","人工智慧","ChatGPT","機器人","晶片","生成式AI"],"交通安全":["酒駕","行人","地雷","交通事故","肇逃","捷運"],"長照高齡":["長照","老人","高齡","照護","失智","安養","虐老"],"租屋居住":["租屋","房租","押金","房東","租約","社會宅"],"兒少家庭":["兒少","幼兒","托育","幼稚園","營養午餐","霸凌"],"電價能源":["電價","台電","核電","光電","漲價","能源"],"房市政策":["房價","打炒房","囤房","房貸","升息","實價登錄"]};
+  return (map[g]||[]).join("、");
+}
+function anglesFor(g){
+  const map={"都更危老":["老屋住戶「換屋不換人」能否落地？","都更門檻降至 50% 後，誰來蓋？","無限都更是否只是選前支票？"],"AI 科技":["台灣 AI 人才缺口有多大？","生成式 AI 讓哪些職位先消失？","政府 AI 預算流向哪裡？"],"交通安全":["酒駕重罰後死亡率是否下降？","行人天橋與地下道誰來管？","捷運延遲對通勤族的隱形成本"],"長照高齡":["長照機構檢查機制為何失靈？","失智友善社區推展進度？","外籍看護工權益保障現況"],"租屋居住":["租屋合約版本統一化進度？","房東任意漲租法律救濟？","社會宅分配公平性？"],"兒少家庭":["營養午餐標準為何十年不變？","托育缺額地圖在哪裡？","霸凌通報後處理流程透明度"],"電價能源":["電價調漲對產業鏈衝擊？","核廢料最終置放方案？","再生能源佔比能否達標？"],"房市政策":["打炒房新政實施半年成效？","實價登錄 2.0 上路時間？","青年安心成屋實際獲配率"]};
+  return map[g]||["（請記者自行發掘切入角度）"];
+}
+function sourcesFor(g){
+  const map={"都更危老":["都市更新業者、都市計畫委員、老屋住戶代表、都發局官員"],"AI 科技":["產學界 AI 研究者、受影響產業從業者、數發部官員"],"交通安全":["交通部專家、酒駕受害者家屬、捷運局工程師"],"長照高齡":["長照機構負責人、失智照顧者家屬、衛福部長照司"],"租屋居住":["租屋權益團體、不動產仲介、內政部營建署"],"兒少家庭":["教育部國教署、營養師公會、家長會代表"],"電價能源":["台電董事、經發會委員、綠能業者"],"房市政策":["金管會官員、建商公會、不動產經紀人"]};
+  return map[g]||["相關領域專家、主管機關、當事人"];
+}
+
+// ========== 渲染 ==========
+function render(){
+  console.log("🔧 render() called, currentDate:", currentDate);
+  const data = EMBEDDED[currentDate] || [];
+  console.log("🔧 data for date:", data.length, "items");
+  const list = document.getElementById("list");
+  const stats = document.getElementById("stats");
+
+  let filtered = data.filter(d=>{
+    if(currentType==="pv" && !d.public_value) return false;
+    if(currentType==="general" && d.public_value) return false;
+    return true;
+  });
+
+  stats.textContent = `共 ${filtered.length} 條｜公共價值 ${data.filter(d=>d.public_value).length} 條｜更新 ${currentDate}`;
+  console.log("🔧 filtered:", filtered.length);
+
+  if(!filtered.length){list.innerHTML=`<div class="empty">無符合條件資料</div>`;console.log("🔧 empty");return}
+
+  list.innerHTML = filtered.map((d,i)=>`<article class="card" data-group="${escapeHtml(d.group)}">
+    <div class="row">
+      <div class="rank rank-${i+1<=3?i+1:''}">${i+1}</div>
+      <div class="content">
+        <div class="title">${escapeHtml(d.group)} ${d.public_value?'<span class="tag tag-pv">公共價值</span>':''}</div>
+        <div class="meta">
+          <span>🔥 升溫分 <strong class="score">${d.score}</strong></span>
+          <span>📊 今日 ${d.today} 篇</span>
+          <span>📈 近 3 日 ${d.last3} 篇</span>
+          <span>📉 成長 ${d.growth_pct}%</span>
+        </div>
+        <div class="bar-wrap"><div class="bar" style="width:${Math.min(d.score/12*100,100)}%"></div></div>
+        <div class="actions">
+          <button class="btn-sm" style="background:#fff;border:1px solid #ccc" onclick="toggleDetail(this)">展開詳情</button>
+          <button class="btn-sm btn-primary" onclick="openLeadPack('${escapeHtml(d.group)}')">產出線索包 <span class="ai-badge">AI</span></button>
+          <button class="btn-sm" style="background:#fff;border:1px solid #ccc" onclick="alert('Demo: 複製關鍵字')">複製關鍵字</button>
+        </div>
+        <div class="detail">
+          <strong>樣本標題：</strong> ${escapeHtml(d.sample)}<br>
+          <strong>推薦關鍵字群組：</strong> ${escapeHtml(keywordsFor(d.group))}<br>
+          <strong>建議切入角度（AI 生成）：</strong><br>
+          ${anglesFor(d.group).map(a=>`• ${escapeHtml(a)}`).join('<br>')}<br>
+          <strong>建議訪問對象：</strong> ${escapeHtml(sourcesFor(d.group))}<br>
+          <em style="color:#999">※ 上述 AI 生成內容僅供參考，請記者自行判斷</em>
+        </div>
+      </div>
+    </div>
+  </article>`).join("");
+  console.log("🔧 DOM rendered");
+}
+
+function toggleDetail(btn){
+  const detail = btn.closest(".card").querySelector(".detail");
+  detail.classList.toggle("open");
+  btn.textContent = detail.classList.contains("open")?"收起詳情":"展開詳情";
+}
+function openLeadPack(group){ alert(`Demo: 開啟「${group}」的 F2 線索工作包`); }
+function refresh(){ console.log("🔧 refresh clicked"); render(); }
+
+// ========== 初始化 ==========
+function init(){
+  console.log("🔧 init() start");
+  const ds = document.getElementById("dateSel");
+  if(!ds){console.error("🔧 dateSel not found!");return}
+  Object.keys(EMBEDDED).sort().reverse().forEach(d=>{
+    const opt=document.createElement("option");opt.value=d;opt.textContent=d;
+    if(d===currentDate)opt.selected=true;ds.appendChild(opt);
+  });
+  ds.addEventListener("change",()=>{currentDate=ds.value;console.log("🔧 date changed to",currentDate);render()});
+  document.getElementById("boardSel").addEventListener("change",e=>{currentBoard=e.target.value;render()});
+  document.getElementById("typeSel").addEventListener("change",e=>{currentType=e.target.value;render()});
+  console.log("🔧 event listeners attached");
+  render();
+}
+
+// 啟動
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",init);
+}else{
+  init();
+}
+console.log("🔧 script loaded, readyState:", document.readyState);
+</script>
+</body>
+</html>

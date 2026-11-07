@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>微光雷達｜聲音回流</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--ink:#1a1a1a;--muted:#666;--primary:#0066cc;--primary-hover:#0052a3;--bg:#fafafa;--card:#fff;--border:#e0e0e0;--danger:#d00;--success:#2e7d32}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:10}
+h1{margin:0;font-size:1.2rem;font-weight:700}
+.back{display:inline-block;margin-bottom:16px;padding:8px 12px;background:#fff;border:1px solid var(--border);border-radius:6px;color:var(--primary);text-decoration:none;font-size:.9rem}
+.back:hover{background:var(--primary);color:#fff}
+main{max-width:560px;margin:0 auto;padding:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px}
+.label{display:block;font-weight:600;margin-bottom:8px;font-size:.95rem}
+.select-wrap{position:relative;margin-bottom:16px}
+select{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:1rem;appearance:none;cursor:pointer}
+select:focus{outline:2px solid var(--primary);outline-offset:2px}
+.textarea-wrap{margin-bottom:16px}
+textarea{width:100%;min-height:100px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:1rem;font-family:inherit;resize:vertical;line-height:1.5}
+textarea:focus{outline:2px solid var(--primary);outline-offset:2px}
+.char-count{text-align:right;font-size:.75rem;color:var(--muted);margin-top:6px}
+.btn{width:100%;padding:14px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-hover)}
+.btn-primary:disabled{background:#ccc;cursor:not-allowed}
+.msg{padding:12px 16px;border-radius:8px;margin-top:16px;display:none}
+.msg-success{background:#e8f5e9;color:var(--success);border:1px solid #c8e6c9;display:block}
+.msg-error{background:#fdecea;color:var(--danger);border:1px solid #f8bdbd;display:block}
+.hint{font-size:.8rem;color:var(--muted);margin-top:12px;text-align:center}
+footer{text-align:center;padding:24px;font-size:.75rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <h1>微光雷達 <span style="background:#fff3e0;color:#e65100;padding:1px 6px;border-radius:3px;font-size:.65rem;font-weight:600;margin-left:8px">Beta</span></h1>
+</header>
+<main>
+  <a class="back" href="simple.html">← 返回升溫榜</a>
+
+  <article class="card">
+    <h2 style="margin:0 0 8px;font-size:1.1rem">聲音回流</h2>
+    <p style="margin:0 0 20px;color:var(--muted)">這個議題你有感嗎？一句話讓記者看見民眾聲音</p>
+
+    <form id="form">
+      <div class="select-wrap">
+        <label class="label" for="topic">選擇議題</label>
+        <select id="topic" required>
+          <option value="">請選擇…</option>
+        </select>
+      </div>
+
+      <div class="textarea-wrap">
+        <label class="label" for="voice">你的聲音（50 字內）</label>
+        <textarea id="voice" maxlength="200" placeholder="例：我家附近都更案已拖 5 年，老屋滲水没人管，希望媒體關注…" required></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 200 字</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="submitBtn">送出回饋</button>
+    </form>
+
+    <div id="successMsg" class="msg msg-success">✅ 送出成功！感謝你的聲音，已匯入記者線索清單</div>
+    <div id="errorMsg" class="msg msg-error">❌ 送出失敗，請重試</div>
+
+    <p class="hint">※ 回饋將以 CSV 形式儲存，僅供記者選題參考，不公開個人資訊</p>
+  </article>
+</main>
+<footer>微光雷達｜2026 永續智慧創新黑客松｜<a href="feedback.csv" style="color:var(--primary)">下載回饋資料</a></footer>
+
+<script>
+// ========== 議題清單（同 simple.html） ==========
+const TOPICS = [
+  "都更危老","AI 科技","交通安全","長照高齡",
+  "租屋居住","兒少家庭","電價能源","房市政策"
+];
+
+// ========== 初始化下拉選單 ==========
+const sel = document.getElementById("topic");
+TOPICS.forEach(t => {
+  const opt = document.createElement("option");
+  opt.value = t; opt.textContent = t; sel.appendChild(opt);
+});
+
+// 從 URL 帶入預設議題
+const urlTopic = new URLSearchParams(location.search).get("topic");
+if(urlTopic && TOPICS.includes(urlTopic)) sel.value = urlTopic;
+
+// ========== 字數統計 ==========
+const ta = document.getElementById("voice");
+ta.addEventListener("input",()=>{
+  document.getElementById("charCount").textContent = ta.value.length;
+});
+
+// ========== 送出處理 ==========
+const form = document.getElementById("form");
+const btn = document.getElementById("submitBtn");
+const ok = document.getElementById("successMsg");
+const err = document.getElementById("errorMsg");
+
+form.addEventListener("submit", async e=>{
+  e.preventDefault();
+  if(!sel.value){ alert("請選擇議題"); return; }
+  if(!ta.value.trim()){ alert("請輸入你的聲音"); return; }
+
+  btn.disabled = true; btn.textContent = "送出中…";
+  ok.style.display = "none"; err.style.display = "none";
+
+  const row = {
+    time: new Date().toISOString().replace("T"," ").slice(0,19),
+    topic: sel.value,
+    voice: ta.value.trim().replace(/\n/g," "),
+  };
+
+  try{
+    // 嘗試呼叫後端 API（若有），失敗則走本地下載
+    const res = await fetch("save_feedback.php", {
+      method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(row)
+    });
+    if(res.ok){
+      showOk();
+    }else{
+      throw new Error("server error");
+    }
+  }catch{
+    // 無後端：觸發 CSV 下載（含既有資料＋新一筆）
+    downloadCSV(row);
+    showOk();
+  }
+  btn.disabled = false; btn.textContent = "送出回饋";
+});
+
+function showOk(){
+  ok.style.display = "block"; err.style.display = "none";
+  form.reset(); document.getElementById("charCount").textContent = "0";
+  setTimeout(()=>{ok.style.display="none"}, 4000);
+}
+function showErr(){ err.style.display = "block"; ok.style.display = "none"; }
+
+function downloadCSV(newRow){
+  // 讀取既有 feedback.csv（若有），合併後下載
+  fetch("feedback.csv")
+    .then(r=>r.ok?r.text():"")
+    .catch(()=>"")
+    .then(text=>{
+      const rows = text?text.trim().split("\n"):["時間,議題,聲音"];
+      rows.push(`${row.time},${row.topic},"${row.voice}"`);
+      const blob = new Blob([rows.join("\n")], {type:"text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "feedback.csv"; a.click();
+      URL.revokeObjectURL(url);
+    });
+}
+</script>
+</body></html>
