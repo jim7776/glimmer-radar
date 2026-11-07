@@ -309,7 +309,7 @@ function renderRadar(){
           <div class="bar-wrap"><div class="bar" style="width:${Math.min(d.score/13*100,100)}%"></div></div>
           <div class="actions">
             <button class="btn btn-sm" onclick="openDetail('${ESC(d.group)}')">開啟線索包</button>
-            <button class="btn btn-sm btn-primary" onclick="aiGenerate('${ESC(d.group)}')"><span class="badge-ai">AI</span> 產出線索包</button>
+            <button class="btn btn-sm btn-primary" onclick="copyPack('${ESC(d.group)}')">📋 一鍵複製線索包</button>
           </div>
         </div>
       </div>
@@ -322,33 +322,61 @@ function openDetail(group){
   currentDetailGroup = group;
   switchTab("detail");
   $("detailSel").value = group;
-  renderDetail(group, false);
+  renderDetail(group);
 }
 
-// AI 產出線索包：先顯示生成過程，再出現完整內容
-function aiGenerate(group){
-  if(!group) return;
-  currentDetailGroup = group;
-  switchTab("detail");
-  $("detailSel").value = group;
-  $("detailWrap").innerHTML = `<div class="card loading"><span class="spinner"></span>AI 正在分析「${ESC(group)}」的關鍵字、切角與訪問對象…</div>`;
-  setTimeout(()=>renderDetail(group, true), 900);
+// 一鍵複製線索包：把該議題的完整線索包轉成純文字，複製到剪貼簿
+function copyPack(group){
+  const list = RANK_DATA[currentDate] || [];
+  const d = list.find(x=>x.group===group) || {score:0,today:0,last3:0,growth:0,pv:false,sample:""};
+  const k = KNOWLEDGE[group] || {keywords:[],angles:[],sources:[]};
+  const rank = list.findIndex(x=>x.group===group)+1;
+  const text = [
+    `【微光雷達 線索包】${group}（${currentDate}）`,
+    rank>0 ? `排名 #${rank}｜` : "",
+    `升溫分 ${d.score}｜今日 ${d.today} 篇｜近3日 ${d.last3} 篇｜成長 ${d.growth}%`,
+    d.pv ? "公共價值議題" : "",
+    d.sample ? `樣本標題：${d.sample}` : "",
+    "",
+    `關鍵字：${k.keywords.join("、")}`,
+    "建議切入角度（AI 生成，請自行核實）：",
+    ...k.angles.map(a=>`  • ${a}`),
+    `建議訪問對象：${k.sources.join("、")}`,
+    "",
+    "資料來源：PTT 公開資料｜產出：微光雷達（2026 永續智慧創新黑客松）",
+  ].filter(x=>x!==undefined&&x!=="").join("\n");
+
+  const done = ()=>{
+    alert(`✅ 已複製「${group}」線索包（含關鍵字、3 個切角、訪問對象）\n可直接貼到採訪筆記或 Word。`);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));
+  }else{
+    fallbackCopy(text,done);
+  }
+}
+function fallbackCopy(text,done){
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); done(); }
+  catch(e){ alert("複製失敗，請手動選取內容"); }
+  document.body.removeChild(ta);
 }
 
-function renderDetail(group, isAI){
+function renderDetail(group){
   const list = RANK_DATA[currentDate] || [];
   const d = list.find(x=>x.group===group) || {group:group,score:0,today:0,last3:0,growth:0,pv:false,sample:""};
   const k = KNOWLEDGE[group] || {keywords:[],angles:[],sources:[]};
   const rank = list.findIndex(x=>x.group===group)+1;
   const rankBadge = rank>0 ? `<div class="rank-badge ${rank<4?'rank-'+rank:''}">${rank}</div>` : "";
-  const aiTag = isAI ? '<span class="badge-ai">AI 生成</span>' : "";
 
   $("detailWrap").innerHTML = `<article class="card">
     <div class="row">
       ${rankBadge}
       <div style="flex:1">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
-          <span class="title-row">${ESC(group)}</span>${aiTag}
+          <span class="title-row">${ESC(group)}</span>
           ${d.pv?'<span class="tag tag-pv">公共價值</span>':''}
         </div>
         <div style="color:var(--muted);font-size:.9rem">${ESC(d.sample||"（今日無樣本標題）")}</div>
@@ -363,14 +391,15 @@ function renderDetail(group, isAI){
     <div class="section"><h3>推薦關鍵字群組</h3>
       <div class="kw-list">${k.keywords.map(w=>`<span class="kw">${ESC(w)}</span>`).join("")}</div>
     </div>
-    <div class="section"><h3>建議切入角度 ${aiTag}</h3>
+    <div class="section"><h3>建議切入角度 <span class="badge-ai">AI 生成</span></h3>
       <div>${k.angles.map(a=>`<div class="angle">• ${ESC(a)}</div>`).join("")}</div>
       <p class="ai-note">※ 以上由 LLM 依議題關鍵字自動生成，供記者參考發掘，請自行判斷核實</p>
     </div>
     <div class="section"><h3>建議訪問對象</h3>
       <div>${k.sources.map(s=>`<div class="source">${ESC(s)}</div>`).join("")}</div>
     </div>
-    <div style="margin-top:16px;text-align:center">
+    <div style="margin-top:16px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="btn" onclick="copyPack('${ESC(group)}')">📋 複製線索包</button>
       <button class="btn btn-primary" onclick="goFeedback('${ESC(group)}')">我有感，想回饋給記者 →</button>
     </div>
   </article>`;
