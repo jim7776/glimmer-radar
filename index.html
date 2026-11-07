@@ -1,177 +1,305 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<title>微光雷達｜升溫雷達榜（Debug版）</title>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<title>微光雷達｜完整版（單檔）</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-:root{--bg:#fafafa;--card:#fff;--ink:#1a1a1a;--muted:#666;--primary:#0066cc;--primary-hover:#0052a3;--border:#e0e0e0;--pv:#e8f5e9;--pv-text:#2e7d32}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
-header{background:#fff;border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:10}
-h1{margin:0;font-size:1.25rem;font-weight:700}.sub{margin-top:4px;font-size:.85rem;color:var(--muted)}
-main{max-width:960px;margin:0 auto;padding:20px}
-.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
-select,button{padding:8px 14px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:.9rem;cursor:pointer}
-select:focus,button:focus{outline:2px solid var(--primary);outline-offset:2px}
-.btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
-.btn-primary:hover{background:var(--primary-hover)}
-.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600}
-.tag-pv{background:var(--pv);color:var(--pv-text)}
+:root{--ink:#1a1a1a;--muted:#666;--primary:#0066cc;--primary-h:#0052a3;--bg:#fafafa;--card:#fff;--border:#e0e0e0;--pv:#e8f5e9;--pv-t:#2e7d32;--warn:#fff3e0;--warn-t:#e65100;--danger:#d00;--ok:#2e7d32}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:#fff;border-bottom:1px solid var(--border);padding:12px 16px;position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.badge{font-size:.6rem;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--warn);color:var(--warn-t)}
+.nav{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.tab{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--ink);font-size:.8rem;cursor:pointer}
+.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+main{padding:16px;max-width:1000px;margin:0 auto;width:100%}
+.view{display:none}.view.active{display:block}
 .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
-.row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}
-.rank{width:36px;height:36px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:#666;flex-shrink:0}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600}
+.tag-pv{background:var(--pv);color:var(--pv-t)}
+.badge-ai{font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--warn);color:var(--warn-t);margin-left:6px}
+.rank-badge{width:36px;height:36px;border-radius:8px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:#666;flex-shrink:0}
 .rank-1{background:#fff3e0;color:#e65100}.rank-2{background:#fce4ec;color:#c2185b}.rank-3{background:#f3e5f5;color:#7b1fa2}
-.content{flex:1;min-width:0}.title{font-weight:600;font-size:1rem;margin-bottom:6px;word-break:break-word}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:10px}
+.title-row{font-weight:600;font-size:1rem;margin-bottom:4px;word-break:break-word}
 .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-bottom:8px}
-.meta span{display:flex;align-items:center;gap:4px}.score{font-weight:700;color:var(--primary)}
+.meta span{display:flex;align-items:center;gap:4px}
+.score{font-weight:700;color:var(--primary)}
 .bar-wrap{height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden;margin-top:6px}
-.bar{height:100%;background:linear-gradient(90deg,#ffb300,#ff8f00);border-radius:3px;transition:width .3s}
-.actions{display:flex;gap:8px;margin-top:10px}.btn-sm{padding:6px 12px;font-size:.8rem}
-.detail{display:none;background:#fafafa;border:1px dashed var(--border);border-radius:8px;padding:12px;margin-top:10px;font-size:.85rem;line-height:1.6}
-.detail.open{display:block}
+.bar{height:100%;background:linear-gradient(90deg,#ffb300,#ff8f00);border-radius:3px}
+.kw-list{display:flex;flex-wrap:wrap;gap:6px}
+.kw{background:#f0f0f0;padding:4px 10px;border-radius:999px;font-size:.85rem}
+.angle{background:#fffbe6;border-left:3px solid #ffb300;padding:10px 12px;margin:8px 0;border-radius:0 6px 6px 0}
+.source{background:#f5f5f5;padding:10px 12px;margin:8px 0;border-radius:6px}
+.ai-note{font-size:.8rem;color:var(--muted);margin-top:8px}
+.section{margin-top:16px}
+.section h3{font-size:.95rem;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.btn{padding:8px 16px;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:.85rem;cursor:pointer}
+.btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn-primary:hover{background:var(--primary-h)}
+.btn-sm{padding:6px 12px;font-size:.8rem}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .empty{text-align:center;padding:40px;color:var(--muted)}
-footer{text-align:center;padding:24px;font-size:.75rem;color:var(--muted)}
-.ai-badge{display:inline-block;margin-left:8px;padding:1px 6px;background:#fff3e0;color:#e65100;border-radius:3px;font-size:.65rem;font-weight:600}
-</style>
-</head>
-<body>
+footer{text-align:center;padding:16px;font-size:.7rem;color:var(--muted);border-top:1px solid var(--border);background:#fff}
+.fb-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;max-width:560px}
+.fb-label{display:block;font-weight:600;margin-bottom:8px;font-size:.9rem}
+.fb-select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:.95rem;margin-bottom:12px}
+.fb-textarea{width:100%;min-height:90px;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:.95rem;font-family:inherit;resize:vertical;line-height:1.5;margin-bottom:8px}
+.fb-count{text-align:right;font-size:.7rem;color:var(--muted);margin-bottom:12px}
+.fb-btn{width:100%;padding:12px;border:none;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;background:var(--primary);color:#fff}
+.fb-btn:disabled{background:#ccc}
+.fb-msg{padding:10px 12px;border-radius:8px;margin-top:12px;display:none}
+.fb-ok{background:#e8f5e9;color:var(--ok);border:1px solid #c8e6c9;display:block}
+.fb-err{background:#fdecea;color:var(--danger);border:1px solid #f8bdbd;display:block}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat{background:#f5f5f5;padding:10px;border-radius:8px}
+.stat-label{font-size:.7rem;color:var(--muted);margin-bottom:2px}
+.stat-value{font-weight:700;font-size:1.05rem}
+</style></head><body>
+
 <header>
-  <h1>微光雷達 <span class="ai-badge">Debug</span></h1>
-  <div class="sub">AI 升溫雷達榜｜每日 08:30 更新｜資料來源：PTT、YouTube、Google Trends</div>
+  <h1>微光雷達 <span class="badge">Beta</span></h1>
+  <nav class="nav" aria-label="功能分頁">
+    <button class="tab active" onclick="switchTab('radar')">📡 升溫雷達榜</button>
+    <button class="tab" onclick="switchTab('detail')">📋 線索工作包</button>
+    <button class="tab" onclick="switchTab('feedback')">🗣️ 聲音回流</button>
+  </nav>
 </header>
+
 <main>
-  <div class="controls">
-    <label>日期 <select id="dateSel"></select></label>
-    <label>看板 <select id="boardSel"><option value="">全部</option></select></label>
-    <label>類型 <select id="typeSel"><option value="">全部</option><option value="pv">公共價值</option><option value="general">一般</option></select></label>
-    <button class="btn-primary" onclick="refresh()">重新整理</button>
-    <span style="margin-left:auto;font-size:.8rem;color:#666" id="stats"></span>
-  </div>
-  <div id="list"></div>
+  <!-- 雷達榜 -->
+  <section id="v-radar" class="view active">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center">
+      <label style="font-size:.8rem">日期 <select id="dateSel" onchange="renderRadar()" style="padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"></select></label>
+      <label style="font-size:.8rem">類型 <select id="typeSel" onchange="renderRadar()" style="padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"><option value="">全部</option><option value="pv">公共價值</option><option value="general">一般</option></select></label>
+      <span id="radarStats" style="margin-left:auto;font-size:.75rem;color:var(--muted)"></span>
+    </div>
+    <div id="radarList"></div>
+  </section>
+
+  <!-- 詳情 -->
+  <section id="v-detail" class="view">
+    <div style="margin-bottom:12px;font-size:.8rem;color:var(--muted)">
+      從雷達榜點選「開啟線索包」，或在下方選擇議題：
+      <select id="detailSel" onchange="openDetail(this.value)" style="margin-left:8px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"></select>
+    </div>
+    <div id="detailWrap"><div class="empty">請先在「升溫雷達榜」點選議題，或上方下拉選單選擇</div></div>
+  </section>
+
+  <!-- 回流 -->
+  <section id="v-feedback" class="view">
+    <article class="fb-card">
+      <h2 style="margin:0 0 6px;font-size:1.05rem">聲音回流</h2>
+      <p style="margin:0 0 16px;color:var(--muted)">這個議題你有感嗎？一句話讓記者看見民眾聲音</p>
+      <form id="fbForm" onsubmit="submitFeedback(event)">
+        <label class="fb-label" for="fbTopic">選擇議題</label>
+        <select id="fbTopic" class="fb-select" required><option value="">請選擇…</option></select>
+        <label class="fb-label" for="fbVoice">你的聲音（200 字內）</label>
+        <textarea id="fbVoice" class="fb-textarea" maxlength="200" placeholder="例：我家附近都更案已拖 5 年，老屋滲水没人管，希望媒體關注…" required></textarea>
+        <div class="fb-count"><span id="fbCount">0</span> / 200 字</div>
+        <button type="submit" class="fb-btn" id="fbBtn">送出回饋</button>
+      </form>
+      <div id="fbOk" class="fb-msg fb-ok">✅ 送出成功！感謝你的聲音，已匯入記者線索清單</div>
+      <div id="fbErr" class="fb-msg fb-err">❌ 送出失敗，請重試</div>
+      <p style="font-size:.7rem;color:var(--muted);margin-top:12px;text-align:center">※ 回饋將以 CSV 形式儲存，僅供記者選題參考，不公開個人資訊</p>
+    </article>
+  </section>
 </main>
+
 <footer>
-  微光雷達｜2026 永續智慧創新黑客松｜Debug 版
-  <br><a href="#" onclick="alert('Demo: 連到 F3 回流單頁')">我有感，想回饋給記者 →</a>
+  微光雷達｜2026 永續智慧創新黑客松｜資料：PTT、YouTube、Google Trends（合規公開資料）｜
+  <a href="#" onclick="downloadFeedbackCSV()" style="color:var(--primary)">下載回饋 CSV</a>
 </footer>
 
 <script>
-// ========== 資料（直接內嵌，免讀檔） ==========
-const EMBEDDED = {
-  "2026/11/07": [
-    {group:"都更危老",score:10.15,today:11,last3:16,growth_pct:1440,public_value:"✓",push_today:0,sample:"沈伯洋無限都更6步驟曝光!老屋住戶可換屋"},
-    {group:"AI 科技",score:3.88,today:3,last3:6,growth_pct:600,public_value:"",push_today:0,sample:"為啥東方人接受AI比西方人快？"},
-    {group:"交通安全",score:2.1,today:4,last3:7,growth_pct:350,public_value:"✓",push_today:0,sample:"酒駕慣犯撞死19歲男大生"},
-    {group:"長照高齡",score:1.8,today:3,last3:5,growth_pct:280,public_value:"✓",push_today:0,sample:"長照機構虐老案曝光"},
-    {group:"租屋居住",score:1.5,today:2,last3:4,growth_pct:200,public_value:"✓",push_today:0,sample:"房東任意漲租租客無法負擔"},
-    {group:"兒少家庭",score:1.2,today:2,last3:3,growth_pct:150,public_value:"✓",push_today:0,sample:"營養午餐香鬆2克引發討論"},
-    {group:"電價能源",score:0.9,today:2,last3:2,growth_pct:120,public_value:"",push_today:0,sample:"台電擬調漲電價"},
-    {group:"房市政策",score:0.7,today:2,last3:2,growth_pct:80,public_value:"",push_today:0,sample:"打炒房新政上路"}
-  ]
+// ========== 資料 ==========
+const RANK_DATA = [
+  {group:"都更危老",score:10.15,today:11,last3:16,growth:1440,pv:true,sample:"沈伯洋無限都更6步驟曝光!老屋住戶可換屋"},
+  {group:"AI 科技",score:3.88,today:3,last3:6,growth:600,pv:false,sample:"為啥東方人接受AI比西方人快？"},
+  {group:"交通安全",score:2.1,today:4,last3:7,growth:350,pv:true,sample:"酒駕慣犯撞死19歲男大生"},
+  {group:"長照高齡",score:1.8,today:3,last3:5,growth:280,pv:true,sample:"長照機構虐老案曝光"},
+  {group:"租屋居住",score:1.5,today:2,last3:4,growth:200,pv:true,sample:"房東任意漲租租客無法負擔"},
+  {group:"兒少家庭",score:1.2,today:2,last3:3,growth:150,pv:true,sample:"營養午餐香鬆2克引發討論"},
+  {group:"電價能源",score:0.9,today:2,last3:2,growth:120,pv:false,sample:"台電擬調漲電價"},
+  {group:"房市政策",score:0.7,today:2,last3:2,growth:80,pv:false,sample:"打炒房新政上路"}
+];
+const KNOWLEDGE = {
+  "都更危老":{keywords:["都更","危老","重建","容積","建蔽","無限都更","門檻"],angles:["老屋住戶「換屋不換人」能否落地？","都更門檻降至 50% 後，誰來蓋？","無限都更是否只是選前支票？"],sources:["都市更新業者、都市計畫委員、老屋住戶代表、都發局官員"]},
+  "AI 科技":{keywords:["AI","人工智慧","ChatGPT","機器人","晶片","生成式AI"],angles:["台灣 AI 人才缺口有多大？","生成式 AI 讓哪些職位先消失？","政府 AI 預算流向哪裡？"],sources:["產學界 AI 研究者、受影響產業從業者、數發部官員"]},
+  "交通安全":{keywords:["酒駕","行人","地雷","交通事故","肇逃","捷運"],angles:["酒駕重罰後死亡率是否下降？","行人天橋與地下道誰來管？","捷運延遲對通勤族的隱形成本"],sources:["交通部專家、酒駕受害者家屬、捷運局工程師"]},
+  "長照高齡":{keywords:["長照","老人","高齡","照護","失智","安養","虐老"],angles:["長照機構檢查機制為何失靈？","失智友善社區推展進度？","外籍看護工權益保障現況"],sources:["長照機構負責人、失智照顧者家屬、衛福部長照司"]},
+  "租屋居住":{keywords:["租屋","房租","押金","房東","租約","社會宅"],angles:["租屋合約版本統一化進度？","房東任意漲租法律救濟？","社會宅分配公平性？"],sources:["租屋權益團體、不動產仲介、內政部營建署"]},
+  "兒少家庭":{keywords:["兒少","幼兒","托育","幼稚園","營養午餐","霸凌"],angles:["營養午餐標準為何十年不變？","托育缺額地圖在哪裡？","霸凌通報後處理流程透明度"],sources:["教育部國教署、營養師公會、家長會代表"]},
+  "電價能源":{keywords:["電價","台電","核電","光電","漲價","能源"],angles:["電價調漲對產業鏈衝擊？","核廢料最終置放方案？","再生能源佔比能否達標？"],sources:["台電董事、經發會委員、綠能業者"]},
+  "房市政策":{keywords:["房價","打炒房","囤房","房貸","升息","實價登錄"],angles:["打炒房新政實施半年成效？","實價登錄 2.0 上路時間？","青年安心成屋實際獲配率"],sources:["金管會官員、建商公會、不動產經紀人"]}
 };
+const TOPICS = RANK_DATA.map(d=>d.group);
+const ESC = s=>String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
 
-console.log("🔧 Debug: 腳本開始執行", new Date().toISOString());
-console.log("🔧 EMBEDDED keys:", Object.keys(EMBEDDED));
-
-let currentDate = "2026/11/07";
-let currentBoard = "";
+// ========== 狀態 ==========
 let currentType = "";
 
-// ========== 工具函數 ==========
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));}
-function keywordsFor(g){
-  const map={"都更危老":["都更","危老","重建","容積","建蔽","無限都更","門檻"],"AI 科技":["AI","人工智慧","ChatGPT","機器人","晶片","生成式AI"],"交通安全":["酒駕","行人","地雷","交通事故","肇逃","捷運"],"長照高齡":["長照","老人","高齡","照護","失智","安養","虐老"],"租屋居住":["租屋","房租","押金","房東","租約","社會宅"],"兒少家庭":["兒少","幼兒","托育","幼稚園","營養午餐","霸凌"],"電價能源":["電價","台電","核電","光電","漲價","能源"],"房市政策":["房價","打炒房","囤房","房貸","升息","實價登錄"]};
-  return (map[g]||[]).join("、");
+// ========== 工具 ==========
+function $(id){return document.getElementById(id)}
+function switchTab(name){
+  ['radar','detail','feedback'].forEach(n=>{
+    const v=$( 'v-'+n ), t=$('tab-'+n);
+    if(v) v.classList.toggle('active', n===name);
+    if(t) t.classList.toggle('active', n===name);
+  });
 }
-function anglesFor(g){
-  const map={"都更危老":["老屋住戶「換屋不換人」能否落地？","都更門檻降至 50% 後，誰來蓋？","無限都更是否只是選前支票？"],"AI 科技":["台灣 AI 人才缺口有多大？","生成式 AI 讓哪些職位先消失？","政府 AI 預算流向哪裡？"],"交通安全":["酒駕重罰後死亡率是否下降？","行人天橋與地下道誰來管？","捷運延遲對通勤族的隱形成本"],"長照高齡":["長照機構檢查機制為何失靈？","失智友善社區推展進度？","外籍看護工權益保障現況"],"租屋居住":["租屋合約版本統一化進度？","房東任意漲租法律救濟？","社會宅分配公平性？"],"兒少家庭":["營養午餐標準為何十年不變？","托育缺額地圖在哪裡？","霸凌通報後處理流程透明度"],"電價能源":["電價調漲對產業鏈衝擊？","核廢料最終置放方案？","再生能源佔比能否達標？"],"房市政策":["打炒房新政實施半年成效？","實價登錄 2.0 上路時間？","青年安心成屋實際獲配率"]};
-  return map[g]||["（請記者自行發掘切入角度）"];
+function setTabs(){ // 重新綁定 tab 按鈕
+  $$('.tab').forEach((btn,i)=>{
+    const views=['radar','detail','feedback'];
+    btn.onclick=()=>switchTab(views[i]);
+  });
 }
-function sourcesFor(g){
-  const map={"都更危老":["都市更新業者、都市計畫委員、老屋住戶代表、都發局官員"],"AI 科技":["產學界 AI 研究者、受影響產業從業者、數發部官員"],"交通安全":["交通部專家、酒駕受害者家屬、捷運局工程師"],"長照高齡":["長照機構負責人、失智照顧者家屬、衛福部長照司"],"租屋居住":["租屋權益團體、不動產仲介、內政部營建署"],"兒少家庭":["教育部國教署、營養師公會、家長會代表"],"電價能源":["台電董事、經發會委員、綠能業者"],"房市政策":["金管會官員、建商公會、不動產經紀人"]};
-  return map[g]||["相關領域專家、主管機關、當事人"];
+function $$(sel){return document.querySelectorAll(sel)}
+
+// ========== 初始化（DOMContentLoaded 確保元素存在） ==========
+document.addEventListener('DOMContentLoaded',()=>{
+  console.log('✅ DOM ready, init start');
+  // 日期下拉
+  $('dateSel').innerHTML = '<option value="2026/11/07">2026/11/07</option>';
+  // 類型下拉已在 HTML
+  // 詳情下拉
+  $('detailSel').innerHTML = '<option value="">請選擇議題…</option>' + TOPICS.map(t=>`<option value="${ESC(t)}">${ESC(t)}</option>`).join('');
+  // 回流下拉
+  $('fbTopic').innerHTML = '<option value="">請選擇…</option>' + TOPICS.map(t=>`<option value="${ESC(t)}">${ESC(t)}</option>`).join('');
+  // 字數計數
+  $('fbVoice').addEventListener('input',()=>$('fbCount').textContent=$('fbVoice').value.length);
+  // Tab 綁定（用 inline onclick 但這裡再保險綁一次）
+  $$('.tab').forEach((btn,i)=>{
+    const views=['radar','detail','feedback'];
+    btn.onclick=()=>switchTab(views[i]);
+  });
+  // 初始渲染
+  renderRadar();
+  console.log('✅ Init done');
+});
+
+// ========== Tab 切換 ==========
+function switchTab(name){
+  ['radar','detail','feedback'].forEach(n=>{
+    const v=$( 'v-'+n );
+    if(v) v.classList.toggle('active', n===name);
+  });
+  // 更新 tab 按鈕樣式
+  $$('.tab').forEach((btn,i)=>{
+    const views=['radar','detail','feedback'];
+    btn.classList.toggle('active', views[i]===name);
+  });
 }
 
-// ========== 渲染 ==========
-function render(){
-  console.log("🔧 render() called, currentDate:", currentDate);
-  const data = EMBEDDED[currentDate] || [];
-  console.log("🔧 data for date:", data.length, "items");
-  const list = document.getElementById("list");
-  const stats = document.getElementById("stats");
-
-  let filtered = data.filter(d=>{
-    if(currentType==="pv" && !d.public_value) return false;
-    if(currentType==="general" && d.public_value) return false;
+// ========== 雷達榜 ==========
+function renderRadar(){
+  const data = RANK_DATA.filter(d=>{
+    if(currentType==="pv" && !d.pv) return false;
+    if(currentType==="general" && d.pv) return false;
     return true;
   });
-
-  stats.textContent = `共 ${filtered.length} 條｜公共價值 ${data.filter(d=>d.public_value).length} 條｜更新 ${currentDate}`;
-  console.log("🔧 filtered:", filtered.length);
-
-  if(!filtered.length){list.innerHTML=`<div class="empty">無符合條件資料</div>`;console.log("🔧 empty");return}
-
-  list.innerHTML = filtered.map((d,i)=>`<article class="card" data-group="${escapeHtml(d.group)}">
+  $('radarStats').textContent = `共 ${data.length} 條｜公共價值 ${RANK_DATA.filter(d=>d.pv).length} 條｜更新 2026/11/07`;
+  if(!data.length){$('radarList').innerHTML='<div class="empty">無符合條件資料</div>';return}
+  $('radarList').innerHTML = data.map((d,i)=>`<article class="card" data-group="${ESC(d.group)}">
     <div class="row">
-      <div class="rank rank-${i+1<=3?i+1:''}">${i+1}</div>
-      <div class="content">
-        <div class="title">${escapeHtml(d.group)} ${d.public_value?'<span class="tag tag-pv">公共價值</span>':''}</div>
+      <div class="rank-badge ${i<=2?'rank-'+(i+1):''}">${i+1}</div>
+      <div style="flex:1;min-width:0">
+        <div class="title-row">${ESC(d.group)} ${d.pv?'<span class="tag tag-pv">公共價值</span>':''}</div>
         <div class="meta">
           <span>🔥 升溫分 <strong class="score">${d.score}</strong></span>
           <span>📊 今日 ${d.today} 篇</span>
           <span>📈 近 3 日 ${d.last3} 篇</span>
-          <span>📉 成長 ${d.growth_pct}%</span>
+          <span>📉 成長 ${d.growth}%</span>
         </div>
         <div class="bar-wrap"><div class="bar" style="width:${Math.min(d.score/12*100,100)}%"></div></div>
         <div class="actions">
-          <button class="btn-sm" style="background:#fff;border:1px solid #ccc" onclick="toggleDetail(this)">展開詳情</button>
-          <button class="btn-sm btn-primary" onclick="openLeadPack('${escapeHtml(d.group)}')">產出線索包 <span class="ai-badge">AI</span></button>
-          <button class="btn-sm" style="background:#fff;border:1px solid #ccc" onclick="alert('Demo: 複製關鍵字')">複製關鍵字</button>
-        </div>
-        <div class="detail">
-          <strong>樣本標題：</strong> ${escapeHtml(d.sample)}<br>
-          <strong>推薦關鍵字群組：</strong> ${escapeHtml(keywordsFor(d.group))}<br>
-          <strong>建議切入角度（AI 生成）：</strong><br>
-          ${anglesFor(d.group).map(a=>`• ${escapeHtml(a)}`).join('<br>')}<br>
-          <strong>建議訪問對象：</strong> ${escapeHtml(sourcesFor(d.group))}<br>
-          <em style="color:#999">※ 上述 AI 生成內容僅供參考，請記者自行判斷</em>
+          <button class="btn btn-sm" onclick="openDetail('${ESC(d.group)}')">開啟線索包</button>
+          <button class="btn btn-sm btn-primary" onclick="openDetail('${ESC(d.group)}')"><span class="badge-ai">AI</span> 產出線索包</button>
         </div>
       </div>
     </div>
   </article>`).join("");
-  console.log("🔧 DOM rendered");
+}
+function openDetail(group){
+  if(!group) return;
+  switchTab('detail');
+  $('detailSel').value = group;
+  renderDetail(group);
 }
 
-function toggleDetail(btn){
-  const detail = btn.closest(".card").querySelector(".detail");
-  detail.classList.toggle("open");
-  btn.textContent = detail.classList.contains("open")?"收起詳情":"展開詳情";
+// ========== 詳情 ==========
+function renderDetail(group){
+  const d = RANK_DATA.find(x=>x.group===group) || RANK_DATA[0];
+  const k = KNOWLEDGE[group] || {keywords:[],angles:[],sources:[]};
+  const rank = RANK_DATA.findIndex(x=>x.group===group)+1;
+  const rankCls = rank<=3?'rank-'+rank:'';
+  $('detailWrap').innerHTML = `<article class="card">
+    <div class="row">
+      <div class="rank-badge ${rankCls}">${rank}</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="title-row">${ESC(d.group)}</span>
+          ${d.pv?'<span class="tag tag-pv">公共價值</span>':''}
+        </div>
+        <div style="color:var(--muted);font-size:.9rem">${ESC(d.sample)}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0">
+      <div class="stat"><div class="stat-label">升溫分</div><div class="stat-value">${d.score}</div></div>
+      <div class="stat"><div class="stat-label">今日篇數</div><div class="stat-value">${d.today} 篇</div></div>
+      <div class="stat"><div class="stat-label">近 3 日</div><div class="stat-value">${d.last3} 篇</div></div>
+      <div class="stat"><div class="stat-label">成長幅度</div><div class="stat-value">${d.growth}%</div></div>
+    </div>
+    <div style="margin-top:16px"><h3 style="font-size:.95rem;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">推薦關鍵字群組</h3>
+      <div class="kw-list">${k.keywords.map(w=>`<span class="kw">${ESC(w)}</span>`).join('')}</div>
+    </div>
+    <div style="margin-top:16px"><h3 style="font-size:.95rem;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">建議切入角度 <span class="badge-ai">AI 生成</span></h3>
+      <div>${k.angles.map(a=>`<div style="background:#fffbe6;border-left:3px solid #ffb300;padding:10px 12px;margin:8px 0;border-radius:0 6px 6px 0">• ${ESC(a)}</div>`).join('')}</div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:8px">※ 以上由 LLM 依議題關鍵字自動生成，供記者參考發掘，請自行判斷核實</p>
+    </div>
+    <div style="margin-top:16px"><h3 style="font-size:.95rem;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">建議訪問對象</h3>
+      <div>${k.sources.map(s=>`<div style="background:#f5f5f5;padding:10px 12px;margin:8px 0;border-radius:6px">${ESC(s)}</div>`).join('')}</div>
+    </div>
+    <div style="margin-top:16px;text-align:center">
+      <button class="btn btn-primary" onclick="switchTab('feedback');$('fbTopic').value='${ESC(group)}';">我有感，想回饋給記者 →</button>
+    </div>
+  </article>`;
 }
-function openLeadPack(group){ alert(`Demo: 開啟「${group}」的 F2 線索工作包`); }
-function refresh(){ console.log("🔧 refresh clicked"); render(); }
 
-// ========== 初始化 ==========
-function init(){
-  console.log("🔧 init() start");
-  const ds = document.getElementById("dateSel");
-  if(!ds){console.error("🔧 dateSel not found!");return}
-  Object.keys(EMBEDDED).sort().reverse().forEach(d=>{
-    const opt=document.createElement("option");opt.value=d;opt.textContent=d;
-    if(d===currentDate)opt.selected=true;ds.appendChild(opt);
+// ========== 回流 ==========
+function initFeedback(){
+  $('fbTopic').innerHTML = '<option value="">請選擇…</option>' + TOPICS.map(t=>`<option value="${ESC(t)}">${ESC(t)}</option>`).join('');
+  $('fbVoice').addEventListener('input',()=>$('fbCount').textContent=$('fbVoice').value.length);
+}
+function submitFeedback(e){
+  e.preventDefault();
+  const topic=$('fbTopic').value, voice=$('fbVoice').value.trim();
+  if(!topic){alert('請選擇議題');return}
+  if(!voice){alert('請輸入你的聲音');return}
+  const btn=$('fbBtn'); btn.disabled=true; btn.textContent='送出中…';
+  $('fbOk').style.display='none'; $('fbErr').style.display='none';
+  const row={time:new Date().toISOString().replace('T',' ').slice(0,19),topic,voice:voice.replace(/\n/g,' ')};
+  try{
+    const res=fetch('save_feedback.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(row)});
+    if(res.ok) showFbOk(); else throw new Error('no backend');
+  }catch{downloadCSV(row); showFbOk();}
+  btn.disabled=false; btn.textContent='送出回饋';
+}
+function showFbOk(){$('fbOk').style.display='block';$('fbErr').style.display='none';$('fbForm').reset();$('fbCount').textContent='0';setTimeout(()=>$('fbOk').style.display='none',4000)}
+function downloadCSV(row){
+  fetch('feedback.csv').then(r=>r.ok?r.text():'').catch(()=>'').then(text=>{
+    const rows=text?text.trim().split('\n'):['時間,議題,聲音'];
+    rows.push(`${row.time},${row.topic},"${row.voice}"`);
+    const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='feedback.csv';a.click();URL.revokeObjectURL(url);
   });
-  ds.addEventListener("change",()=>{currentDate=ds.value;console.log("🔧 date changed to",currentDate);render()});
-  document.getElementById("boardSel").addEventListener("change",e=>{currentBoard=e.target.value;render()});
-  document.getElementById("typeSel").addEventListener("change",e=>{currentType=e.target.value;render()});
-  console.log("🔧 event listeners attached");
-  render();
 }
+function downloadFeedbackCSV(){downloadCSV({time:'',topic:'',voice:''})}
 
-// 啟動
-if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",init);
-}else{
-  init();
-}
-console.log("🔧 script loaded, readyState:", document.readyState);
+// ========== 啟動 ==========
+document.addEventListener('DOMContentLoaded',()=>{
+  initFeedback();
+  renderRadar();
+  console.log('🚀 微光雷達已就緒');
+});
 </script>
-</body>
-</html>
+</body></html>
