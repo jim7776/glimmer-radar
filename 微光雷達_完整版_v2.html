@@ -133,7 +133,7 @@ const KNOWLEDGE = {
   "房市政策":{keywords:["房價","打炒房","囤房","房貸","升息","實價登錄"],angles:["打炒房新政實施半年成效？","實價登錄 2.0 上路時間？","青年安心成屋實際獲配率"],sources:["金管會官員、建商公會、不動產經紀人"]}
 };
 const TOPICS = RANK_DATA.map(d=>d.group);
-const ESC = s=>String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
+const ESC = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // ========== 狀態 ==========
 let currentType = "";
