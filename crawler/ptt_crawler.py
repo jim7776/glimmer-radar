@@ -3,11 +3,17 @@
 微光雷達 - PTT 公開看板爬蟲
 用途：抓取指定看板最近 N 頁的文章標題、日期、推噓數，輸出 CSV
 資料來源：PTT 公開網頁（僅抓公開文章列表，請勿抓取需登入的個別推文內文）
+
+連線策略（PTT 會封鎖雲端機房 IP，實測 GitHub Actions 回 403）：
+  1. 直連 ptt.cc            ← 本機執行時走這條
+  2. Google 翻譯轉傳 translate.goog（同語言轉傳，內容不變） ← 雲端執行時走這條
+  3. allorigins 轉傳         ← 備援
 """
 import csv
 import re
 import sys
 import time
+import urllib.parse
 from datetime import datetime, timedelta, timezone
 
 import requests
@@ -27,11 +33,72 @@ HEADERS = {
 COOKIES = {"over18": "1"}        # PTT 公開頁面年齡確認 cookie
 
 
+# ---------- 轉傳管道（雲端 IP 被 PTT 封鎖時的替代路徑） ----------
+def to_translate(url: str) -> str:
+    """把 ptt.cc 網址轉成 Google 翻譯轉傳網址（sl=auto&tl=zh-TW：只轉傳、不翻譯）"""
+    p = urllib.parse.urlsplit(url)
+    host = p.netloc.replace(".", "-") + ".translate.goog"
+    q = urllib.parse.urlencode({"_x_tr_sl": "auto", "_x_tr_tl": "zh-TW", "_x_tr_hl": "zh-TW"})
+    return urllib.parse.urlunsplit(("https", host, p.path, q, ""))
+
+
+def from_translate(href: str) -> str:
+    """把轉傳網址還原回原始 ptt.cc 網址（含協定相對 // 開頭）"""
+    if "translate.goog" not in href:
+        return href
+    if href.startswith("//"):
+        href = "https:" + href
+    p = urllib.parse.urlsplit(href)
+    host = p.netloc.split(".")[0].replace("-", ".")      # www-ptt-cc -> www.ptt.cc
+    query = [(k, v) for k, v in urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+             if not k.startswith("_x_tr_")]               # 去掉 _x_tr_* 參數
+    return urllib.parse.urlunsplit(("https", host, p.path, urllib.parse.urlencode(query), p.fragment))
+
+
+_direct_blocked = False        # 直連失敗一次後就不再浪費請求（雲端 IP 被封鎖時）
+
+
+def fetch_html(url: str) -> str:
+    """依序嘗試：直連 → Google 轉傳 → allorigins。回傳含 r-ent 文章列表的 HTML"""
+    global _direct_blocked
+    attempts = []
+    if not _direct_blocked:
+        attempts.append(("直連", url, True))
+    attempts += [
+        ("Google轉傳", to_translate(url), False),
+        ("allorigins", "https://api.allorigins.win/raw?url=" + urllib.parse.quote(url, safe=""), False),
+    ]
+    errors = []
+    for name, target, send_cookie in attempts:
+        try:
+            r = requests.get(target, headers=HEADERS,
+                             cookies=COOKIES if send_cookie else None, timeout=30)
+            if r.status_code == 200 and 'class="r-ent"' in r.text:
+                print(f"    ✓ {name} 取得 {len(r.text)} 字元")
+                return r.text
+            errors.append(f"{name}=HTTP {r.status_code}")
+            if name == "直連":
+                _direct_blocked = True      # PTT 封鎖此 IP，後續直接走轉傳
+        except Exception as e:
+            errors.append(f"{name}={type(e).__name__}")
+            if name == "直連":
+                _direct_blocked = True
+        time.sleep(1)
+    raise RuntimeError("所有管道皆失敗：" + "、".join(errors))
+
+
+def abs_url(href: str) -> str:
+    """href 轉絕對網址（並把轉傳網址還原成 ptt.cc）"""
+    href = from_translate(href or "")
+    if href.startswith("http"):
+        return href
+    return BASE + href
+
+
 def fetch_page(board: str, page_url: str) -> tuple[list[dict], str | None]:
     """抓一頁文章列表，回傳 (文章列表, 上一頁網址)"""
-    r = requests.get(page_url, headers=HEADERS, cookies=COOKIES, timeout=20)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "lxml")
+    html = fetch_html(page_url)
+    soup = BeautifulSoup(html, "lxml")
 
     posts = []
     for entry in soup.select("div.r-ent"):
@@ -39,7 +106,7 @@ def fetch_page(board: str, page_url: str) -> tuple[list[dict], str | None]:
         if title_a is None:
             continue  # 刪文
         title = title_a.get_text(strip=True)
-        href = title_a.get("href", "")
+        href = abs_url(title_a.get("href", ""))
 
         # 推噓數：div.nrec > span
         nrec = entry.select_one("div.nrec")
@@ -55,14 +122,14 @@ def fetch_page(board: str, page_url: str) -> tuple[list[dict], str | None]:
             "title": title,
             "date": normalize_date(date_str),
             "push": push,
-            "url": BASE + href,
+            "url": href,
         })
 
     # 上一頁連結（PTT 按鈕文字為「‹ 上頁」，href 指向 indexN.html）
     prev_links = [a for a in soup.select("a.btn.wide")
                   if a.get("href") and "上頁" in a.get_text()]
     prev = prev_links[0] if prev_links else None
-    prev_url = BASE + prev["href"] if prev and prev.get("href") else None
+    prev_url = abs_url(prev["href"]) if prev and prev.get("href") else None
     return posts, prev_url
 
 
@@ -95,12 +162,12 @@ def normalize_date(d: str) -> str:
     return f"{year}/{month:02d}/{day:02d}"
 
 
-def crawl() -> list[dict]:
+def crawl(cutoff_override: str | None = None) -> list[dict]:
     # 累積式爬取：一路往回抓，直到「昨天以前」的文章出現為止，
     # 確保昨天與今天兩天資料完整（高流量看板如 Gossiping 需要抓較多頁）
     tw_now = datetime.now(timezone(timedelta(hours=8)))
-    cutoff = (tw_now - timedelta(days=1)).strftime("%Y/%m/%d")
-    print(f"回抓目標：抓到 {cutoff} 以前的文章就停（台北時間 {tw_now:%Y/%m/%d %H:%M}）")
+    cutoff = cutoff_override or (tw_now - timedelta(days=1)).strftime("%Y/%m/%d")
+    print(f"回抓目標：抓到 {cutoff} 以前的文章就停（台北時間 {tw_now:%Y/%m/%d %H:%M}，每看板上限 {MAX_PAGES_PER_BOARD} 頁）")
     all_posts = []
     for board in BOARDS:
         url = f"{BASE}/bbs/{board}/index.html"
@@ -128,7 +195,12 @@ def crawl() -> list[dict]:
 
 
 def main():
-    posts = crawl()
+    # 可選參數：python ptt_crawler.py [回抓截止日 YYYY/MM/DD] [每看板最大頁數]
+    cutoff_override = sys.argv[1] if len(sys.argv) > 1 else None
+    global MAX_PAGES_PER_BOARD
+    if len(sys.argv) > 2:
+        MAX_PAGES_PER_BOARD = int(sys.argv[2])
+    posts = crawl(cutoff_override)
     if not posts:
         print("沒有抓到任何資料，請檢查網路。")
         sys.exit(1)
