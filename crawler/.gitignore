@@ -1,0 +1,5 @@
+# 每日爬取的原始檔不進版控（已併入 data/ptt_all.csv、data/yt_all.csv）
+ptt_data_*.csv
+yt_data_*.csv
+__pycache__/
+*.pyc

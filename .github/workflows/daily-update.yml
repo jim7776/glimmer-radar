@@ -1,0 +1,69 @@
+# 微光雷達 - 每日自動更新（台北時間 07:00）
+# 流程：抓 PTT（回抓到昨天為止）→ 抓 YouTube → 併入累積資料 → 產生榜單
+#       → 注入 index.html → commit & push → 觸發 Pages 重新部署
+name: Daily radar update
+
+on:
+  schedule:
+    - cron: '0 23 * * *'   # UTC 23:00 = 台北時間 07:00（次日）
+  workflow_dispatch:       # 可在 Actions 頁面手動觸發
+
+permissions:
+  contents: write          # 允許把更新後的資料推回 main
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: crawler/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r crawler/requirements.txt
+
+      - name: 1. 抓 PTT（累積到昨天為止）
+        working-directory: crawler
+        run: python ptt_crawler.py
+
+      - name: 2. 抓 YouTube 留言（失敗不中斷）
+        working-directory: crawler
+        continue-on-error: true
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python youtube_fetch.py
+
+      - name: 3. 併入累積資料（去重）
+        working-directory: crawler
+        run: python merge_data.py
+
+      - name: 4. 產生升溫榜資料
+        working-directory: crawler
+        run: python build_rank.py
+
+      - name: 5. 注入 index.html
+        working-directory: crawler
+        run: python inject_json.py
+
+      - name: 6. Commit & push（觸發 Pages 部署）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "本次無資料變更，跳過推送"
+          else
+            git commit -m "chore: 每日自動更新 $(TZ=Asia/Taipei date +%Y-%m-%d)"
+            git push
+          fi
