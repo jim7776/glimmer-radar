@@ -43,8 +43,10 @@ def merge(acc_path, new_files, primary, fallback_fields):
     added = 0
     for path in new_files:
         nf, rows = load(path)
-        if nf and not fields:
-            fields = nf
+        # 新檔可能有新欄位（例如 YouTube 加了 topic），欄位取聯集才不會丟資料
+        for f in (nf or []):
+            if f not in fields:
+                fields.append(f)
         for row in rows:
             key = row_key(row, primary, fallback_fields)
             if key in seen:

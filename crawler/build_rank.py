@@ -83,7 +83,11 @@ def main():
         if d not in date_index:
             continue
         i = date_index[d]
-        for g in classify(r.get("text", "")):
+        # 優先用「這支影片是用哪個議題的關鍵字找到的」（留言口語、常不含關鍵字），
+        # 舊資料沒有 topic 欄位時才退回逐句文字比對
+        topic = (r.get("topic") or "").strip()
+        groups = [topic] if topic in ISSUE_GROUPS else classify(r.get("text", ""))
+        for g in groups:
             yt_series[g][i] += 1
 
     out = {}
