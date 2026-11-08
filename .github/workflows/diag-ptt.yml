@@ -10,37 +10,53 @@ jobs:
   diag:
     runs-on: ubuntu-latest
     steps:
-      - name: 驗證 jina 是否拿到真內容
+      - name: 大規模管道測試
         run: |
-          TARGET="https://www.ptt.cc/bbs/Gossiping/index.html"
-          HOME="https://www.ptt.cc/bbs/home-sale/index.html"
-
-          dump () {
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+          T="https://www.ptt.cc/bbs/Gossiping/index.html"
+          ENC="https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html"
+          probe () {
             NAME="$1"; FILE="$2"
-            DATES=$(grep -oE "[0-9]{2}/[0-9]{2}" "$FILE" 2>/dev/null | wc -l | tr -d ' ')
-            ART=$(grep -c "article-meta\|r-list__title\|\.entry" "$FILE" 2>/dev/null || true)
-            NEWS=$(grep -c "\[新聞\]\|\[問卦\]\|\[閒聊\]" "$FILE" 2>/dev/null || true)
-            SIZE=$(wc -c < "$FILE" | tr -d ' ')
-            echo "[$NAME] size=$SIZE 日期筆數=$DATES 文章區塊=$ART 含文章標題=$NEWS"
-            head -c 250 "$FILE" | tr '\n' ' '; echo ""; echo "==="
+            D=$(grep -oE "[0-9]{2}/[0-9]{2}" "$FILE" 2>/dev/null | wc -l | tr -d ' ')
+            N=$(grep -c "\[新聞\]\|\[問卦\]\|\[閒聊\]\|\[請益\]" "$FILE" 2>/dev/null || true)
+            S=$(wc -c < "$FILE" 2>/dev/null | tr -d ' ')
+            echo "  [$NAME] size=$S 日期=$D 文章標題=$N"
           }
 
-          echo "=== A. jina markdown（無 cookie） ==="
-          curl -s -m 40 -o /tmp/a.md -w "http=%{http_code}\n" "https://r.jina.ai/$TARGET"
-          dump jina-md /tmp/a.md
+          echo "=== 0. 403 回應內容（看是誰擋的） ==="
+          curl -s -m 20 -A "$UA" -i "https://www.ptt.cc/bbs/Gossiping/index.html" | head -c 400
+          echo ""; echo "---"
 
-          echo "=== B. jina markdown + over18 cookie ==="
-          curl -s -m 40 -H "x-set-cookie: over18=1" -o /tmp/b.md -w "http=%{http_code}\n" "https://r.jina.ai/$TARGET"
-          dump jina-md-cookie /tmp/b.md
+          echo "=== 1. IPv6 直連 ==="
+          curl -6 -s -m 20 -o /tmp/v6.html -w "http=%{http_code}\n" -A "$UA" -b "over18=1" "$T" || echo "(無 IPv6)"
+          probe ipv6 /tmp/v6.html
 
-          echo "=== C. jina HTML + cookie ==="
-          curl -s -m 40 -H "x-set-cookie: over18=1" -H "x-respond-with: html" -o /tmp/c.html -w "http=%{http_code}\n" "https://r.jina.ai/$TARGET"
-          dump jina-html-cookie /tmp/c.html
+          echo "=== 2. allorigins 重試 3 次 ==="
+          for i in 1 2 3; do
+            curl -s -m 45 -o /tmp/ao.html -w "try$i http=%{http_code}\n" "https://api.allorigins.win/raw?url=$ENC"
+            D=$(grep -oE "[0-9]{2}/[0-9]{2}" /tmp/ao.html 2>/dev/null | wc -l | tr -d ' ')
+            echo "  日期=$D size=$(wc -c < /tmp/ao.html | tr -d ' ')"
+            [ "$D" -gt 10 ] && break
+            sleep 5
+          done
+          probe allorigins /tmp/ao.html
 
-          echo "=== D. jina markdown 抓非限制級看板 home-sale ==="
-          curl -s -m 40 -o /tmp/d.md -w "http=%{http_code}\n" "https://r.jina.ai/$HOME"
-          dump jina-home /tmp/d.md
+          echo "=== 3. whateverorigin ==="
+          curl -s -m 30 -o /tmp/wo.txt -w "http=%{http_code}\n" "https://whateverorigin.org/get?url=$ENC"
+          probe whateverorigin /tmp/wo.txt
 
-          echo "=== E. B 的前 800 字元（看是不是驗證頁） ==="
-          head -c 800 /tmp/b.md
-          echo ""
+          echo "=== 4. cors.eu.org ==="
+          curl -s -m 30 -o /tmp/ce.html -w "http=%{http_code}\n" -A "$UA" "https://cors.eu.org/$T"
+          probe cors.eu.org /tmp/ce.html
+
+          echo "=== 5. api.cors.lol ==="
+          curl -s -m 30 -o /tmp/cl.html -w "http=%{http_code}\n" -A "$UA" "https://api.cors.lol/?url=$T"
+          probe cors.lol /tmp/cl.html
+
+          echo "=== 6. jina + 指定選取器 .r-ent ==="
+          curl -s -m 40 -H "x-target-selector: .r-ent" -H "x-set-cookie: over18=1" -o /tmp/j2.md -w "http=%{http_code}\n" "https://r.jina.ai/$T"
+          probe jina-selector /tmp/j2.md
+
+          echo "=== 7. pttweb 鏡像 ==="
+          curl -s -m 20 -o /tmp/pw.html -w "http=%{http_code}\n" -A "$UA" "https://www.pttweb.cc/bbs/Gossiping" || true
+          probe pttweb /tmp/pw.html
