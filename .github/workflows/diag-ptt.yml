@@ -1,0 +1,33 @@
+name: diag-ptt
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 基本連線測試
+        run: |
+          echo "=== 1. 一般網站（確認有網路） ==="
+          curl -s -o /dev/null -w "example.com: %{http_code}\n" https://example.com
+          echo "=== 2. PTT 首頁 ==="
+          curl -s -o /dev/null -w "ptt root: %{http_code}\n" https://www.ptt.cc/
+          echo "=== 3. PTT 看板（瀏覽器 UA + over18 cookie） ==="
+          curl -s -o /dev/null -w "board UA+cookie: %{http_code}\n" \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36" \
+            -H "Accept: text/html,application/xhtml+xml" \
+            -H "Accept-Language: zh-TW,zh;q=0.9" \
+            -b "over18=1" \
+            https://www.ptt.cc/bbs/Gossiping/index.html
+          echo "=== 4. PTT 看板（curl 預設） ==="
+          curl -s -o /dev/null -w "board plain: %{http_code}\n" https://www.ptt.cc/bbs/Gossiping/index.html
+          echo "=== 5. PTT 來源 IP 位置 ==="
+          curl -s https://ipinfo.io/json 2>/dev/null | head -c 200 || echo "(ipinfo 無法取得)"
+          echo ""
+          echo "=== 6. 回應內容前 200 字元 ==="
+          curl -s -A "Mozilla/5.0" -b "over18=1" https://www.ptt.cc/bbs/Gossiping/index.html | head -c 200
+          echo ""
