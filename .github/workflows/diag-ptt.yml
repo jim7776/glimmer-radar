@@ -10,24 +10,41 @@ jobs:
   diag:
     runs-on: ubuntu-latest
     steps:
-      - name: 測試各種取得 PTT 的管道
+      - name: 比較各轉傳管道
         run: |
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
-          echo "=== 1. allorigins（回原始 HTML） ==="
-          curl -s -m 30 -o /tmp/p1.html -w "code=%{http_code} size=%{size_download}\n" \
-            "https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html"
-          head -c 150 /tmp/p1.html; echo ""
-          echo "=== 2. r.jina.ai（回 markdown） ==="
-          curl -s -m 30 -o /tmp/p2.txt -w "code=%{http_code} size=%{size_download}\n" \
-            "https://r.jina.ai/https://www.ptt.cc/bbs/Gossiping/index.html"
-          head -c 200 /tmp/p2.txt; echo ""
-          echo "=== 3. corsproxy.io ==="
-          curl -s -m 30 -o /tmp/p3.html -w "code=%{http_code} size=%{size_download}\n" \
-            -A "$UA" "https://corsproxy.io/?url=https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html"
-          head -c 150 /tmp/p3.html; echo ""
-          echo "=== 4. YouTube Data API（雲端是否可用） ==="
-          curl -s -m 30 -o /dev/null -w "code=%{http_code}\n" \
-            "https://www.googleapis.com/youtube/v3/search?part=snippet&q=test&maxResults=1"
-          echo "=== 5. Google Trends（pytrends 端點） ==="
-          curl -s -m 30 -o /dev/null -w "code=%{http_code}\n" \
-            "https://trends.google.com/trends/api/explore?hl=zh-TW&tz=480&req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%E7%A7%9F%E5%B1%8B%22%2C%22geo%22%3A%22TW%22%2C%22time%22%3A%22now%207-d%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D"
+          TARGET="https://www.ptt.cc/bbs/Gossiping/index.html"
+          ENC=$(python3 -c "import urllib.parse,os;print(urllib.parse.quote(os.environ['T'],safe=''))" 2>/dev/null || echo "https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html")
+
+          check () {
+            NAME="$1"; FILE="$2"
+            SIZE=$(wc -c < "$FILE" 2>/dev/null | tr -d ' ')
+            MARK=$(grep -c "article-meta" "$FILE" 2>/dev/null || true)
+            GATE=$(grep -c "限制級" "$FILE" 2>/dev/null || true)
+            echo "[$NAME] size=$SIZE 真實文章頁article-meta=$MARK 被擋在18+關卡=$GATE"
+            head -c 120 "$FILE" | tr '\n' ' '; echo ""; echo "---"
+          }
+
+          echo "=== 1. codetabs ==="
+          curl -s -m 40 -A "$UA" -o /tmp/c1.html -w "http=%{http_code}\n" "https://api.codetabs.com/v1/proxy?quest=$TARGET"
+          check codetabs /tmp/c1.html
+
+          echo "=== 2. allorigins（重試） ==="
+          curl -s -m 60 -o /tmp/c2.html -w "http=%{http_code}\n" "https://api.allorigins.win/raw?url=$ENC"
+          check allorigins /tmp/c2.html
+
+          echo "=== 3. r.jina.ai 預設 ==="
+          curl -s -m 40 -o /tmp/c3.txt -w "http=%{http_code}\n" "https://r.jina.ai/$TARGET"
+          check jina-default /tmp/c3.txt
+
+          echo "=== 4. r.jina.ai + cookie + 回傳 HTML ==="
+          curl -s -m 40 -H "x-set-cookie: over18=1" -H "x-respond-with: html" -o /tmp/c4.html -w "http=%{http_code}\n" "https://r.jina.ai/$TARGET"
+          check jina-html /tmp/c4.html
+
+          echo "=== 5. Google translate 代理 ==="
+          curl -s -m 40 -A "$UA" -o /tmp/c5.html -w "http=%{http_code}\n" "https://www-ptt-cc.translate.goog/bbs/Gossiping/index.html?_x_tr_sl=zh-TW&_x_tr_tl=en&_x_tr_hl=en"
+          check translate /tmp/c5.html
+
+          echo "=== 6. codetabs 抓非限制級看板（home-sale） ==="
+          curl -s -m 40 -A "$UA" -o /tmp/c6.html -w "http=%{http_code}\n" "https://api.codetabs.com/v1/proxy?quest=https://www.ptt.cc/bbs/home-sale/index.html"
+          check codetabs-home /tmp/c6.html
