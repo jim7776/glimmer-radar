@@ -10,53 +10,36 @@ jobs:
   diag:
     runs-on: ubuntu-latest
     steps:
-      - name: 大規模管道測試
+      - name: 驗證 translate.goog 從雲端可用
         run: |
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
-          T="https://www.ptt.cc/bbs/Gossiping/index.html"
-          ENC="https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html"
           probe () {
             NAME="$1"; FILE="$2"
-            D=$(grep -oE "[0-9]{2}/[0-9]{2}" "$FILE" 2>/dev/null | wc -l | tr -d ' ')
-            N=$(grep -c "\[新聞\]\|\[問卦\]\|\[閒聊\]\|\[請益\]" "$FILE" 2>/dev/null || true)
+            RENT=$(grep -c 'class="r-ent"' "$FILE" 2>/dev/null || true)
             S=$(wc -c < "$FILE" 2>/dev/null | tr -d ' ')
-            echo "  [$NAME] size=$S 日期=$D 文章標題=$N"
+            echo "  [$NAME] size=$S r-ent=$RENT"
           }
 
-          echo "=== 0. 403 回應內容（看是誰擋的） ==="
-          curl -s -m 20 -A "$UA" -i "https://www.ptt.cc/bbs/Gossiping/index.html" | head -c 400
-          echo ""; echo "---"
+          echo "=== A. Gossiping（限制級）經 translate ==="
+          curl -s -m 40 -A "$UA" -o /tmp/a.html -w "http=%{http_code}\n" \
+            "https://www-ptt-cc.translate.goog/bbs/Gossiping/index.html?_x_tr_sl=zh-TW&_x_tr_tl=en&_x_tr_hl=en"
+          probe gossiping /tmp/a.html
+          grep -oE 'href="[^"]*translate.goog[^"]*"' /tmp/a.html | head -3
 
-          echo "=== 1. IPv6 直連 ==="
-          curl -6 -s -m 20 -o /tmp/v6.html -w "http=%{http_code}\n" -A "$UA" -b "over18=1" "$T" || echo "(無 IPv6)"
-          probe ipv6 /tmp/v6.html
+          echo "=== B. 第 2 頁（驗證分頁） ==="
+          curl -s -m 40 -A "$UA" -o /tmp/b.html -w "http=%{http_code}\n" \
+            "https://www-ptt-cc.translate.goog/bbs/Gossiping/index2.html?_x_tr_sl=zh-TW&_x_tr_tl=en&_x_tr_hl=en"
+          probe gossiping-p2 /tmp/b.html
 
-          echo "=== 2. allorigins 重試 3 次 ==="
-          for i in 1 2 3; do
-            curl -s -m 45 -o /tmp/ao.html -w "try$i http=%{http_code}\n" "https://api.allorigins.win/raw?url=$ENC"
-            D=$(grep -oE "[0-9]{2}/[0-9]{2}" /tmp/ao.html 2>/dev/null | wc -l | tr -d ' ')
-            echo "  日期=$D size=$(wc -c < /tmp/ao.html | tr -d ' ')"
-            [ "$D" -gt 10 ] && break
-            sleep 5
-          done
-          probe allorigins /tmp/ao.html
+          echo "=== C. home-sale 經 translate ==="
+          curl -s -m 40 -A "$UA" -o /tmp/c.html -w "http=%{http_code}\n" \
+            "https://www-ptt-cc.translate.goog/bbs/home-sale/index.html?_x_tr_sl=zh-TW&_x_tr_tl=en&_x_tr_hl=en"
+          probe home-sale /tmp/c.html
 
-          echo "=== 3. whateverorigin ==="
-          curl -s -m 30 -o /tmp/wo.txt -w "http=%{http_code}\n" "https://whateverorigin.org/get?url=$ENC"
-          probe whateverorigin /tmp/wo.txt
+          echo "=== D. WomenTalk（限制級）經 translate ==="
+          curl -s -m 40 -A "$UA" -o /tmp/d.html -w "http=%{http_code}\n" \
+            "https://www-ptt-cc.translate.goog/bbs/WomenTalk/index.html?_x_tr_sl=zh-TW&_x_tr_tl=en&_x_tr_hl=en"
+          probe womentalk /tmp/d.html
 
-          echo "=== 4. cors.eu.org ==="
-          curl -s -m 30 -o /tmp/ce.html -w "http=%{http_code}\n" -A "$UA" "https://cors.eu.org/$T"
-          probe cors.eu.org /tmp/ce.html
-
-          echo "=== 5. api.cors.lol ==="
-          curl -s -m 30 -o /tmp/cl.html -w "http=%{http_code}\n" -A "$UA" "https://api.cors.lol/?url=$T"
-          probe cors.lol /tmp/cl.html
-
-          echo "=== 6. jina + 指定選取器 .r-ent ==="
-          curl -s -m 40 -H "x-target-selector: .r-ent" -H "x-set-cookie: over18=1" -o /tmp/j2.md -w "http=%{http_code}\n" "https://r.jina.ai/$T"
-          probe jina-selector /tmp/j2.md
-
-          echo "=== 7. pttweb 鏡像 ==="
-          curl -s -m 20 -o /tmp/pw.html -w "http=%{http_code}\n" -A "$UA" "https://www.pttweb.cc/bbs/Gossiping" || true
-          probe pttweb /tmp/pw.html
+          echo "=== E. 直連（對照，預期 403） ==="
+          curl -s -m 20 -A "$UA" -o /dev/null -w "http=%{http_code}\n" "https://www.ptt.cc/bbs/Gossiping/index.html"
