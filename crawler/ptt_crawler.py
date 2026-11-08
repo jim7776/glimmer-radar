@@ -25,7 +25,9 @@ BASE = "https://www.ptt.cc"
 BOARDS = ["Gossiping", "HatePolitics", "home-sale", "WomenTalk",
           "BabyMother", "PublicServan", "Kaohsiung"]
 MAX_PAGES_PER_BOARD = 60         # 上限保險絲（高流量看板如 Gossiping 一天可達千篇），正常用不到
-SLEEP_BETWEEN = 1.0              # 請求間隔秒數，友善爬蟲
+SLEEP_BETWEEN = 1.5              # 請求間隔秒數，友善爬蟲（PTT 對高頻會回 429）
+MAX_PAGE_RETRIES = 3             # 單頁失敗最多重試次數
+RETRY_BACKOFF = 45               # 每次重試前的等待秒數（會遞增）
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
@@ -173,12 +175,21 @@ def crawl(cutoff_override: str | None = None) -> list[dict]:
         url = f"{BASE}/bbs/{board}/index.html"
         print(f"[{board}] 開始抓取...")
         pages = 0
+        attempts = 0
         while url and pages < MAX_PAGES_PER_BOARD:
             try:
                 posts, prev_url = fetch_page(board, url)
             except Exception as e:
-                print(f"  ! 頁面失敗 {url}: {e}")
-                break
+                # PTT 對高頻請求會回 429：等待後重試，而非直接放棄整個看板
+                attempts += 1
+                if attempts > MAX_PAGE_RETRIES:
+                    print(f"  ! 頁面失敗（已重試 {MAX_PAGE_RETRIES} 次）{url}: {e}")
+                    break
+                wait = RETRY_BACKOFF * attempts
+                print(f"  ⏳ {e} → 等 {wait} 秒後重試第 {attempts} 次...")
+                time.sleep(wait)
+                continue
+            attempts = 0
             all_posts.extend(posts)
             print(f"  第 {pages + 1} 頁：{len(posts)} 篇")
             url = prev_url
@@ -195,11 +206,14 @@ def crawl(cutoff_override: str | None = None) -> list[dict]:
 
 
 def main():
-    # 可選參數：python ptt_crawler.py [回抓截止日 YYYY/MM/DD] [每看板最大頁數]
+    # 可選參數：python ptt_crawler.py [回抓截止日 YYYY/MM/DD] [每看板最大頁數] [只抓哪個看板,逗號分隔]
     cutoff_override = sys.argv[1] if len(sys.argv) > 1 else None
-    global MAX_PAGES_PER_BOARD
+    global MAX_PAGES_PER_BOARD, BOARDS
     if len(sys.argv) > 2:
         MAX_PAGES_PER_BOARD = int(sys.argv[2])
+    if len(sys.argv) > 3:
+        BOARDS = [b.strip() for b in sys.argv[3].split(",") if b.strip()]
+        print(f"只抓這幾個看板：{BOARDS}")
     posts = crawl(cutoff_override)
     if not posts:
         print("沒有抓到任何資料，請檢查網路。")

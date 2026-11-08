@@ -5,12 +5,11 @@
 先跑：python oauth_login.py  （取得 yt_token.json）
 """
 import csv
-import glob
 import json
 import os
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import requests
 
@@ -28,12 +27,15 @@ def get_token() -> str:
     print("找不到 yt_token.json，請先跑：python oauth_login.py")
     sys.exit(1)
 
-# MVP 用途：抓「熱門新聞頻道」的影片留言。先用範例清單，之後換成你自己的來源
-VIDEO_IDS = [
-    "REPLACE_ME_1",   # <-- 換成你想追的影片 ID（網址 v= 後面那段）
+# 搜尋模式：依 8 大議題群組找相關熱門影片（讓 YouTube 留言能對上雷達議題）
+SEARCH_QUERIES = [
+    "台灣 新聞", "租屋 房東 房租", "都更 危老 老屋", "長照 失智 照護",
+    "營養午餐 霸凌 學生", "行人 車禓 交通安全", "電價 台電 漲價", "AI 人工智慧",
 ]
+MAX_VIDEOS_PER_QUERY = 6      # 每個關鍵字最多嘗試幾支候選影片
+TARGET_VIDEOS = 5             # 至少要有幾支影片抓到留言（很多熱門影片會關閉留言）
 
-MAX_PAGES_PER_VIDEO = 3        # 每支影片抓 3 頁留言（約 300 則）
+MAX_PAGES_PER_VIDEO = 2        # 每支影片抓 2 頁留言（約 200 則）
 SLEEP_BETWEEN = 0.5
 
 
@@ -53,7 +55,10 @@ def fetch_comments(token: str, video_id: str) -> list[dict]:
             params["pageToken"] = page_token
         r = requests.get(f"{API}/commentThreads", params=params, timeout=20)
         if r.status_code != 200:
-            print(f"  ! API 錯誤 {video_id}: {r.status_code} {r.text[:200]}")
+            if r.status_code == 403:
+                print(f"  （{video_id} 關閉留言或不可取用，跳過）")
+            else:
+                print(f"  ! API 錯誤 {video_id}: {r.status_code} {r.text[:200]}")
             break
         data = r.json()
         for item in data.get("items", []):
@@ -72,44 +77,77 @@ def fetch_comments(token: str, video_id: str) -> list[dict]:
     return rows
 
 
+def search_videos(token: str, query: str, days: int | None = None, order: str = "viewCount") -> list[str]:
+    """用一個關鍵字搜尋影片，回傳影片 ID 列表
+    days=7  → 只找最近 7 天發布的（留言日期才會落在近幾天）
+    order=date → 依發布時間新到舊（能找到昨天/今天的新片，其留言就是最新留言）"""
+    params = {
+        "part": "snippet", "q": query, "type": "video",
+        "order": order, "maxResults": MAX_VIDEOS_PER_QUERY, "regionCode": "TW",
+        "relevanceLanguage": "zh", "key": token,
+    }
+    if days:
+        params["publishedAfter"] = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%dT00:00:00Z")
+    sr = requests.get(f"{API}/search", params=params, timeout=20)
+    if sr.status_code != 200:
+        print(f"  搜尋失敗（{query}）: {sr.status_code} {sr.text[:200]}")
+        return []
+    return [i["id"]["videoId"] for i in sr.json().get("items", []) if i["id"].get("videoId")]
+
+
 def main():
     token = get_token()
 
-    # 沒有影片 ID 模式：改抓「搜尋熱門影片」→ 留言
-    if VIDEO_IDS == ["REPLACE_ME_1"]:
-        print("尚未設定影片 ID，改用搜尋模式抓取範例關鍵字的熱門影片...")
-        query = sys.argv[1] if len(sys.argv) > 1 else "台灣 新聞"
-        sr = requests.get(f"{API}/search", params={
-            "part": "snippet", "q": query, "type": "video",
-            "order": "viewCount", "maxResults": 5, "regionCode": "TW",
-            "relevanceLanguage": "zh", "key": token,
-        }, timeout=20)
-        if sr.status_code != 200:
-            print(f"搜尋失敗: {sr.status_code} {sr.text[:300]}")
-            sys.exit(1)
-        vids = [i["id"]["videoId"] for i in sr.json().get("items", []) if i["id"].get("videoId")]
-        print(f"找到 {len(vids)} 支影片: {vids}")
-    else:
-        vids = VIDEO_IDS
+    # 多關鍵字搜尋：依 8 大議題群組找影片，直到抓到足夠有留言的影片
+    # （很多熱門影片關閉留言會回 403，所以要多找幾支備胎）
+    print(f"搜尋 {len(SEARCH_QUERIES)} 組關鍵字，目標 {TARGET_VIDEOS} 支有留言的影片...")
+    tried, all_rows, ok_videos = set(), [], []
+    for query in SEARCH_QUERIES:
+        if len(ok_videos) >= TARGET_VIDEOS:
+            break
+        # 依序找候選：① 最近 2 天的新片（留言就是最新留言）
+        #           ② 最近 7 天的熱門片  ③ 不限日期的熱門片
+        # 很多影片關閉留言會回 403，所以要多找幾支備胎
+        vids: list[str] = []
 
-    all_rows = []
-    for vid in vids:
-        print(f"[{vid}] 抓取留言...")
-        rows = fetch_comments(token, vid)
-        all_rows.extend(rows)
-        print(f"  {len(rows)} 則留言")
-        time.sleep(SLEEP_BETWEEN)
+        def add(cands):
+            for v in cands:
+                if v not in tried and v not in vids:
+                    vids.append(v)
 
-    if not all_rows:
-        print("沒有抓到留言。")
+        add(search_videos(token, query, days=2, order="date"))
+        if len(vids) < TARGET_VIDEOS + 3:
+            add(search_videos(token, query, days=7))
+        if len(vids) < TARGET_VIDEOS + 3:
+            add(search_videos(token, query))
+        vids = vids[:MAX_VIDEOS_PER_QUERY * 2]
+
+        print(f"[{query}] 找到 {len(vids)} 支候選影片...")
+        for vid in vids:
+            if len(ok_videos) >= TARGET_VIDEOS:
+                break
+            tried.add(vid)
+            print(f"  [{vid}] 抓取留言...")
+            rows = fetch_comments(token, vid)
+            time.sleep(SLEEP_BETWEEN)
+            if rows:
+                all_rows.extend(rows)
+                ok_videos.append(vid)
+                print(f"    ✓ {len(rows)} 則留言")
+            else:
+                print(f"    （無留言，換下一支）")
+
+    if not ok_videos:
+        print("沒有任何影片抓到留言。")
         sys.exit(1)
 
+    print(f"\n成功抓到 {len(ok_videos)} 支影片的留言：{ok_videos}")
     out = f"yt_data_{datetime.now():%Y%m%d}.csv"
     with open(out, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=["video_id", "comment_id", "date", "text", "like_count"])
         writer.writeheader()
         writer.writerows(all_rows)
-    print(f"\n完成：共 {len(all_rows)} 則留言 -> {out}")
+    print(f"完成：共 {len(all_rows)} 則留言 -> {out}")
 
 
 if __name__ == "__main__":
