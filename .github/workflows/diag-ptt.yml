@@ -1,4 +1,4 @@
-name: diag-ptt
+name: diag-proxy
 
 on:
   workflow_dispatch:
@@ -10,24 +10,24 @@ jobs:
   diag:
     runs-on: ubuntu-latest
     steps:
-      - name: 基本連線測試
+      - name: 測試各種取得 PTT 的管道
         run: |
-          echo "=== 1. 一般網站（確認有網路） ==="
-          curl -s -o /dev/null -w "example.com: %{http_code}\n" https://example.com
-          echo "=== 2. PTT 首頁 ==="
-          curl -s -o /dev/null -w "ptt root: %{http_code}\n" https://www.ptt.cc/
-          echo "=== 3. PTT 看板（瀏覽器 UA + over18 cookie） ==="
-          curl -s -o /dev/null -w "board UA+cookie: %{http_code}\n" \
-            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36" \
-            -H "Accept: text/html,application/xhtml+xml" \
-            -H "Accept-Language: zh-TW,zh;q=0.9" \
-            -b "over18=1" \
-            https://www.ptt.cc/bbs/Gossiping/index.html
-          echo "=== 4. PTT 看板（curl 預設） ==="
-          curl -s -o /dev/null -w "board plain: %{http_code}\n" https://www.ptt.cc/bbs/Gossiping/index.html
-          echo "=== 5. PTT 來源 IP 位置 ==="
-          curl -s https://ipinfo.io/json 2>/dev/null | head -c 200 || echo "(ipinfo 無法取得)"
-          echo ""
-          echo "=== 6. 回應內容前 200 字元 ==="
-          curl -s -A "Mozilla/5.0" -b "over18=1" https://www.ptt.cc/bbs/Gossiping/index.html | head -c 200
-          echo ""
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+          echo "=== 1. allorigins（回原始 HTML） ==="
+          curl -s -m 30 -o /tmp/p1.html -w "code=%{http_code} size=%{size_download}\n" \
+            "https://api.allorigins.win/raw?url=https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html"
+          head -c 150 /tmp/p1.html; echo ""
+          echo "=== 2. r.jina.ai（回 markdown） ==="
+          curl -s -m 30 -o /tmp/p2.txt -w "code=%{http_code} size=%{size_download}\n" \
+            "https://r.jina.ai/https://www.ptt.cc/bbs/Gossiping/index.html"
+          head -c 200 /tmp/p2.txt; echo ""
+          echo "=== 3. corsproxy.io ==="
+          curl -s -m 30 -o /tmp/p3.html -w "code=%{http_code} size=%{size_download}\n" \
+            -A "$UA" "https://corsproxy.io/?url=https%3A%2F%2Fwww.ptt.cc%2Fbbs%2FGossiping%2Findex.html"
+          head -c 150 /tmp/p3.html; echo ""
+          echo "=== 4. YouTube Data API（雲端是否可用） ==="
+          curl -s -m 30 -o /dev/null -w "code=%{http_code}\n" \
+            "https://www.googleapis.com/youtube/v3/search?part=snippet&q=test&maxResults=1"
+          echo "=== 5. Google Trends（pytrends 端點） ==="
+          curl -s -m 30 -o /dev/null -w "code=%{http_code}\n" \
+            "https://trends.google.com/trends/api/explore?hl=zh-TW&tz=480&req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%E7%A7%9F%E5%B1%8B%22%2C%22geo%22%3A%22TW%22%2C%22time%22%3A%22now%207-d%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D"
