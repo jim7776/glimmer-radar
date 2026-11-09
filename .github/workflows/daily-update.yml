@@ -65,5 +65,15 @@ jobs:
             echo "本次無資料變更，跳過推送"
           else
             git commit -m "chore: 每日自動更新 $(TZ=Asia/Taipei date +%Y-%m-%d)"
-            git push
-          fi
+            # 推送前先同步遠端（避免與其他推送撞車），最多重試 3 次
+            for i in 1 2 3; do
+              if git push; then
+                echo "推送成功"
+                break
+              fi
+              echo "推送被拒絕（遠端有新提交），第 $i 次 pull --rebase 後重試..."
+              git pull --rebase origin main
+              git add -A
+              git diff --cached --quiet || git commit -m "chore: 每日自動更新 $(TZ=Asia/Taipei date +%Y-%m-%d)（rebase 後）"
+              sleep 5
+            done
