@@ -80,7 +80,8 @@ footer{text-align:center;padding:16px;font-size:.7rem;color:var(--muted);border-
       <label style="font-size:.8rem">日期 <select id="dateSel" onchange="changeDate(this.value)" style="padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"></select></label>
       <label style="font-size:.8rem">類型 <select id="typeSel" onchange="changeType(this.value)" style="padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"><option value="">全部</option><option value="pv">公共價值</option><option value="general">一般</option></select></label>
       <span id="radarStats" style="margin-left:auto;font-size:.75rem;color:var(--muted)"></span>
-      <button onclick="window.open('https://github.com/jim7776/glimmer-radar/actions/workflows/daily-update.yml','_blank')" style="padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:.75rem;color:var(--muted)">🔄 手動更新</button>
+      <button id="manualUpdateBtn" onclick="manualUpdate()" style="padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:.75rem;color:var(--muted)">🔄 手動更新</button>
+      <span id="manualUpdateMsg" style="font-size:.75rem;color:var(--muted)"></span>
     </div>
     <div id="radarList"></div>
   </section>
@@ -4005,6 +4006,23 @@ function goFeedback(group){
 // ========== 7. 聲音回流 ==========
 // Apps Script 後端網址（讀者回饋會寫入 Google 試算表的「回饋」分頁）
 const FEEDBACK_API = "https://script.google.com/macros/s/AKfycbyIeH8C82QJGt53WiVU59R2bJ1pQmfmdreP7-tpgAm5GjbOesos2XzzL3xctIj6GNpw/exec";
+
+// 手動更新：請 Apps Script 去觸發 GitHub Actions 的每日更新排程
+function manualUpdate(){
+  const btn = $("manualUpdateBtn"), msg = $("manualUpdateMsg");
+  if(btn.disabled) return;
+  btn.disabled = true; btn.textContent = "🔄 觸發中…";
+  msg.textContent = "";
+  fetch(`${FEEDBACK_API}?action=trigger`).then(r=>r.json()).then(d=>{
+    msg.textContent = d.ok ? "✅ " + d.msg : "⚠️ " + (d.msg || "觸發失敗");
+    msg.style.color = d.ok ? "var(--primary)" : "#c0392b";
+    btn.textContent = "🔄 手動更新";
+  }).catch(()=>{
+    msg.textContent = "❌ 無法連線，請重試";
+    msg.style.color = "#c0392b";
+    btn.textContent = "🔄 手動更新";
+  }).finally(()=>{ btn.disabled = false; });
+}
 
 function submitFeedback(e){
   e.preventDefault();
