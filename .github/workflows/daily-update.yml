@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write          # 允許把更新後的資料推回 main
+  actions: write           # 允許觸發 Pages 部署 workflow
 
 concurrency:
   group: daily-update
@@ -78,3 +79,27 @@ jobs:
               sleep 5
             done
           fi
+
+      # GitHub 規則：用 GITHUB_TOKEN 推的 commit 不會觸發其他 workflow（Pages 部署不會自動跑），
+      # 所以這裡用 workflow_dispatch 明確叫醒 Pages 部署（workflow_dispatch 是例外，允許觸發）
+      - name: 7. 觸發 Pages 重新部署（讓網站立即更新）
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/gh_resp.txt -w "%{http_code}" \
+              -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/repos/${{ github.repository }}/actions/workflows/pages.yml/dispatches \
+              -d '{"ref":"main"}')
+            echo "HTTP $code"
+            if [ "$code" = "204" ]; then
+              echo "✅ 已觸發 Pages 部署"
+              break
+            fi
+            cat /tmp/gh_resp.txt
+            echo "第 $i 次觸發失敗，10 秒後重試..."
+            sleep 10
+          done
