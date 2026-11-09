@@ -77,3 +77,4 @@ jobs:
               git diff --cached --quiet || git commit -m "chore: 每日自動更新 $(TZ=Asia/Taipei date +%Y-%m-%d)（rebase 後）"
               sleep 5
             done
+          fi
