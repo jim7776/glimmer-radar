@@ -10,6 +10,7 @@
   3. allorigins 轉傳         ← 備援
 """
 import csv
+import os
 import re
 import sys
 import time
@@ -164,11 +165,36 @@ def normalize_date(d: str) -> str:
     return f"{year}/{month:02d}/{day:02d}"
 
 
-def crawl(cutoff_override: str | None = None) -> list[dict]:
-    # 累積式爬取：一路往回抓，直到「昨天以前」的文章出現為止，
-    # 確保昨天與今天兩天資料完整（高流量看板如 Gossiping 需要抓較多頁）
+def default_cutoff() -> str:
+    """上次總結日期：取累積檔 ptt_all.csv 中最新的日期。
+
+    目標是「總結前一天或上次總結時間之後出現的文章」：
+      - 正常每日執行：累積檔最新日期 ≈ 昨天 → 與原本行為一致
+      - 某天排程失敗：累積檔最新日期會停在更早那天 → 自動往回補抓缺口
+      - 當天手動更新：抓到昨天為止（今天的文章由下次執行補齊）
+    累積檔不存在時退回「昨天」。
+    """
     tw_now = datetime.now(timezone(timedelta(hours=8)))
-    cutoff = cutoff_override or (tw_now - timedelta(days=1)).strftime("%Y/%m/%d")
+    yesterday = (tw_now - timedelta(days=1)).strftime("%Y/%m/%d")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "ptt_all.csv")
+    last = None
+    if os.path.exists(path):
+        with open(path, encoding="utf-8-sig", newline="") as f:
+            for row in csv.DictReader(f):
+                d = (row.get("date") or "").strip()
+                if re.match(r"^\d{4}/\d{2}/\d{2}$", d) and (last is None or d > last):
+                    last = d
+    if last and last < yesterday:
+        print(f"⚠️ 累積檔最新日期為 {last}（早於昨天 {yesterday}），將往回補抓缺口")
+        return last
+    return yesterday
+
+
+def crawl(cutoff_override: str | None = None) -> list[dict]:
+    # 累積式爬取：一路往回抓，直到「上次總結日期」的文章出現為止，
+    # 確保上次總結之後的文章全部補齊（高流量看板如 Gossiping 需要抓較多頁）
+    tw_now = datetime.now(timezone(timedelta(hours=8)))
+    cutoff = cutoff_override or default_cutoff()
     print(f"回抓目標：抓到 {cutoff} 以前的文章就停（台北時間 {tw_now:%Y/%m/%d %H:%M}，每看板上限 {MAX_PAGES_PER_BOARD} 頁）")
     all_posts = []
     for board in BOARDS:

@@ -72,11 +72,11 @@ def main():
         for g in classify(r.get("title", "")):
             series[g][i] += 1
             title = r.get("title", "")
-            if len(samples[g][d]) < 3 and title not in samples[g][d]:
+            if len(samples[g][d]) < 10 and title not in samples[g][d]:
                 samples[g][d].append(title)
             url = (r.get("url") or "").strip()
-            if url and len(links[g][d]) < 3 and all(l["url"] != url for l in links[g][d]):
-                links[g][d].append({"title": title[:40], "url": url})
+            if url and len(links[g][d]) < 20 and all(l["url"] != url for l in links[g][d]):
+                links[g][d].append({"title": title[:60], "url": url})
 
     for r in yt:
         d = (r.get("date") or "").replace("-", "/")
@@ -126,7 +126,7 @@ def main():
                 "pv": g in PUBLIC_VALUE_TAGS,
                 "sample": (samples[g].get(d) or [""])[0],
                 "sources": {"ptt": today_v, "yt": yt_series[g][i]},
-                "links": links[g].get(d, [])[:3],
+                "links": links[g].get(d, [])[:20],
                 "trend": s[max(0, i - 13):i + 1],
             })
         items.sort(key=lambda x: (-x["score"], -x["today"]))
