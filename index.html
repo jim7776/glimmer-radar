@@ -108,14 +108,14 @@ footer{text-align:center;padding:16px;font-size:.7rem;color:var(--muted);border-
       </form>
       <div id="fbOk" class="fb-msg fb-ok">✅ 送出成功！感謝你的聲音，已匯入記者線索清單</div>
       <div id="fbErr" class="fb-msg fb-err">❌ 送出失敗，請重試</div>
-      <p style="font-size:.7rem;color:var(--muted);margin-top:12px;text-align:center">※ 回饋將以 CSV 形式儲存，僅供記者選題參考，不公開個人資訊</p>
+      <p style="font-size:.7rem;color:var(--muted);margin-top:12px;text-align:center">※ 回饋直接送達記者線索清單，僅供選題參考，不公開個人資訊</p>
     </article>
   </section>
 </main>
 
 <footer>
   微光雷達｜2026 永續智慧創新黑客松｜資料：PTT、YouTube、Google Trends（合規公開資料）｜
-  <a href="#" onclick="downloadFeedbackCSV();return false" style="color:var(--primary)">下載回饋 CSV</a>
+  <a href="#" onclick="downloadFeedbackCSV();return false" style="color:var(--primary)">下載回饋 CSV（本地備份）</a>
 </footer>
 
 <script>
@@ -2605,6 +2605,9 @@ function goFeedback(group){
 }
 
 // ========== 7. 聲音回流 ==========
+// Apps Script 後端網址（讀者回饋會寫入 Google 試算表的「回饋」分頁）
+const FEEDBACK_API = "https://script.google.com/macros/s/AKfycbyIeH8C82QJGt53WiVU59R2bJ1pQmfmdreP7-tpgAm5GjbOesos2XzzL3xctIj6GNpw/exec";
+
 function submitFeedback(e){
   e.preventDefault();
   const topic = $("fbTopic").value, voice = $("fbVoice").value.trim();
@@ -2612,15 +2615,25 @@ function submitFeedback(e){
   if(!voice){ alert("請輸入你的聲音"); return; }
   const btn = $("fbBtn"); btn.disabled = true; btn.textContent = "送出中…";
   $("fbOk").style.display = "none"; $("fbErr").style.display = "none";
-  const row = { time:new Date().toISOString().replace("T"," ").slice(0,19), topic, voice:voice.replace(/\n/g," ") };
-  setTimeout(()=>{
-    downloadCSV(row);
-    $("fbOk").style.display = "block";
-    $("fbForm").reset();
-    $("fbCount").textContent = "0";
+  const time = new Date().toISOString().replace("T"," ").slice(0,19);
+  // 用 GET 參數送到 Apps Script（寫入 Google 試算表）
+  const params = new URLSearchParams({ time, topic, voice: voice.replace(/\n/g," "), source: "website" });
+  fetch(`${FEEDBACK_API}?${params}`).then(r=>r.json()).then(d=>{
+    if(d.ok){
+      $("fbOk").style.display = "block";
+      $("fbForm").reset();
+      $("fbCount").textContent = "0";
+      setTimeout(()=>{ $("fbOk").style.display = "none"; }, 4000);
+    } else {
+      $("fbErr").style.display = "block";
+      setTimeout(()=>{ $("fbErr").style.display = "none"; }, 4000);
+    }
+  }).catch(()=>{
+    $("fbErr").style.display = "block";
+    setTimeout(()=>{ $("fbErr").style.display = "none"; }, 4000);
+  }).finally(()=>{
     btn.disabled = false; btn.textContent = "送出回饋";
-    setTimeout(()=>{ $("fbOk").style.display = "none"; }, 4000);
-  }, 400);
+  });
 }
 
 function downloadCSV(newRow){
