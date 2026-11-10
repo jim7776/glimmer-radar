@@ -2648,7 +2648,7 @@
    "sample": "Re: [問卦] 黃仁勳為何當初賠錢被罵也要發展AI ?",
    "sources": {
     "ptt": 34,
-    "yt": 103
+    "yt": 136
    },
    "links": [
     {
@@ -2884,7 +2884,7 @@
    "sample": "[新聞] 沈伯洋都更政策土地「不能說」",
    "sources": {
     "ptt": 5,
-    "yt": 0
+    "yt": 1
    },
    "links": [
     {
@@ -3086,23 +3086,120 @@
  ],
  "2026/11/10": [
   {
+   "group": "AI 科技",
+   "score": 0.0,
+   "today": 12,
+   "last3": 78,
+   "growth": -72,
+   "baseline": 42.71,
+   "lead": 12,
+   "pv": false,
+   "sample": "Re: [問卦] 美國民主黨為什麼要限制AI？",
+   "sources": {
+    "ptt": 12,
+    "yt": 194
+   },
+   "links": [
+    {
+     "title": "Re: [問卦] 美國民主黨為什麼要限制AI？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794284718.A.7E1.html"
+    },
+    {
+     "title": "[新聞] 不上課作業AI做 美揭「幽靈學生」詐騙網",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794282770.A.2FE.html"
+    },
+    {
+     "title": "[新聞] 黃仁勳為何力推晶片賣中國？胡采蘋追查女",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794278579.A.1FB.html"
+    },
+    {
+     "title": "Re: [問卦] 為啥AI會泡沫化〓〓？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794277883.A.101.html"
+    },
+    {
+     "title": "[問卦] 中國逆向工程對顯卡晶片沒用？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794277952.A.16A.html"
+    },
+    {
+     "title": "[問卦] 中國網民各種AI玩梗 黃仁勳要被玩壞了",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276011.A.608.html"
+    },
+    {
+     "title": "Re: [問卦] 台灣為什麼不趁這時候建立AI資料中心",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276032.A.A7C.html"
+    },
+    {
+     "title": "[問卦] AI考台韓中大學入學考都滿分了?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276150.A.B9B.html"
+    },
+    {
+     "title": "[問卦] 美國民主黨為什麼要限制AI？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276693.A.494.html"
+    },
+    {
+     "title": "[問卦] 黃樂不是中國女間諜，美國AI巨頭轉移焦",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276865.A.6D7.html"
+    },
+    {
+     "title": "[問卦] 輝達出口少報了五萬顆晶片",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794273595.A.135.html"
+    },
+    {
+     "title": "[討論] 國民黨跟統媒到底多愛用AI生成圖？",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794280856.A.41B.html"
+    }
+   ],
+   "trend": [
+    15,
+    1,
+    34,
+    24,
+    30,
+    31,
+    46,
+    18,
+    31,
+    105,
+    33,
+    32,
+    34,
+    12
+   ]
+  },
+  {
    "group": "兒少家庭",
    "score": 0.0,
-   "today": 1,
-   "last3": 20,
-   "growth": -93,
+   "today": 5,
+   "last3": 24,
+   "growth": -64,
    "baseline": 13.86,
-   "lead": 0,
+   "lead": 14,
    "pv": true,
    "sample": "[討論] 范雲：請藍營不要用司法霸凌廖玉蕙",
    "sources": {
-    "ptt": 1,
+    "ptt": 5,
     "yt": 0
    },
    "links": [
     {
      "title": "[討論] 范雲：請藍營不要用司法霸凌廖玉蕙",
      "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794242737.A.2BC.html"
+    },
+    {
+     "title": "[新聞] 不上課作業AI做 美揭「幽靈學生」詐騙網",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794282770.A.2FE.html"
+    },
+    {
+     "title": "[問卦] 被同事投訴職場霸凌",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794278671.A.3EB.html"
+    },
+    {
+     "title": "Re: [討論] 范雲：請藍營不要用司法霸凌廖玉蕙",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794280793.A.8B0.html"
+    },
+    {
+     "title": "Re: [討論] 范雲：請藍營不要用司法霸凌廖玉蕙",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794279452.A.91C.html"
     }
    ],
    "trend": [
@@ -3119,6 +3216,178 @@
     18,
     12,
     7,
+    5
+   ]
+  },
+  {
+   "group": "交通安全",
+   "score": 0.0,
+   "today": 5,
+   "last3": 20,
+   "growth": -59,
+   "baseline": 12.14,
+   "lead": 12,
+   "pv": true,
+   "sample": "[問卦] 台灣的酒駕/毒駕再犯是否你我都推了一把",
+   "sources": {
+    "ptt": 5,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[問卦] 台灣的酒駕/毒駕再犯是否你我都推了一把",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794267301.A.FDD.html"
+    },
+    {
+     "title": "[問卦] 為什麼台灣號稱性能機車都沒加PCX龍骨?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794259528.A.37C.html"
+    },
+    {
+     "title": "[問卦] 為何不針對除了酒駕/毒駕的車禍死亡呢?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794262543.A.783.html"
+    },
+    {
+     "title": "[新聞] 蔣萬安捷運站外發文宣　簡舒培提三質疑",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794273811.A.B94.html"
+    },
+    {
+     "title": "[討論] 原來以前總統府前不能騎機車",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794259581.A.BD9.html"
+    }
+   ],
+   "trend": [
+    0,
+    0,
+    5,
+    8,
+    6,
+    21,
+    14,
+    37,
+    6,
+    5,
+    8,
+    7,
+    8,
+    5
+   ]
+  },
+  {
+   "group": "長照高齡",
+   "score": 0.0,
+   "today": 2,
+   "last3": 11,
+   "growth": -48,
+   "baseline": 3.86,
+   "lead": 0,
+   "pv": true,
+   "sample": "Re: [問卦] 為啥老人爬山這麼強?",
+   "sources": {
+    "ptt": 2,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "Re: [問卦] 為啥老人爬山這麼強?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794278647.A.3C4.html"
+    },
+    {
+     "title": "[問卦] 為啥老人爬山這麼強?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794277615.A.D27.html"
+    }
+   ],
+   "trend": [
+    0,
+    5,
+    5,
+    3,
+    5,
+    5,
+    6,
+    5,
+    1,
+    2,
+    4,
+    8,
+    1,
+    2
+   ]
+  },
+  {
+   "group": "電價能源",
+   "score": 0.0,
+   "today": 2,
+   "last3": 7,
+   "growth": -70,
+   "baseline": 6.71,
+   "lead": 0,
+   "pv": false,
+   "sample": "Re: [新聞] 張建一:中油台電撥補未通過 CPI恐破3%迫",
+   "sources": {
+    "ptt": 2,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "Re: [新聞] 張建一:中油台電撥補未通過 CPI恐破3%迫",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276327.A.3EC.html"
+    },
+    {
+     "title": "[新聞] 張建一:中油台電撥補未通過 CPI恐破3%迫",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794274978.A.602.html"
+    }
+   ],
+   "trend": [
+    1,
+    6,
+    1,
+    0,
+    4,
+    5,
+    5,
+    15,
+    8,
+    13,
+    1,
+    1,
+    4,
+    2
+   ]
+  },
+  {
+   "group": "房市政策",
+   "score": 0.0,
+   "today": 1,
+   "last3": 8,
+   "growth": -78,
+   "baseline": 4.57,
+   "lead": 0,
+   "pv": false,
+   "sample": "[問卦] 台股反彈了房價怎還沒回升？",
+   "sources": {
+    "ptt": 1,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[問卦] 台股反彈了房價怎還沒回升？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794276002.A.A85.html"
+    }
+   ],
+   "trend": [
+    3,
+    4,
+    9,
+    3,
+    0,
+    11,
+    2,
+    9,
+    7,
+    4,
+    3,
+    4,
+    3,
     1
    ]
   },
@@ -3183,166 +3452,6 @@
     57,
     8,
     5,
-    0
-   ]
-  },
-  {
-   "group": "長照高齡",
-   "score": 0.0,
-   "today": 0,
-   "last3": 9,
-   "growth": -100,
-   "baseline": 3.86,
-   "lead": 0,
-   "pv": true,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    0,
-    5,
-    5,
-    3,
-    5,
-    5,
-    6,
-    5,
-    1,
-    2,
-    4,
-    8,
-    1,
-    0
-   ]
-  },
-  {
-   "group": "交通安全",
-   "score": 0.0,
-   "today": 0,
-   "last3": 15,
-   "growth": -100,
-   "baseline": 12.14,
-   "lead": 0,
-   "pv": true,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    0,
-    0,
-    5,
-    8,
-    6,
-    21,
-    14,
-    37,
-    6,
-    5,
-    8,
-    7,
-    8,
-    0
-   ]
-  },
-  {
-   "group": "電價能源",
-   "score": 0.0,
-   "today": 0,
-   "last3": 5,
-   "growth": -100,
-   "baseline": 6.71,
-   "lead": 0,
-   "pv": false,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    1,
-    6,
-    1,
-    0,
-    4,
-    5,
-    5,
-    15,
-    8,
-    13,
-    1,
-    1,
-    4,
-    0
-   ]
-  },
-  {
-   "group": "AI 科技",
-   "score": 0.0,
-   "today": 0,
-   "last3": 66,
-   "growth": -100,
-   "baseline": 42.71,
-   "lead": 0,
-   "pv": false,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    15,
-    1,
-    34,
-    24,
-    30,
-    31,
-    46,
-    18,
-    31,
-    105,
-    33,
-    32,
-    34,
-    0
-   ]
-  },
-  {
-   "group": "房市政策",
-   "score": 0.0,
-   "today": 0,
-   "last3": 7,
-   "growth": -100,
-   "baseline": 4.57,
-   "lead": 0,
-   "pv": false,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    3,
-    4,
-    9,
-    3,
-    0,
-    11,
-    2,
-    9,
-    7,
-    4,
-    3,
-    4,
-    3,
     0
    ]
   }
