@@ -28,4 +28,31 @@ if n != 1:
 with open(HTML, "w", encoding="utf-8", newline="") as f:
     f.write(new_html)
 
+# ---------- 注入 KNOWLEDGE（主題定義）從 keywords.json ----------
+import json as _json
+topics_path = os.path.abspath(os.path.join(HERE, "..", "keywords.json"))
+with open(topics_path, encoding="utf-8") as f:
+    topics_raw = _json.load(f)
+knowledge = {}
+for name, info in topics_raw.items():
+    knowledge[name] = {
+        "keywords": info.get("keywords", []),
+        "angles": info.get("angles", []),
+        "sources": info.get("sources", []),
+    }
+knowledge_str = "const KNOWLEDGE = " + _json.dumps(knowledge, ensure_ascii=False, separators=(",", ":")) + ";"
+with open(HTML, encoding="utf-8", newline="") as f:
+    html2 = f.read()
+new_html2, n2 = re.subn(
+    r"const KNOWLEDGE = \{[\s\S]*?\};",
+    knowledge_str,
+    html2,
+    count=1,
+)
+if n2 != 1:
+    raise SystemExit(f"找不到 KNOWLEDGE 區塊（替換 {n2} 次）")
+with open(HTML, "w", encoding="utf-8", newline="") as f:
+    f.write(new_html2)
+print(f"已注入 KNOWLEDGE（{len(knowledge)} 個主題）")
+
 print(f"已注入 index.html（{len(data)} 字元）")

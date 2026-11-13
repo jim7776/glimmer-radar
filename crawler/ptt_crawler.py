@@ -24,7 +24,8 @@ BASE = "https://www.ptt.cc"
 # MVP 選擇的看板：綜合輿論 + 政治 + 房屋/租屋 + 兒少家庭 + 地方 + 公共行政
 # （看板名以 https://www.ptt.cc/bbs/index.html 為準，已實測 200）
 BOARDS = ["Gossiping", "HatePolitics", "home-sale", "WomenTalk",
-          "BabyMother", "PublicServan", "Kaohsiung"]
+          "BabyMother", "PublicServan", "Kaohsiung", "Stock", "Tech_Job",
+          "marriage", "car", "Salary", "Insurance", "food", "pet"]
 MAX_PAGES_PER_BOARD = 60         # 上限保險絲（高流量看板如 Gossiping 一天可達千篇），正常用不到
 SLEEP_BETWEEN = 1.5              # 請求間隔秒數，友善爬蟲（PTT 對高頻會回 429）
 MAX_PAGE_RETRIES = 3             # 單頁失敗最多重試次數

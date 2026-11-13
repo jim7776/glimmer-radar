@@ -23,8 +23,8 @@ textarea:focus{outline:2px solid var(--primary);outline-offset:2px}
 .btn-primary:hover{background:var(--primary-hover)}
 .btn-primary:disabled{background:#ccc;cursor:not-allowed}
 .msg{padding:12px 16px;border-radius:8px;margin-top:16px;display:none}
-.msg-success{background:#e8f5e9;color:var(--success);border:1px solid #c8e6c9;display:block}
-.msg-error{background:#fdecea;color:var(--danger);border:1px solid #f8bdbd;display:block}
+.msg-success{background:#e8f5e9;color:var(--success);border:1px solid #c8e6c9}
+.msg-error{background:#fdecea;color:var(--danger);border:1px solid #f8bdbd}
 .hint{font-size:.8rem;color:var(--muted);margin-top:12px;text-align:center}
 footer{text-align:center;padding:24px;font-size:.75rem;color:var(--muted)}
 </style>
@@ -68,8 +68,20 @@ footer{text-align:center;padding:24px;font-size:.75rem;color:var(--muted)}
 <script>
 // ========== 議題清單（同 simple.html） ==========
 const TOPICS = [
-  "都更危老","AI 科技","交通安全","長照高齡",
-  "租屋居住","兒少家庭","電價能源","房市政策"
+  "都更危老",
+  "AI 科技",
+  "交通安全",
+  "長照高齡",
+  "租屋居住",
+  "兒少家庭",
+  "電價能源",
+  "房市政策",
+  "勞工權益",
+  "醫療健保",
+  "環境氣候",
+  "教育",
+  "食安",
+  "公共運輸",
 ];
 
 // ========== 初始化下拉選單 ==========
@@ -111,10 +123,11 @@ form.addEventListener("submit", async e=>{
 
   try{
     // 嘗試呼叫後端 API（若有），失敗則走本地下載
-    const res = await fetch("save_feedback.php", {
-      method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(row)
-    });
-    if(res.ok){
+    const FEEDBACK_API = "https://script.google.com/macros/s/AKfycbyIeH8C82QJGt53WiVU59R2bJ1pQmfmdreP7-tpgAm5GjbOesos2XzzL3xctIj6GNpw/exec";
+    const params = new URLSearchParams({ time: row.time, topic: row.topic, voice: row.voice, source: "feedback-page" });
+    const res = await fetch(`${FEEDBACK_API}?${params}`);
+    const d = await res.json();
+    if(res.ok && d.ok){
       showOk();
     }else{
       throw new Error("server error");
