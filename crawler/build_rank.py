@@ -49,7 +49,7 @@ def _kw_match(kw, text):
     if not kw:
         return False
     if kw.isascii() and kw.isalpha():
-        return _re.search(r"\b" + _re.escape(kw) + r"\b", text, _re.IGNORECASE) is not None
+        return _re.search(r"(?<![A-Za-z0-9])" + _re.escape(kw) + r"(?![A-Za-z0-9])", text, _re.IGNORECASE) is not None
     return kw in text
 
 def classify(text):
