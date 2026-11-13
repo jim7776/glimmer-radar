@@ -2951,7 +2951,7 @@
    "sample": "[問卦] 現在還需要AI園區嗎",
    "sources": {
     "ptt": 26,
-    "yt": 239
+    "yt": 240
    },
    "links": [
     {
@@ -4202,16 +4202,16 @@
   {
    "group": "AI 科技",
    "score": 0.0,
-   "today": 14,
-   "last3": 77,
-   "growth": -67,
+   "today": 21,
+   "last3": 84,
+   "growth": -51,
    "baseline": 43,
    "lead": 14,
    "pv": false,
    "sample": "[問卦] 接下來AI是不是要東昇西降了啊？",
    "sources": {
-    "ptt": 14,
-    "yt": 23
+    "ptt": 21,
+    "yt": 265
    },
    "links": [
     {
@@ -4269,6 +4269,30 @@
     {
      "title": "[賣/新竹/竹北]台元/AI/五大房臨路住店/遠百",
      "url": "https://www.ptt.cc/bbs/home-sale/M.1794536652.A.1E2.html"
+    },
+    {
+     "title": "Re: [新聞] 全認了！4軍事無人機標案混用中製晶片 杜",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794578271.A.284.html"
+    },
+    {
+     "title": "[問卦] 怎麼沒人用AI搞個outlook?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794578954.A.2B7.html"
+    },
+    {
+     "title": "[問卦] 民主國家為什麼不讓老黃賣晶片給中國？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794577030.A.490.html"
+    },
+    {
+     "title": "Re: [新聞] 全認了！4軍事無人機標案混用中製晶片 杜",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794574768.A.253.html"
+    },
+    {
+     "title": "[問卦] AI就是把麻煩帶給底層，把財富帶給富人？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794574781.A.D4B.html"
+    },
+    {
+     "title": "Re: [問卦] AI就是把麻煩帶給底層，把財富帶給富人？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794575054.A.220.html"
     }
    ],
    "trend": [
@@ -4285,7 +4309,7 @@
     30,
     26,
     37,
-    14
+    21
    ]
   },
   {
@@ -4345,7 +4369,7 @@
    "sample": "[新聞] 藍白若強修空污法 台電工會嗆包圍立院抗",
    "sources": {
     "ptt": 3,
-    "yt": 0
+    "yt": 1
    },
    "links": [
     {
@@ -4375,6 +4399,51 @@
     10,
     1,
     5,
+    3
+   ]
+  },
+  {
+   "group": "公共運輸",
+   "score": 0.0,
+   "today": 3,
+   "last3": 18,
+   "growth": -65,
+   "baseline": 8.57,
+   "lead": 8,
+   "pv": true,
+   "sample": "[問卦] 台女是不是都有搭公車障礙？",
+   "sources": {
+    "ptt": 3,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[問卦] 台女是不是都有搭公車障礙？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794530541.A.75E.html"
+    },
+    {
+     "title": "[賣/新竹/竹北]高鐵宏觀大器三房平車",
+     "url": "https://www.ptt.cc/bbs/home-sale/M.1794555665.A.F1D.html"
+    },
+    {
+     "title": "[賣/新竹/竹北] 高鐵潤達IF採光視野樓中樓",
+     "url": "https://www.ptt.cc/bbs/home-sale/M.1794561963.A.126.html"
+    }
+   ],
+   "trend": [
+    3,
+    6,
+    3,
+    4,
+    8,
+    1,
+    3,
+    17,
+    13,
+    8,
+    4,
+    4,
+    11,
     3
    ]
   },
@@ -4420,6 +4489,47 @@
    ]
   },
   {
+   "group": "醫療健保",
+   "score": 0.0,
+   "today": 2,
+   "last3": 8,
+   "growth": -60,
+   "baseline": 5,
+   "lead": 0,
+   "pv": true,
+   "sample": "[轉錄] 杜承哲醫師 脆 青鳥果然翻車了！",
+   "sources": {
+    "ptt": 2,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[轉錄] 杜承哲醫師 脆 青鳥果然翻車了！",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794500159.A.614.html"
+    },
+    {
+     "title": "長庚醫院拾獲SUBARU 鑰匙一把",
+     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794567851.A.ACD.html"
+    }
+   ],
+   "trend": [
+    4,
+    9,
+    7,
+    9,
+    4,
+    3,
+    16,
+    3,
+    5,
+    2,
+    3,
+    0,
+    6,
+    2
+   ]
+  },
+  {
    "group": "勞工權益",
    "score": 0.0,
    "today": 1,
@@ -4457,43 +4567,6 @@
    ]
   },
   {
-   "group": "醫療健保",
-   "score": 0.0,
-   "today": 1,
-   "last3": 7,
-   "growth": -80,
-   "baseline": 5,
-   "lead": 0,
-   "pv": true,
-   "sample": "[轉錄] 杜承哲醫師 脆 青鳥果然翻車了！",
-   "sources": {
-    "ptt": 1,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[轉錄] 杜承哲醫師 脆 青鳥果然翻車了！",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794500159.A.614.html"
-    }
-   ],
-   "trend": [
-    4,
-    9,
-    7,
-    9,
-    4,
-    3,
-    16,
-    3,
-    5,
-    2,
-    3,
-    0,
-    6,
-    1
-   ]
-  },
-  {
    "group": "環境氣候",
    "score": 0.0,
    "today": 1,
@@ -4527,43 +4600,6 @@
     0,
     0,
     0,
-    1
-   ]
-  },
-  {
-   "group": "公共運輸",
-   "score": 0.0,
-   "today": 1,
-   "last3": 16,
-   "growth": -88,
-   "baseline": 8.57,
-   "lead": 0,
-   "pv": true,
-   "sample": "[問卦] 台女是不是都有搭公車障礙？",
-   "sources": {
-    "ptt": 1,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[問卦] 台女是不是都有搭公車障礙？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794530541.A.75E.html"
-    }
-   ],
-   "trend": [
-    3,
-    6,
-    3,
-    4,
-    8,
-    1,
-    3,
-    17,
-    13,
-    8,
-    4,
-    4,
-    11,
     1
    ]
   },
