@@ -30,11 +30,18 @@ ISSUE_GROUPS = {
     "兒少家庭": ["兒少", "幼兒", "托育", "幼稚園", "學生", "營養午餐", "霸凌"],
     "交通安全": ["酒駕", "行人", "地雷", "交通事故", "肇逃", "捷運", "機車"],
     "電價能源": ["電價", "台電", "核電", "光電", "漲價", "能源"],
-    "AI 科技": ["AI", "ai", "人工智慧", "ChatGPT", "機器人", "晶片",
+    "AI 科技": ["AI", "人工智慧", "ChatGPT", "機器人", "晶片",
                 "輝達", "黃仁勳", "老黃", "NVIDIA", "nvidia", "顯示卡", "GPU", "5090", "RTX"],
     "房市政策": ["房價", "打炒房", "囤房", "房貸", "升息", "實價登錄"],
+    "勞工權益": ["勞工", "勞動", "薪資", "加班", "工時", "資遣", "職災", "最低工資", "工會"],
+    "醫療健保": ["醫療", "健保", "醫院", "醫師", "護理", "藥價", "健保費", "急診"],
+    "環境氣候": ["環境", "氣候", "空污", "PM2.5", "碳排", "暖化", "颱風", "淹水", "空氣品質"],
+    "教育": ["教育", "學校", "教師", "課綱", "升學", "學費", "大學", "教改"],
+    "食安": ["食安", "食品安全", "添加物", "農藥", "食中毒", "標示", "食藥署"],
+    "公共運輸": ["公車", "台鐵", "高鐵", "捷運", "大眾運輸", "轉乘", "月票", "YouBike"],
 }
-PUBLIC_VALUE_TAGS = {"租屋居住", "都更危老", "長照高齡", "兒少家庭", "交通安全"}
+PUBLIC_VALUE_TAGS = {"租屋居住", "都更危老", "長照高齡", "兒少家庭", "交通安全",
+                     "勞工權益", "醫療健保", "環境氣候", "教育", "食安", "公共運輸"}
 
 
 def load(path):
@@ -44,10 +51,19 @@ def load(path):
         return list(csv.DictReader(f))
 
 
+import re as _re
+
+def _kw_match(kw, text):
+    if not kw:
+        return False
+    if kw.isascii() and kw.isalpha():
+        return _re.search(r"\b" + _re.escape(kw) + r"\b", text, _re.IGNORECASE) is not None
+    return kw in text
+
 def classify(text):
     if not text:
         return []
-    return [g for g, kws in ISSUE_GROUPS.items() if any(k in text for k in kws)]
+    return [g for g, kws in ISSUE_GROUPS.items() if any(_kw_match(k, text) for k in kws)]
 
 
 def main():

@@ -25,6 +25,19 @@ function doPost(e) {
   }
 }
 
+// ---------- CORS preflight ----------
+function doOptions(e) {
+  return ContentService
+    .createTextOutput('')
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '86400'
+    });
+}
+
 // ---------- 統一入口：GET ----------
 //   ?action=trigger                      → 觸發 GitHub 每日更新
 //   ?time=..&topic=..&voice=..           → 寫入回饋（網站目前用這條）
@@ -101,5 +114,10 @@ function triggerDailyUpdate() {
 function json_(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
 }
