@@ -100,6 +100,7 @@ def main():
             yt_series[g][i] += 1
 
     out = {}
+    _champions = [None] * len(dates)
     for i, d in enumerate(dates):
         if i < 7:
             continue                      # 前 7 天不足以算基期
@@ -118,12 +119,6 @@ def main():
                 growth = (today_v - mean) / mean if mean > 0 else 0.0
             score = max(z, 0) * (1 + min(today_v, 30) / 30) if today_v >= 3 else 0.0
             last3 = sum(s[max(0, i - 2):i + 1])
-            lead = 0
-            for j in range(i, -1, -1):     # 連續達門檻天數（領先天數）
-                if s[j] >= 3:
-                    lead += 1
-                else:
-                    break
             items.append({
                 "group": g,
                 "score": round(score, 2),
@@ -131,7 +126,6 @@ def main():
                 "last3": last3,
                 "growth": round(growth * 100),
                 "baseline": round(mean, 2),
-                "lead": lead,
                 "pv": g in PUBLIC_VALUE_TAGS,
                 "sample": (samples[g].get(d) or [""])[0],
                 "sources": {"ptt": today_v, "yt": yt_series[g][i]},
@@ -139,6 +133,18 @@ def main():
                 "trend": s[max(0, i - 13):i + 1],
             })
         items.sort(key=lambda x: (-x["score"], -x["today"]))
+        # 領先天數：連續幾天拿下該日第一名
+        champion = items[0]["group"] if items else None
+        _champions[i] = champion
+        for it in items:
+            g = it["group"]
+            lead = 0
+            for j in range(i, -1, -1):
+                if _champions[j] == g:
+                    lead += 1
+                else:
+                    break
+            it["lead"] = lead
         out[d] = [it for it in items if it["score"] > 0] + [it for it in items if it["score"] <= 0]
 
     with open(os.path.join(HERE, "rank_data.json"), "w", encoding="utf-8") as f:
