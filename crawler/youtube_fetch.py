@@ -29,27 +29,19 @@ def get_token() -> str:
     print("找不到 yt_token.json，請先跑：python oauth_login.py")
     sys.exit(1)
 
-# 搜尋模式：依 8 大議題群組找相關熱門影片（讓 YouTube 留言能對上雷達議題）
-# 每組 = (搜尋關鍵字, 對應的議題群組)。留言太口語、常不含關鍵字，
-# 所以改用「這支影片是用哪個議題的關鍵字找到的」來歸類，比逐句比對準確。
-SEARCH_QUERIES = [
-    ("租屋 房東 房租", "租屋居住"),
-    ("都更 危老 老屋", "都更危老"),
-    ("長照 失智 照護", "長照高齡"),
-    ("營養午餐 霸凌 學生", "兒少家庭"),
-    ("行人 車禓 交通安全", "交通安全"),
-    ("電價 台電 漲價", "電價能源"),
-    ("房價 打房 房貸", "房市政策"),
-    ("AI 人工智慧", "AI 科技"),
-    ("輝達 黃仁勳 NVIDIA", "AI 科技"),   # NV 事件專用（近期話題，PTT/YouTube 都熱）
-    ("勞工 薪資 加班", "勞工權益"),
-    ("健保 醫院 醫療", "醫療健保"),
-    ("空污 氣候 碳排", "環境氣候"),
-    ("教育 課綱 學校", "教育"),
-    ("食安 食品安全 農藥", "食安"),
-    ("公車 台鐵 高鐵 月票", "公共運輸"),
-    ("台灣 新聞", ""),            # 泛用備援：無對應議題，改由文字比對
-]
+import json as _json, os as _os
+_TOPICS_PATH = _os.path.abspath(_os.path.join(_os.path.dirname(__file__), "..", "keywords.json"))
+def _load_search_queries():
+    out = []
+    with open(_TOPICS_PATH, encoding="utf-8") as f:
+        raw = _json.load(f)
+    for name, info in raw.items():
+        for q in info.get("youtube", []) or []:
+            out.append((q, name))
+    out.append(("台灣 新聞", ""))   # 泛用備援：無對應議題，改由文字比對
+    return out
+
+SEARCH_QUERIES = _load_search_queries()
 MAX_VIDEOS_PER_QUERY = 6      # 每個關鍵字最多嘗試幾支候選影片
 TARGET_PER_QUERY = 1          # 每個議題至少要抓到幾支有留言的影片
 MAX_TOTAL_VIDEOS = 16         # 整體最多抓幾支影片（留言量控制在每天 2,000 則內）
