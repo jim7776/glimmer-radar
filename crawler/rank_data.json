@@ -1,803 +1,4 @@
 {
- "2026/11/08": [
-  {
-   "group": "長照高齡",
-   "score": 2.56,
-   "today": 9,
-   "last3": 23,
-   "growth": 75,
-   "baseline": 5.14,
-   "pv": true,
-   "sample": "[新聞] 醫界肯定行政院魄力「不副署老人免健保",
-   "sources": {
-    "ptt": 9,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[新聞] 醫界肯定行政院魄力「不副署老人免健保",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794107870.A.3E1.html"
-    },
-    {
-     "title": "[新聞] 卓榮泰不副署老人福利法 許宇甄：民進黨",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794100968.A.34E.html"
-    },
-    {
-     "title": "Re: [新聞] 卓榮泰不副署老人福利法 許宇甄：民進黨",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794101879.A.040.html"
-    },
-    {
-     "title": "Re: [新聞] 陪長者外出散步未攙扶釀跌倒亡 照服員遭",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794114848.A.7B9.html"
-    },
-    {
-     "title": "Re: [問卦] 為啥一直推出老人福利的政策啊=.=",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794153069.A.BC4.html"
-    },
-    {
-     "title": "[問卦] 有家庭財務被長照拖垮的嗎",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794152330.A.E18.html"
-    },
-    {
-     "title": "[問卦] 為啥一直推出老人福利的政策啊=.=",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794152644.A.73D.html"
-    },
-    {
-     "title": "Re: [討論] 徐欣瑩連失智的柯媽媽也要拿來操作選舉",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794147864.A.C0D.html"
-    },
-    {
-     "title": "[討論] 徐欣瑩連失智的柯媽媽也要拿來操作選舉",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794143051.A.5A8.html"
-    }
-   ],
-   "trend": [
-    5,
-    5,
-    6,
-    5,
-    1,
-    8,
-    6,
-    9
-   ],
-   "lead": 1
-  },
-  {
-   "group": "公共運輸",
-   "score": 2.02,
-   "today": 13,
-   "last3": 33,
-   "growth": 117,
-   "baseline": 6,
-   "pv": true,
-   "sample": "Re: [新聞] 快訊／機捷高鐵桃園站「站內炸雞店起火」",
-   "sources": {
-    "ptt": 13,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "Re: [新聞] 快訊／機捷高鐵桃園站「站內炸雞店起火」",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794068216.A.018.html"
-    },
-    {
-     "title": "Re: [討論] 2018韓流2020蔡英文 台鐵高鐵 訂票率對比",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794098949.A.465.html"
-    },
-    {
-     "title": "[新聞] 台鐵明停駛65列次！12班對號車停駛、集",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794147591.A.137.html"
-    },
-    {
-     "title": "[問卦] Zone 2 騎 YouBike 是最好的選擇？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794145404.A.D23.html"
-    },
-    {
-     "title": "[新聞]赤腳怪男公車緊盯女童！霸氣司機吼「坐好",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794145574.A.C42.html"
-    },
-    {
-     "title": "[問卦] 時速300公里的高鐵在海上奔馳有多爽？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794139946.A.B0E.html"
-    },
-    {
-     "title": "[問卦] 今天從北部南下的高鐵超多人",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794137103.A.8A9.html"
-    },
-    {
-     "title": "[問卦] 台灣高鐵排行榜",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794129834.A.176.html"
-    },
-    {
-     "title": "[問卦] 台鐵怪人？斗六怪人？如何自保？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794125537.A.014.html"
-    },
-    {
-     "title": "[新聞] 搭公車挺沈伯洋！ 小水滴下車獲巨星級迎",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794152230.A.D68.html"
-    },
-    {
-     "title": "[黑特] 國民黨對支持者真的很靠背 紙紮捷運",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794148389.A.90E.html"
-    },
-    {
-     "title": "[討論] 11/27 高鐵 台北=台中 下午 1 點後完售",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794134431.A.F16.html"
-    },
-    {
-     "title": "[交換] 【高雄捷運】蜜柑X江之電 壓克力鑰匙圈",
-     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794130222.A.A04.html"
-    }
-   ],
-   "trend": [
-    6,
-    3,
-    4,
-    8,
-    1,
-    3,
-    17,
-    13
-   ],
-   "lead": 0
-  },
-  {
-   "group": "租屋居住",
-   "score": 1.03,
-   "today": 3,
-   "last3": 4,
-   "growth": 110,
-   "baseline": 1.43,
-   "pv": true,
-   "sample": "[討論] 沈柏洋怎麼不打房價,房租問題",
-   "sources": {
-    "ptt": 3,
-    "yt": 1
-   },
-   "links": [
-    {
-     "title": "[討論] 沈柏洋怎麼不打房價,房租問題",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794105562.A.8A2.html"
-    },
-    {
-     "title": "[問卦] 台灣套房價格可以買日本三房？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794139669.A.164.html"
-    },
-    {
-     "title": "[新聞] 存頭期想買房 佛心房東800萬中和宅直接送",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794143232.A.2C7.html"
-    }
-   ],
-   "trend": [
-    0,
-    4,
-    1,
-    4,
-    0,
-    0,
-    1,
-    3
-   ],
-   "lead": 0
-  },
-  {
-   "group": "房市政策",
-   "score": 0.23,
-   "today": 8,
-   "last3": 18,
-   "growth": 8,
-   "baseline": 7.43,
-   "pv": false,
-   "sample": "[討論] 沈柏洋怎麼不打房價,房租問題",
-   "sources": {
-    "ptt": 8,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[討論] 沈柏洋怎麼不打房價,房租問題",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794105562.A.8A2.html"
-    },
-    {
-     "title": "[問卦] 台灣套房價格可以買日本三房？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794139669.A.164.html"
-    },
-    {
-     "title": "[問卦] 覺得房價不會跌的人是哪一種人？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794119941.A.68E.html"
-    },
-    {
-     "title": "[情報] 桃園小檜溪4房成交實價登錄到70萬/坪",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794142319.A.781.html"
-    },
-    {
-     "title": "[新聞] 存頭期想買房 佛心房東800萬中和宅直接送",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794143232.A.2C7.html"
-    },
-    {
-     "title": "[新聞] 汐止、新莊預售屋邁向百萬俱樂部",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794143459.A.869.html"
-    },
-    {
-     "title": "Re: [求助] 婚後買房地點選擇",
-     "url": "https://www.ptt.cc/bbs/marriage/M.1794072996.A.995.html"
-    },
-    {
-     "title": "Re: [求助] 婚後買房地點選擇",
-     "url": "https://www.ptt.cc/bbs/marriage/M.1794081370.A.49E.html"
-    }
-   ],
-   "trend": [
-    3,
-    13,
-    8,
-    9,
-    9,
-    5,
-    5,
-    8
-   ],
-   "lead": 0
-  },
-  {
-   "group": "AI 科技",
-   "score": 0.0,
-   "today": 30,
-   "last3": 185,
-   "growth": -37,
-   "baseline": 47.29,
-   "pv": false,
-   "sample": "Re: [問卦] 美國ai機房為何不蓋外無人地帶",
-   "sources": {
-    "ptt": 30,
-    "yt": 455
-   },
-   "links": [
-    {
-     "title": "Re: [問卦] 美國ai機房為何不蓋外無人地帶",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794107942.A.D3E.html"
-    },
-    {
-     "title": "Re: [問卦] 歐洲也在反AI了?",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794104085.A.4A0.html"
-    },
-    {
-     "title": "[問卦] 美國ai機房為何不蓋外無人地帶",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794103097.A.049.html"
-    },
-    {
-     "title": "[問卦] 怎麼日本a片不出12歲AI少女裸體寫真呢?",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794074319.A.B96.html"
-    },
-    {
-     "title": "[問卦] 美國人反抗AI騙局，台積電準備破產？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794069598.A.F6C.html"
-    },
-    {
-     "title": "Re: [問卦] 現在AI影片太驚人",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794113795.A.CEE.html"
-    },
-    {
-     "title": "[問卦] 現在AI影片太驚人",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794111426.A.8B4.html"
-    },
-    {
-     "title": "Re: [問卦] 現在AI影片太驚人",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794111979.A.A48.html"
-    },
-    {
-     "title": "[新聞] 美放行輝達H200晶片出口大陸 遭踢爆空殼",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794116219.A.218.html"
-    },
-    {
-     "title": "[問卦] AI怎麼可能停下來",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794150492.A.7EE.html"
-    },
-    {
-     "title": "Re: [問卦] 美國ai機房為何不蓋外無人地帶",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794146580.A.FD9.html"
-    },
-    {
-     "title": "Re: [問卦] AI影片才是未來方向吧？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794147326.A.E94.html"
-    },
-    {
-     "title": "Re: [問卦] 為什麼要支持科技巨頭發展AI搶走我們工作",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794144558.A.31C.html"
-    },
-    {
-     "title": "Re: [問卦] 為什麼要支持科技巨頭發展AI搶走我們工作",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794146299.A.13A.html"
-    },
-    {
-     "title": "Re: [問卦] 川普要課晶片重稅",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794140750.A.9ED.html"
-    },
-    {
-     "title": "Re: [問卦] 川普要課晶片重稅",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794138329.A.460.html"
-    },
-    {
-     "title": "[問卦] 川普要課晶片重稅",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794135569.A.E06.html"
-    },
-    {
-     "title": "[問卦] 已經無法喜歡非AI臉的女人了怎麼辦？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794132399.A.B93.html"
-    },
-    {
-     "title": "[問卦] 自助結帳時你不出聲，AI搶你工作你靠北？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794130051.A.D6C.html"
-    },
-    {
-     "title": "Re: [問卦] 為什麼要支持科技巨頭發展AI搶走我",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794130537.A.B06.html"
-    }
-   ],
-   "trend": [
-    36,
-    31,
-    49,
-    21,
-    39,
-    120,
-    35,
-    30
-   ],
-   "lead": 0
-  },
-  {
-   "group": "兒少家庭",
-   "score": 0.0,
-   "today": 15,
-   "last3": 53,
-   "growth": -30,
-   "baseline": 21.43,
-   "pv": true,
-   "sample": "[問卦] 霸凌者問為什麼只霸凌你沒霸凌別人？",
-   "sources": {
-    "ptt": 15,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[問卦] 霸凌者問為什麼只霸凌你沒霸凌別人？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794107838.A.ABB.html"
-    },
-    {
-     "title": "Re: [問卦] 少子化台男總是推沒錢是怎樣",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794100822.A.5EC.html"
-    },
-    {
-     "title": "Re: [問卦] 少子化台男總是推沒錢是怎樣",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794102071.A.FDE.html"
-    },
-    {
-     "title": "Re: [討論] 郭萬安支持者霸凌後的又一村水餃",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794078167.A.9C8.html"
-    },
-    {
-     "title": "[討論] 國民黨賴苡任:青鳥不要霸凌我的助理！",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794092170.A.72B.html"
-    },
-    {
-     "title": "[討論] 郭萬安支持者霸凌後的又一村水餃",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794070321.A.CF3.html"
-    },
-    {
-     "title": "[討論] 臺鐵人事主管職場霸凌前傳",
-     "url": "https://www.ptt.cc/bbs/PublicServan/M.1794072830.A.BCA.html"
-    },
-    {
-     "title": "[交換] 嬰幼兒棉被和床圍",
-     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794102155.A.E03.html"
-    },
-    {
-     "title": "Re: [問卦] 有女生44歲還在生小孩欸〓〓？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794126466.A.ACA.html"
-    },
-    {
-     "title": "[問卦] 有女生44歲還在生小孩欸〓〓？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794124465.A.A92.html"
-    },
-    {
-     "title": "[問卦] 朋友被問為什麼別人不會被霸凌? 就只有你",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794118980.A.393.html"
-    },
-    {
-     "title": "[討論] 民進黨青鳥持續在霸凌蔣萬安",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794140292.A.55A.html"
-    },
-    {
-     "title": "[閒聊]少子化才是房板的重點.解決就沒信用管制",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794136903.A.9FF.html"
-    },
-    {
-     "title": "[閒聊] 台灣有女生44歲還在生小孩",
-     "url": "https://www.ptt.cc/bbs/WomenTalk/M.1794125426.A.CFA.html"
-    },
-    {
-     "title": "[食記] 台北。忠孝敦化-墨賞新鐵板料理~商業午餐",
-     "url": "https://www.ptt.cc/bbs/Food/M.1794111015.A.421.html"
-    }
-   ],
-   "trend": [
-    14,
-    35,
-    9,
-    42,
-    12,
-    23,
-    15,
-    15
-   ],
-   "lead": 0
-  },
-  {
-   "group": "交通安全",
-   "score": 0.0,
-   "today": 13,
-   "last3": 42,
-   "growth": -28,
-   "baseline": 18,
-   "pv": true,
-   "sample": "Re: [討論] 2018韓流2020蔡英文 台鐵高鐵 訂票率對比",
-   "sources": {
-    "ptt": 13,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "Re: [討論] 2018韓流2020蔡英文 台鐵高鐵 訂票率對比",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794098949.A.465.html"
-    },
-    {
-     "title": "[新聞]「洋流」大旗男阻礙交通 非藍營反串 他證",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794148757.A.B2B.html"
-    },
-    {
-     "title": "[新聞] 台鐵明停駛65列次！12班對號車停駛、集",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794147591.A.137.html"
-    },
-    {
-     "title": "[新聞]赤腳怪男公車緊盯女童！霸氣司機吼「坐好",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794145574.A.C42.html"
-    },
-    {
-     "title": "[新聞] 台中又見行人地獄！61歲婦走行人穿越道遭",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794138582.A.5F6.html"
-    },
-    {
-     "title": "[問卦] 為什麼酒駕被抓到不用沒入車子",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794132580.A.990.html"
-    },
-    {
-     "title": "[問卦] 學校小黃帽是很棒的交通政策吧",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794129291.A.070.html"
-    },
-    {
-     "title": "[問卦] 為什麼外送還在闖紅燈？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794124260.A.C72.html"
-    },
-    {
-     "title": "[問卦] 台鐵怪人？斗六怪人？如何自保？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794125537.A.014.html"
-    },
-    {
-     "title": "[新聞] 獨／怕曝光？鳥松火警2兄弟遺體消防救護",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794117555.A.1AA.html"
-    },
-    {
-     "title": "[新聞] 搭公車挺沈伯洋！ 小水滴下車獲巨星級迎",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794152230.A.D68.html"
-    },
-    {
-     "title": "[黑特] 國民黨對支持者真的很靠背 紙紮捷運",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794148389.A.90E.html"
-    },
-    {
-     "title": "[交換] 【高雄捷運】蜜柑X江之電 壓克力鑰匙圈",
-     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794130222.A.A04.html"
-    }
-   ],
-   "trend": [
-    8,
-    22,
-    15,
-    39,
-    13,
-    10,
-    19,
-    13
-   ],
-   "lead": 0
-  },
-  {
-   "group": "都更危老",
-   "score": 0.0,
-   "today": 8,
-   "last3": 71,
-   "growth": -69,
-   "baseline": 26.14,
-   "pv": true,
-   "sample": "Re: [新聞] 沈伯洋無限都更6步驟曝光!老屋住戶可換屋",
-   "sources": {
-    "ptt": 8,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "Re: [新聞] 沈伯洋無限都更6步驟曝光!老屋住戶可換屋",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794078459.A.04F.html"
-    },
-    {
-     "title": "[討論] 笑死 無限都更 國有地在哪 沈:選後再說",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794106253.A.31D.html"
-    },
-    {
-     "title": "Re: [閒聊] 北市政府都更成績很好，對手出爛政策是",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794104996.A.C32.html"
-    },
-    {
-     "title": "Re: [閒聊] 北市政府都更成績很好，對手出爛政策是",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794113028.A.8D9.html"
-    },
-    {
-     "title": "[討論] 所以京華城的容積率.........??",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794147163.A.7E0.html"
-    },
-    {
-     "title": "[閒聊] 對於無限都更，只有我樂觀其成嗎？",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794143073.A.72F.html"
-    },
-    {
-     "title": "Re: [閒聊] 對於無限都更，只有我樂觀其成嗎？",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794148800.A.9CD.html"
-    },
-    {
-     "title": "Re: [閒聊] 對於無限都更，只有我樂觀其成嗎？",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794153055.A.F36.html"
-    }
-   ],
-   "trend": [
-    42,
-    37,
-    20,
-    13,
-    8,
-    6,
-    57,
-    8
-   ],
-   "lead": 0
-  },
-  {
-   "group": "醫療健保",
-   "score": 0.0,
-   "today": 6,
-   "last3": 26,
-   "growth": -19,
-   "baseline": 7.43,
-   "pv": true,
-   "sample": "[新聞] 醫界肯定行政院魄力「不副署老人免健保",
-   "sources": {
-    "ptt": 6,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[新聞] 醫界肯定行政院魄力「不副署老人免健保",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794107870.A.3E1.html"
-    },
-    {
-     "title": "[新聞] 醫師公會理事長喊「雙北順起來」　賴清德",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794100211.A.14D.html"
-    },
-    {
-     "title": "[問卦] 沒健保前 當醫生到底有多好賺？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794114898.A.20A.html"
-    },
-    {
-     "title": "[新聞] 對護理師襲胸、罵三字經嗆「我要打妳」 1",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794149909.A.456.html"
-    },
-    {
-     "title": "[問卦] 沒專科醫師的西醫師484很廢",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794139598.A.5E2.html"
-    },
-    {
-     "title": "[險種] 33歲女 新保單規劃/實支/醫療/重傷/意外",
-     "url": "https://www.ptt.cc/bbs/Insurance/M.1794129297.A.6C0.html"
-    }
-   ],
-   "trend": [
-    9,
-    7,
-    9,
-    4,
-    3,
-    16,
-    4,
-    6
-   ],
-   "lead": 0
-  },
-  {
-   "group": "教育",
-   "score": 0.0,
-   "today": 4,
-   "last3": 13,
-   "growth": -38,
-   "baseline": 6.43,
-   "pv": true,
-   "sample": "[討論] 大震撼 國小學校社團把洋流飄帶當獎品",
-   "sources": {
-    "ptt": 4,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[討論] 大震撼 國小學校社團把洋流飄帶當獎品",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794109384.A.256.html"
-    },
-    {
-     "title": "[問卦] 在大學裡 數學系像物理系 物理系像數學系",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794137846.A.D1D.html"
-    },
-    {
-     "title": "[問卦] 學校小黃帽是很棒的交通政策吧",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794129291.A.070.html"
-    },
-    {
-     "title": "[討論] 大學沈伯洋告訴少年，你就說我是你哥就好",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794121575.A.6C3.html"
-    }
-   ],
-   "trend": [
-    10,
-    6,
-    6,
-    12,
-    2,
-    5,
-    4,
-    4
-   ],
-   "lead": 0
-  },
-  {
-   "group": "勞工權益",
-   "score": 0.0,
-   "today": 3,
-   "last3": 5,
-   "growth": -34,
-   "baseline": 4.57,
-   "pv": true,
-   "sample": "Re: [新聞] 德國逾40萬勞工罷工 要求改善薪資與工作",
-   "sources": {
-    "ptt": 3,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "Re: [新聞] 德國逾40萬勞工罷工 要求改善薪資與工作",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794105430.A.A6E.html"
-    },
-    {
-     "title": "[新聞] 德國逾40萬勞工罷工 要求改善薪資與工作",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794098595.A.00E.html"
-    },
-    {
-     "title": "[新聞] MLB》棒球經紀人罕見聯手　對抗薪資上限",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794140214.A.039.html"
-    }
-   ],
-   "trend": [
-    4,
-    5,
-    4,
-    13,
-    4,
-    0,
-    2,
-    3
-   ],
-   "lead": 0
-  },
-  {
-   "group": "電價能源",
-   "score": 0.0,
-   "today": 2,
-   "last3": 22,
-   "growth": -78,
-   "baseline": 9,
-   "pv": true,
-   "sample": "[討論] 震撼彈！燒炭民調 核電贊成反對25:5",
-   "sources": {
-    "ptt": 2,
-    "yt": 1
-   },
-   "links": [
-    {
-     "title": "[討論] 震撼彈！燒炭民調 核電贊成反對25:5",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794106765.A.2EC.html"
-    },
-    {
-     "title": "[討論] 美國華爾街讓美國人付電費，自己炒作股票",
-     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794147863.A.426.html"
-    }
-   ],
-   "trend": [
-    4,
-    8,
-    7,
-    15,
-    9,
-    16,
-    4,
-    2
-   ],
-   "lead": 0
-  },
-  {
-   "group": "環境氣候",
-   "score": 0.0,
-   "today": 1,
-   "last3": 3,
-   "growth": -42,
-   "baseline": 1.71,
-   "pv": true,
-   "sample": "[新聞]賭颱風假送烤雞！混亂驚動警察「業者取消",
-   "sources": {
-    "ptt": 1,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[新聞]賭颱風假送烤雞！混亂驚動警察「業者取消",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794110331.A.75C.html"
-    }
-   ],
-   "trend": [
-    2,
-    2,
-    2,
-    1,
-    3,
-    2,
-    0,
-    1
-   ],
-   "lead": 0
-  },
-  {
-   "group": "食安",
-   "score": 0.0,
-   "today": 0,
-   "last3": 0,
-   "growth": -100,
-   "baseline": 0.43,
-   "pv": true,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    1,
-    1,
-    0,
-    1,
-    0,
-    0,
-    0,
-    0
-   ],
-   "lead": 0
-  }
- ],
  "2026/11/09": [
   {
    "group": "房市政策",
@@ -851,7 +52,6 @@
     }
    ],
    "trend": [
-    3,
     13,
     8,
     9,
@@ -911,7 +111,6 @@
     }
    ],
    "trend": [
-    6,
     3,
     4,
     8,
@@ -1019,7 +218,6 @@
     }
    ],
    "trend": [
-    36,
     31,
     49,
     21,
@@ -1099,7 +297,6 @@
     }
    ],
    "trend": [
-    8,
     22,
     15,
     39,
@@ -1163,7 +360,6 @@
     }
    ],
    "trend": [
-    14,
     35,
     9,
     42,
@@ -1215,7 +411,6 @@
     }
    ],
    "trend": [
-    42,
     37,
     20,
     13,
@@ -1259,7 +454,6 @@
     }
    ],
    "trend": [
-    4,
     8,
     7,
     15,
@@ -1295,7 +489,6 @@
     }
    ],
    "trend": [
-    9,
     7,
     9,
     4,
@@ -1328,7 +521,6 @@
    ],
    "trend": [
     5,
-    5,
     6,
     5,
     1,
@@ -1359,7 +551,6 @@
     }
    ],
    "trend": [
-    0,
     4,
     1,
     4,
@@ -1391,7 +582,6 @@
     }
    ],
    "trend": [
-    4,
     5,
     4,
     13,
@@ -1423,7 +613,6 @@
     }
    ],
    "trend": [
-    10,
     6,
     6,
     12,
@@ -1452,7 +641,6 @@
    "trend": [
     2,
     2,
-    2,
     1,
     3,
     2,
@@ -1477,7 +665,6 @@
    },
    "links": [],
    "trend": [
-    1,
     1,
     0,
     1,
@@ -1551,7 +738,6 @@
     }
    ],
    "trend": [
-    4,
     8,
     7,
     15,
@@ -1604,7 +790,6 @@
     }
    ],
    "trend": [
-    10,
     6,
     6,
     12,
@@ -1713,7 +898,6 @@
     }
    ],
    "trend": [
-    14,
     35,
     9,
     42,
@@ -1822,7 +1006,6 @@
     }
    ],
    "trend": [
-    36,
     31,
     49,
     21,
@@ -1895,7 +1078,6 @@
     }
    ],
    "trend": [
-    8,
     22,
     15,
     39,
@@ -1952,7 +1134,6 @@
     }
    ],
    "trend": [
-    3,
     13,
     8,
     9,
@@ -1998,7 +1179,6 @@
    ],
    "trend": [
     5,
-    5,
     6,
     5,
     1,
@@ -2042,7 +1222,6 @@
     }
    ],
    "trend": [
-    6,
     3,
     4,
     8,
@@ -2083,7 +1262,6 @@
     }
    ],
    "trend": [
-    42,
     37,
     20,
     13,
@@ -2124,7 +1302,6 @@
     }
    ],
    "trend": [
-    9,
     7,
     9,
     4,
@@ -2161,7 +1338,6 @@
     }
    ],
    "trend": [
-    0,
     4,
     1,
     4,
@@ -2195,7 +1371,6 @@
    ],
    "trend": [
     1,
-    1,
     0,
     1,
     0,
@@ -2222,7 +1397,6 @@
    },
    "links": [],
    "trend": [
-    4,
     5,
     4,
     13,
@@ -2250,7 +1424,6 @@
    },
    "links": [],
    "trend": [
-    2,
     2,
     2,
     1,
@@ -2361,7 +1534,6 @@
     }
    ],
    "trend": [
-    14,
     35,
     9,
     42,
@@ -2431,7 +1603,6 @@
     }
    ],
    "trend": [
-    3,
     13,
     8,
     9,
@@ -2485,7 +1656,6 @@
     }
    ],
    "trend": [
-    10,
     6,
     6,
     12,
@@ -2595,7 +1765,6 @@
     }
    ],
    "trend": [
-    36,
     31,
     49,
     21,
@@ -2653,7 +1822,6 @@
     }
    ],
    "trend": [
-    8,
     22,
     15,
     39,
@@ -2699,7 +1867,6 @@
     }
    ],
    "trend": [
-    42,
     37,
     20,
     13,
@@ -2746,7 +1913,6 @@
    ],
    "trend": [
     5,
-    5,
     6,
     5,
     1,
@@ -2791,7 +1957,6 @@
     }
    ],
    "trend": [
-    6,
     3,
     4,
     8,
@@ -2829,7 +1994,6 @@
     }
    ],
    "trend": [
-    0,
     4,
     1,
     4,
@@ -2867,7 +2031,6 @@
     }
    ],
    "trend": [
-    4,
     8,
     7,
     15,
@@ -2905,7 +2068,6 @@
     }
    ],
    "trend": [
-    4,
     5,
     4,
     13,
@@ -2934,7 +2096,6 @@
    },
    "links": [],
    "trend": [
-    9,
     7,
     9,
     4,
@@ -2965,7 +2126,6 @@
    "trend": [
     2,
     2,
-    2,
     1,
     3,
     2,
@@ -2992,7 +2152,6 @@
    },
    "links": [],
    "trend": [
-    1,
     1,
     0,
     1,
@@ -3056,7 +2215,6 @@
     }
    ],
    "trend": [
-    4,
     5,
     4,
     13,
@@ -3167,7 +2325,6 @@
     }
    ],
    "trend": [
-    14,
     35,
     9,
     42,
@@ -3262,7 +2419,6 @@
     }
    ],
    "trend": [
-    8,
     22,
     15,
     39,
@@ -3329,7 +2485,6 @@
     }
    ],
    "trend": [
-    3,
     13,
     8,
     9,
@@ -3404,7 +2559,6 @@
     }
    ],
    "trend": [
-    6,
     3,
     4,
     8,
@@ -3475,7 +2629,6 @@
     }
    ],
    "trend": [
-    4,
     8,
     7,
     15,
@@ -3531,7 +2684,6 @@
    ],
    "trend": [
     5,
-    5,
     6,
     5,
     1,
@@ -3585,7 +2737,6 @@
     }
    ],
    "trend": [
-    9,
     7,
     9,
     4,
@@ -3696,7 +2847,6 @@
     }
    ],
    "trend": [
-    36,
     31,
     49,
     21,
@@ -3743,7 +2893,6 @@
     }
    ],
    "trend": [
-    10,
     6,
     6,
     12,
@@ -3782,7 +2931,6 @@
     }
    ],
    "trend": [
-    42,
     37,
     20,
     13,
@@ -3821,7 +2969,6 @@
     }
    ],
    "trend": [
-    0,
     4,
     1,
     4,
@@ -3853,7 +3000,6 @@
    "trend": [
     2,
     2,
-    2,
     1,
     3,
     2,
@@ -3881,7 +3027,6 @@
    },
    "links": [],
    "trend": [
-    1,
     1,
     0,
     1,
@@ -3994,7 +3139,6 @@
     }
    ],
    "trend": [
-    14,
     35,
     9,
     42,
@@ -4106,7 +3250,6 @@
     }
    ],
    "trend": [
-    36,
     31,
     49,
     21,
@@ -4167,7 +3310,6 @@
    ],
    "trend": [
     5,
-    5,
     6,
     5,
     1,
@@ -4218,7 +3360,6 @@
     }
    ],
    "trend": [
-    10,
     6,
     6,
     12,
@@ -4262,7 +3403,6 @@
     }
    ],
    "trend": [
-    4,
     5,
     4,
     13,
@@ -4326,7 +3466,6 @@
     }
    ],
    "trend": [
-    4,
     8,
     7,
     15,
@@ -4406,7 +3545,6 @@
     }
    ],
    "trend": [
-    8,
     22,
     15,
     39,
@@ -4470,7 +3608,6 @@
     }
    ],
    "trend": [
-    6,
     3,
     4,
     8,
@@ -4514,7 +3651,6 @@
     }
    ],
    "trend": [
-    42,
     37,
     20,
     13,
@@ -4554,7 +3690,6 @@
     }
    ],
    "trend": [
-    0,
     4,
     1,
     4,
@@ -4594,7 +3729,6 @@
     }
    ],
    "trend": [
-    3,
     13,
     8,
     9,
@@ -4634,7 +3768,6 @@
     }
    ],
    "trend": [
-    9,
     7,
     9,
     4,
@@ -4676,7 +3809,6 @@
    "trend": [
     2,
     2,
-    2,
     1,
     3,
     2,
@@ -4706,7 +3838,6 @@
    "links": [],
    "trend": [
     1,
-    1,
     0,
     1,
     0,
@@ -4724,17 +3855,241 @@
  ],
  "2026/11/14": [
   {
+   "group": "交通安全",
+   "score": 7.59,
+   "today": 27,
+   "last3": 55,
+   "growth": 108,
+   "baseline": 13,
+   "pv": true,
+   "sample": "[問卦] 行人闖紅燈，駕駛為禮讓發生車禍？",
+   "sources": {
+    "ptt": 27,
+    "yt": 80
+   },
+   "links": [
+    {
+     "title": "[問卦] 行人闖紅燈，駕駛為禮讓發生車禍？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794623127.A.4C4.html"
+    },
+    {
+     "title": "[問卦] 路上低血糖該叫救護車嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794587582.A.954.html"
+    },
+    {
+     "title": "[閒聊] 車禍外部成本",
+     "url": "https://www.ptt.cc/bbs/car/M.1794621334.A.A4A.html"
+    },
+    {
+     "title": "[新聞] 毒駕猴又肇禍！台中BMW路口闖紅燈 猛撞瑪",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794661153.A.714.html"
+    },
+    {
+     "title": "[問卦] 為何高雄和台南的交通差這麼多啊",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794659613.A.034.html"
+    },
+    {
+     "title": "[新聞] 蔣萬安宣傳車「布幔遮車牌」 警揪違規最4",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794658956.A.241.html"
+    },
+    {
+     "title": "[問卦] 記得高雄酒駕撞一家四口？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794653383.A.7AE.html"
+    },
+    {
+     "title": "[新聞] 友人車禍亡！殯葬男冰庫「拉出遺體」拍照",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794652851.A.06B.html"
+    },
+    {
+     "title": "Re: [新聞] 女外送員遭酒駕撞腦死 夫:會陪2歲兒長大",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794651268.A.D79.html"
+    },
+    {
+     "title": "[新聞] 女外送員遭酒駕撞腦死 夫:會陪2歲兒長大",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794648822.A.0FF.html"
+    },
+    {
+     "title": "[問卦] 台北今天有個安心三小的遊行人多嗎?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794645690.A.B2F.html"
+    },
+    {
+     "title": "[討論] 台北捷運也太廢了吧",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794667278.A.E22.html"
+    },
+    {
+     "title": "[討論] 支持者稱讚蔣萬安「改善內湖交通、砍樹」",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794652952.A.838.html"
+    },
+    {
+     "title": "[新聞] 宣傳車無後車牌　蔣萬安：了解中.若違規",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794653495.A.E3C.html"
+    },
+    {
+     "title": "Re: [討論] 覺得安心上路遊行人數不及格還是沉沒螺旋",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794647701.A.B6B.html"
+    },
+    {
+     "title": "Re: [討論] 覺得安心上路遊行人數不及格還是沉沒螺旋",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794644477.A.7A1.html"
+    },
+    {
+     "title": "Re: [討論] 覺得安心上路遊行人數不及格還是沉沒螺旋",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794644708.A.70B.html"
+    },
+    {
+     "title": "Re: [討論] 覺得安心上路遊行人數不及格還是沉沒螺旋?",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794645318.A.353.html"
+    },
+    {
+     "title": "Re: [討論] 覺得安心上路遊行人數不及格還是沉沒螺旋?",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794642475.A.DF8.html"
+    },
+    {
+     "title": "Re: [討論] 覺得安心上路遊行人數不及格還是沉沒",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794643281.A.775.html"
+    }
+   ],
+   "trend": [
+    22,
+    15,
+    39,
+    13,
+    10,
+    19,
+    13,
+    13,
+    11,
+    7,
+    16,
+    12,
+    27
+   ],
+   "lead": 1
+  },
+  {
+   "group": "兒少家庭",
+   "score": 1.5,
+   "today": 40,
+   "last3": 117,
+   "growth": 44,
+   "baseline": 27.71,
+   "pv": true,
+   "sample": "[問卦] 少子化是誰的問題？",
+   "sources": {
+    "ptt": 40,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[問卦] 少子化是誰的問題？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794619074.A.4C0.html"
+    },
+    {
+     "title": "[問卦] 育兒輔助幹嘛啦",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794615149.A.5E5.html"
+    },
+    {
+     "title": "Re: [問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794616130.A.ACA.html"
+    },
+    {
+     "title": "[問卦] 暖市營養午餐有天然食材比台北香鬆頂太多",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794615047.A.666.html"
+    },
+    {
+     "title": "Re: [問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794592661.A.1D7.html"
+    },
+    {
+     "title": "Re: [問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794591497.A.FD0.html"
+    },
+    {
+     "title": "[問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794586613.A.4E8.html"
+    },
+    {
+     "title": "[新聞] 高雄營養午餐狂出包！三杯雞竟藏「整隻小",
+     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794587886.A.76D.html"
+    },
+    {
+     "title": "[交換] 兒童鞋子和床圍毛毯與棉被",
+     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794620867.A.85D.html"
+    },
+    {
+     "title": "[食記] 台北。中山國中站-貓下去民生早午餐",
+     "url": "https://www.ptt.cc/bbs/Food/M.1794619359.A.C2E.html"
+    },
+    {
+     "title": "[新聞] 超狂三杯雞?高雄高工營養午餐驚見「1隻蛙",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794669700.A.BB7.html"
+    },
+    {
+     "title": "[問卦] 少子化逼你工作到70歲你真的可以嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794661581.A.2C0.html"
+    },
+    {
+     "title": "[問卦] 沒生小孩的40+平時都在聊啥阿?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794662505.A.7A4.html"
+    },
+    {
+     "title": "[問卦] 為何台灣老闆不能理解沒生小孩的人！！",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794656552.A.02B.html"
+    },
+    {
+     "title": "[問卦] 台灣少子化的原因是台男賺太少吧？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794651820.A.DFB.html"
+    },
+    {
+     "title": "Re: [問卦] 台灣少子化的原因是台男賺太少吧？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794652289.A.B8C.html"
+    },
+    {
+     "title": "[問卦] 沒人發現少子化國防會出大問題嗎",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794648741.A.A07.html"
+    },
+    {
+     "title": "[問卦] 年輕人口嚴重萎縮，為什麼叫少子化？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794648829.A.6F7.html"
+    },
+    {
+     "title": "Re: [問卦] 解決少子化就是增加結婚率",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794645888.A.AD3.html"
+    },
+    {
+     "title": "Re: [問卦] 解決少子化就是增加結婚率",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794646074.A.DF4.html"
+    }
+   ],
+   "trend": [
+    35,
+    9,
+    42,
+    12,
+    23,
+    15,
+    15,
+    9,
+    20,
+    58,
+    38,
+    39,
+    40
+   ],
+   "lead": 0
+  },
+  {
    "group": "AI 科技",
-   "score": 0.0,
-   "today": 17,
-   "last3": 134,
-   "growth": -59,
+   "score": 0.71,
+   "today": 46,
+   "last3": 163,
+   "growth": 11,
    "baseline": 41.43,
    "pv": false,
    "sample": "[問卦] 川普為什麼不派美國人來台積電上班？",
    "sources": {
-    "ptt": 17,
-    "yt": 0
+    "ptt": 46,
+    "yt": 16
    },
    "links": [
     {
@@ -4804,10 +4159,21 @@
     {
      "title": "[新聞] 台積電Q3拿下各國政府補助款約1670億！前",
      "url": "https://www.ptt.cc/bbs/Stock/M.1794623068.A.698.html"
+    },
+    {
+     "title": "[問卦] 台灣有seedance sora的AI影片腦嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794670444.A.425.html"
+    },
+    {
+     "title": "[問卦] 看AI硬不起來是電子陽痿嗎",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794665803.A.D92.html"
+    },
+    {
+     "title": "[問卦] 為什麼AI劇總是糖醋排骨？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794664682.A.83D.html"
     }
    ],
    "trend": [
-    36,
     31,
     49,
     21,
@@ -4820,139 +4186,125 @@
     31,
     47,
     70,
-    17
-   ],
-   "lead": 1
-  },
-  {
-   "group": "兒少家庭",
-   "score": 0.0,
-   "today": 10,
-   "last3": 87,
-   "growth": -64,
-   "baseline": 27.71,
-   "pv": true,
-   "sample": "[問卦] 少子化是誰的問題？",
-   "sources": {
-    "ptt": 10,
-    "yt": 0
-   },
-   "links": [
-    {
-     "title": "[問卦] 少子化是誰的問題？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794619074.A.4C0.html"
-    },
-    {
-     "title": "[問卦] 育兒輔助幹嘛啦",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794615149.A.5E5.html"
-    },
-    {
-     "title": "Re: [問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794616130.A.ACA.html"
-    },
-    {
-     "title": "[問卦] 暖市營養午餐有天然食材比台北香鬆頂太多",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794615047.A.666.html"
-    },
-    {
-     "title": "Re: [問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794592661.A.1D7.html"
-    },
-    {
-     "title": "Re: [問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794591497.A.FD0.html"
-    },
-    {
-     "title": "[問卦] 沒有生小孩的人拼命鼓吹其他人生小孩？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794586613.A.4E8.html"
-    },
-    {
-     "title": "[新聞] 高雄營養午餐狂出包！三杯雞竟藏「整隻小",
-     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794587886.A.76D.html"
-    },
-    {
-     "title": "[交換] 兒童鞋子和床圍毛毯與棉被",
-     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794620867.A.85D.html"
-    },
-    {
-     "title": "[食記] 台北。中山國中站-貓下去民生早午餐",
-     "url": "https://www.ptt.cc/bbs/Food/M.1794619359.A.C2E.html"
-    }
-   ],
-   "trend": [
-    14,
-    35,
-    9,
-    42,
-    12,
-    23,
-    15,
-    15,
-    9,
-    20,
-    58,
-    38,
-    39,
-    10
+    46
    ],
    "lead": 0
   },
   {
-   "group": "交通安全",
-   "score": 0.0,
-   "today": 3,
-   "last3": 31,
-   "growth": -77,
-   "baseline": 13,
+   "group": "長照高齡",
+   "score": 0.36,
+   "today": 6,
+   "last3": 19,
+   "growth": 14,
+   "baseline": 5.29,
    "pv": true,
-   "sample": "[問卦] 行人闖紅燈，駕駛為禮讓發生車禍？",
+   "sample": "潛水PTT 20年的一位老人",
    "sources": {
-    "ptt": 3,
+    "ptt": 6,
+    "yt": 1
+   },
+   "links": [
+    {
+     "title": "潛水PTT 20年的一位老人",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794668969.A.81B.html"
+    },
+    {
+     "title": "[新聞] 柯文哲開砲！轟老人健保補助「賴清德瘋了",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794648772.A.6A8.html"
+    },
+    {
+     "title": "Re: [問卦] 多少錢才夠養老?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794637579.A.FA9.html"
+    },
+    {
+     "title": "[問卦] 多少錢才夠養老?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794636912.A.194.html"
+    },
+    {
+     "title": "Re: [問卦] 沒有小孩，是錢可以省下來養老嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794635450.A.2AC.html"
+    },
+    {
+     "title": "[問卦] 沒有小孩，是錢可以省下來養老嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794634432.A.E39.html"
+    }
+   ],
+   "trend": [
+    5,
+    6,
+    5,
+    1,
+    8,
+    6,
+    9,
+    1,
+    4,
+    4,
+    6,
+    7,
+    6
+   ],
+   "lead": 0
+  },
+  {
+   "group": "公共運輸",
+   "score": 0.0,
+   "today": 4,
+   "last3": 23,
+   "growth": -57,
+   "baseline": 9.29,
+   "pv": true,
+   "sample": "[賣/新竹/竹北]坤山一景高鐵三房平車",
+   "sources": {
+    "ptt": 4,
     "yt": 0
    },
    "links": [
     {
-     "title": "[問卦] 行人闖紅燈，駕駛為禮讓發生車禍？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794623127.A.4C4.html"
+     "title": "[賣/新竹/竹北]坤山一景高鐵三房平車",
+     "url": "https://www.ptt.cc/bbs/home-sale/M.1794622989.A.BFC.html"
     },
     {
-     "title": "[問卦] 路上低血糖該叫救護車嗎？",
-     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794587582.A.954.html"
+     "title": "[問卦] 高鐵搭車體驗是不是下降？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794627975.A.60F.html"
     },
     {
-     "title": "[閒聊] 車禍外部成本",
-     "url": "https://www.ptt.cc/bbs/car/M.1794621334.A.A4A.html"
+     "title": "[討論] 台北捷運也太廢了吧",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794667278.A.E22.html"
+    },
+    {
+     "title": "[新聞] 捷運上不准交換洋流飄帶？ 蔣萬安：北捷",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794632759.A.17E.html"
     }
    ],
    "trend": [
+    3,
+    4,
     8,
-    22,
-    15,
-    39,
+    1,
+    3,
+    17,
     13,
-    10,
-    19,
-    13,
-    13,
+    8,
+    4,
+    4,
     11,
-    7,
-    16,
-    12,
-    3
+    8,
+    4
    ],
    "lead": 0
   },
   {
    "group": "電價能源",
    "score": 0.0,
-   "today": 2,
-   "last3": 20,
-   "growth": -66,
+   "today": 3,
+   "last3": 21,
+   "growth": -49,
    "baseline": 5.86,
    "pv": true,
    "sample": "[問卦] 甜甜圈什麼時候漲價的",
    "sources": {
-    "ptt": 2,
+    "ptt": 3,
     "yt": 0
    },
    "links": [
@@ -4963,10 +4315,13 @@
     {
      "title": "[問卦] 夜市牛排是悄悄漲價了嗎?",
      "url": "https://www.ptt.cc/bbs/Gossiping/M.1794587830.A.207.html"
+    },
+    {
+     "title": "[新聞] 核能公投首場辯論「藍喊重啟核電卻無方案",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794642274.A.313.html"
     }
    ],
    "trend": [
-    4,
     8,
     7,
     15,
@@ -4979,7 +4334,7 @@
     2,
     10,
     8,
-    2
+    3
    ],
    "lead": 0
   },
@@ -5007,7 +4362,6 @@
     }
    ],
    "trend": [
-    4,
     5,
     4,
     13,
@@ -5027,93 +4381,63 @@
   {
    "group": "環境氣候",
    "score": 0.0,
-   "today": 1,
-   "last3": 3,
-   "growth": 133,
+   "today": 2,
+   "last3": 4,
+   "growth": 367,
    "baseline": 0.43,
    "pv": true,
    "sample": "[問卦] 環保少女嘲諷氣候抗議活動者 他們還在搞?",
    "sources": {
-    "ptt": 1,
+    "ptt": 2,
     "yt": 0
    },
    "links": [
     {
      "title": "[問卦] 環保少女嘲諷氣候抗議活動者 他們還在搞?",
      "url": "https://www.ptt.cc/bbs/Gossiping/M.1794623015.A.104.html"
-    }
-   ],
-   "trend": [
-    2,
-    2,
-    2,
-    1,
-    3,
-    2,
-    0,
-    1,
-    0,
-    0,
-    0,
-    0,
-    2,
-    1
-   ],
-   "lead": 0
-  },
-  {
-   "group": "公共運輸",
-   "score": 0.0,
-   "today": 1,
-   "last3": 20,
-   "growth": -89,
-   "baseline": 9.29,
-   "pv": true,
-   "sample": "[賣/新竹/竹北]坤山一景高鐵三房平車",
-   "sources": {
-    "ptt": 1,
-    "yt": 0
-   },
-   "links": [
+    },
     {
-     "title": "[賣/新竹/竹北]坤山一景高鐵三房平車",
-     "url": "https://www.ptt.cc/bbs/home-sale/M.1794622989.A.BFC.html"
+     "title": "Re: [問卦] 環保少女嘲諷氣候抗議活動者 他們還在搞?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794630124.A.B9A.html"
     }
    ],
    "trend": [
-    6,
-    3,
-    4,
-    8,
+    2,
+    2,
     1,
     3,
-    17,
-    13,
-    8,
-    4,
-    4,
-    11,
-    8,
-    1
+    2,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2
    ],
    "lead": 0
   },
   {
    "group": "都更危老",
    "score": 0.0,
-   "today": 0,
-   "last3": 5,
-   "growth": -100,
+   "today": 1,
+   "last3": 6,
+   "growth": -92,
    "baseline": 11.86,
    "pv": true,
-   "sample": "",
+   "sample": "[閒聊] 庭院小別墅改建",
    "sources": {
-    "ptt": 0,
+    "ptt": 1,
     "yt": 0
    },
-   "links": [],
+   "links": [
+    {
+     "title": "[閒聊] 庭院小別墅改建",
+     "url": "https://www.ptt.cc/bbs/home-sale/M.1794661880.A.FF0.html"
+    }
+   ],
    "trend": [
-    42,
     37,
     20,
     13,
@@ -5126,39 +4450,43 @@
     4,
     2,
     3,
-    0
+    1
    ],
    "lead": 0
   },
   {
-   "group": "長照高齡",
+   "group": "醫療健保",
    "score": 0.0,
-   "today": 0,
-   "last3": 13,
-   "growth": -100,
-   "baseline": 5.29,
+   "today": 1,
+   "last3": 9,
+   "growth": -70,
+   "baseline": 3.29,
    "pv": true,
-   "sample": "",
+   "sample": "[新聞] 柯文哲開砲！轟老人健保補助「賴清德瘋了",
    "sources": {
-    "ptt": 0,
-    "yt": 0
+    "ptt": 1,
+    "yt": 2
    },
-   "links": [],
+   "links": [
+    {
+     "title": "[新聞] 柯文哲開砲！轟老人健保補助「賴清德瘋了",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794648772.A.6A8.html"
+    }
+   ],
    "trend": [
-    5,
-    5,
-    6,
-    5,
-    1,
-    8,
-    6,
-    9,
-    1,
-    4,
-    4,
-    6,
     7,
-    0
+    9,
+    4,
+    3,
+    16,
+    4,
+    6,
+    2,
+    3,
+    0,
+    6,
+    2,
+    1
    ],
    "lead": 0
   },
@@ -5177,7 +4505,6 @@
    },
    "links": [],
    "trend": [
-    0,
     4,
     1,
     4,
@@ -5209,7 +4536,6 @@
    },
    "links": [],
    "trend": [
-    3,
     13,
     8,
     9,
@@ -5221,38 +4547,6 @@
     7,
     10,
     9,
-    2,
-    0
-   ],
-   "lead": 0
-  },
-  {
-   "group": "醫療健保",
-   "score": 0.0,
-   "today": 0,
-   "last3": 8,
-   "growth": -100,
-   "baseline": 3.29,
-   "pv": true,
-   "sample": "",
-   "sources": {
-    "ptt": 0,
-    "yt": 0
-   },
-   "links": [],
-   "trend": [
-    9,
-    7,
-    9,
-    4,
-    3,
-    16,
-    4,
-    6,
-    2,
-    3,
-    0,
-    6,
     2,
     0
    ],
@@ -5273,7 +4567,6 @@
    },
    "links": [],
    "trend": [
-    10,
     6,
     6,
     12,
@@ -5306,6 +4599,574 @@
    "links": [],
    "trend": [
     1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "lead": 0
+  }
+ ],
+ "2026/11/15": [
+  {
+   "group": "AI 科技",
+   "score": 0.0,
+   "today": 10,
+   "last3": 126,
+   "growth": -77,
+   "baseline": 43,
+   "pv": false,
+   "sample": "[問卦]黃仁勳事件 日韓台&華裔AI騙局 被美國制裁",
+   "sources": {
+    "ptt": 10,
+    "yt": 3
+   },
+   "links": [
+    {
+     "title": "[問卦]黃仁勳事件 日韓台&華裔AI騙局 被美國制裁",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794709196.A.8B7.html"
+    },
+    {
+     "title": "Re: [問卦] 黃仁勳薪水怎麼跟台積電主管差沒多少？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794707547.A.39E.html"
+    },
+    {
+     "title": "[問卦] 黃仁勳薪水怎麼跟台積電主管差沒多少？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794704116.A.C77.html"
+    },
+    {
+     "title": "Re: [問卦] 美國真的能完全堵死中國的AI發展嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794701962.A.5CB.html"
+    },
+    {
+     "title": "[問卦] 為啥台灣不主動調查輝達晶片流向？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794702407.A.B14.html"
+    },
+    {
+     "title": "Re: [問卦] 美國真的能完全堵死中國的AI發展嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794672882.A.496.html"
+    },
+    {
+     "title": "[討論] 無論賣晶片或小吃店，都能捲入政治鬥爭~",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794700209.A.23A.html"
+    },
+    {
+     "title": "[交換] 掃地機器人交換手持吸塵器",
+     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794709646.A.D27.html"
+    },
+    {
+     "title": "Re: [新聞] 受黃仁勳辭職衝擊 中國AI股票暴跌",
+     "url": "https://www.ptt.cc/bbs/Stock/M.1794677475.A.5BE.html"
+    },
+    {
+     "title": "[新聞] 黃仁勳走後誰來當「AI央行」？逾5,300億",
+     "url": "https://www.ptt.cc/bbs/Stock/M.1794699868.A.070.html"
+    }
+   ],
+   "trend": [
+    31,
+    49,
+    21,
+    39,
+    120,
+    35,
+    30,
+    41,
+    36,
+    31,
+    47,
+    70,
+    46,
+    10
+   ],
+   "lead": 1
+  },
+  {
+   "group": "兒少家庭",
+   "score": 0.0,
+   "today": 5,
+   "last3": 84,
+   "growth": -84,
+   "baseline": 31.29,
+   "pv": true,
+   "sample": "[問卦] 有生小孩的人比較關心下一代？",
+   "sources": {
+    "ptt": 5,
+    "yt": 1
+   },
+   "links": [
+    {
+     "title": "[問卦] 有生小孩的人比較關心下一代？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794708069.A.91C.html"
+    },
+    {
+     "title": "Re: [問卦] 台灣少子化的原因是台男賺太少吧？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794679244.A.2AC.html"
+    },
+    {
+     "title": "Re: [問卦] 少子化逼你工作到70歲你真的可以嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794676628.A.51D.html"
+    },
+    {
+     "title": "Re: [問卦] 少子化逼你工作到70歲你真的可以嗎？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794677969.A.F18.html"
+    },
+    {
+     "title": "[交換] 20吋兒童腳踏車換牛奶",
+     "url": "https://www.ptt.cc/bbs/Kaohsiung/M.1794709912.A.792.html"
+    }
+   ],
+   "trend": [
+    35,
+    9,
+    42,
+    12,
+    23,
+    15,
+    15,
+    9,
+    20,
+    58,
+    38,
+    39,
+    40,
+    5
+   ],
+   "lead": 0
+  },
+  {
+   "group": "房市政策",
+   "score": 0.0,
+   "today": 5,
+   "last3": 7,
+   "growth": -22,
+   "baseline": 6.43,
+   "pv": false,
+   "sample": "[新聞] 葡萄牙爆發大規模示威　抗議房價飆漲居歐",
+   "sources": {
+    "ptt": 5,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[新聞] 葡萄牙爆發大規模示威　抗議房價飆漲居歐",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794699322.A.1FF.html"
+    },
+    {
+     "title": "[問卦] 有小孩的人，大部份都有買房",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794696166.A.A1A.html"
+    },
+    {
+     "title": "[問卦] 網路上都在說買房的頭期款不如歐印股市?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794678142.A.5C4.html"
+    },
+    {
+     "title": "Re: [問卦] 網路上都在說買房的頭期款不如歐印股市?",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794681389.A.F98.html"
+    },
+    {
+     "title": "[新聞] 黃仁勳走後誰來當「AI央行」？逾5,300億",
+     "url": "https://www.ptt.cc/bbs/Stock/M.1794699868.A.070.html"
+    }
+   ],
+   "trend": [
+    13,
+    8,
+    9,
+    9,
+    5,
+    5,
+    8,
+    9,
+    7,
+    10,
+    9,
+    2,
+    0,
+    5
+   ],
+   "lead": 0
+  },
+  {
+   "group": "交通安全",
+   "score": 0.0,
+   "today": 2,
+   "last3": 41,
+   "growth": -86,
+   "baseline": 14.14,
+   "pv": true,
+   "sample": "[新聞] 救護驚魂！三重男意識模糊椅式擔架搬運突",
+   "sources": {
+    "ptt": 2,
+    "yt": 1
+   },
+   "links": [
+    {
+     "title": "[新聞] 救護驚魂！三重男意識模糊椅式擔架搬運突",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794706651.A.706.html"
+    },
+    {
+     "title": "[討論] 台中捷運….",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794708253.A.52F.html"
+    }
+   ],
+   "trend": [
+    22,
+    15,
+    39,
+    13,
+    10,
+    19,
+    13,
+    13,
+    11,
+    7,
+    16,
+    12,
+    27,
+    2
+   ],
+   "lead": 0
+  },
+  {
+   "group": "長照高齡",
+   "score": 0.0,
+   "today": 2,
+   "last3": 15,
+   "growth": -62,
+   "baseline": 5.29,
+   "pv": true,
+   "sample": "[問卦] 反年改老人為何不替下一代著想？",
+   "sources": {
+    "ptt": 2,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[問卦] 反年改老人為何不替下一代著想？",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794709365.A.303.html"
+    },
+    {
+     "title": "[討論] 統一之後，陸籍醫護會來台灣照顧老人嗎?",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794709039.A.A80.html"
+    }
+   ],
+   "trend": [
+    5,
+    6,
+    5,
+    1,
+    8,
+    6,
+    9,
+    1,
+    4,
+    4,
+    6,
+    7,
+    6,
+    2
+   ],
+   "lead": 0
+  },
+  {
+   "group": "公共運輸",
+   "score": 0.0,
+   "today": 2,
+   "last3": 14,
+   "growth": -73,
+   "baseline": 7.43,
+   "pv": true,
+   "sample": "[討論] 台中捷運….",
+   "sources": {
+    "ptt": 2,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[討論] 台中捷運….",
+     "url": "https://www.ptt.cc/bbs/HatePolitics/M.1794708253.A.52F.html"
+    },
+    {
+     "title": "[閒聊] 竹北高鐵 為何沒發展出商店街？",
+     "url": "https://www.ptt.cc/bbs/home-sale/M.1794708076.A.30F.html"
+    }
+   ],
+   "trend": [
+    3,
+    4,
+    8,
+    1,
+    3,
+    17,
+    13,
+    8,
+    4,
+    4,
+    11,
+    8,
+    4,
+    2
+   ],
+   "lead": 0
+  },
+  {
+   "group": "電價能源",
+   "score": 0.0,
+   "today": 1,
+   "last3": 12,
+   "growth": -82,
+   "baseline": 5.71,
+   "pv": true,
+   "sample": "[新聞]柯志恩緊咬光電獻金 賴瑞隆反擊「蔣萬安也",
+   "sources": {
+    "ptt": 1,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[新聞]柯志恩緊咬光電獻金 賴瑞隆反擊「蔣萬安也",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794706542.A.4B6.html"
+    }
+   ],
+   "trend": [
+    8,
+    7,
+    15,
+    9,
+    16,
+    4,
+    2,
+    4,
+    11,
+    2,
+    10,
+    8,
+    3,
+    1
+   ],
+   "lead": 0
+  },
+  {
+   "group": "環境氣候",
+   "score": 0.0,
+   "today": 1,
+   "last3": 5,
+   "growth": 40,
+   "baseline": 0.71,
+   "pv": true,
+   "sample": "[新聞] 空污法修惡》中火8機組提前關機 逼2028年",
+   "sources": {
+    "ptt": 1,
+    "yt": 0
+   },
+   "links": [
+    {
+     "title": "[新聞] 空污法修惡》中火8機組提前關機 逼2028年",
+     "url": "https://www.ptt.cc/bbs/Gossiping/M.1794706456.A.70D.html"
+    }
+   ],
+   "trend": [
+    2,
+    2,
+    1,
+    3,
+    2,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    1
+   ],
+   "lead": 0
+  },
+  {
+   "group": "都更危老",
+   "score": 0.0,
+   "today": 0,
+   "last3": 4,
+   "growth": -100,
+   "baseline": 3.86,
+   "pv": true,
+   "sample": "",
+   "sources": {
+    "ptt": 0,
+    "yt": 0
+   },
+   "links": [],
+   "trend": [
+    37,
+    20,
+    13,
+    8,
+    6,
+    57,
+    8,
+    6,
+    3,
+    4,
+    2,
+    3,
+    1,
+    0
+   ],
+   "lead": 0
+  },
+  {
+   "group": "租屋居住",
+   "score": 0.0,
+   "today": 0,
+   "last3": 2,
+   "growth": -100,
+   "baseline": 1.71,
+   "pv": true,
+   "sample": "",
+   "sources": {
+    "ptt": 0,
+    "yt": 1
+   },
+   "links": [],
+   "trend": [
+    4,
+    1,
+    4,
+    0,
+    0,
+    1,
+    3,
+    1,
+    2,
+    2,
+    2,
+    2,
+    0,
+    0
+   ],
+   "lead": 0
+  },
+  {
+   "group": "勞工權益",
+   "score": 0.0,
+   "today": 0,
+   "last3": 5,
+   "growth": -100,
+   "baseline": 2.71,
+   "pv": true,
+   "sample": "",
+   "sources": {
+    "ptt": 0,
+    "yt": 0
+   },
+   "links": [],
+   "trend": [
+    5,
+    4,
+    13,
+    4,
+    0,
+    2,
+    3,
+    1,
+    0,
+    2,
+    8,
+    3,
+    2,
+    0
+   ],
+   "lead": 0
+  },
+  {
+   "group": "醫療健保",
+   "score": 0.0,
+   "today": 0,
+   "last3": 3,
+   "growth": -100,
+   "baseline": 2.86,
+   "pv": true,
+   "sample": "",
+   "sources": {
+    "ptt": 0,
+    "yt": 0
+   },
+   "links": [],
+   "trend": [
+    7,
+    9,
+    4,
+    3,
+    16,
+    4,
+    6,
+    2,
+    3,
+    0,
+    6,
+    2,
+    1,
+    0
+   ],
+   "lead": 0
+  },
+  {
+   "group": "教育",
+   "score": 0.0,
+   "today": 0,
+   "last3": 5,
+   "growth": -100,
+   "baseline": 3.71,
+   "pv": true,
+   "sample": "",
+   "sources": {
+    "ptt": 0,
+    "yt": 0
+   },
+   "links": [],
+   "trend": [
+    6,
+    6,
+    12,
+    2,
+    5,
+    4,
+    4,
+    1,
+    6,
+    6,
+    4,
+    5,
+    0,
+    0
+   ],
+   "lead": 0
+  },
+  {
+   "group": "食安",
+   "score": 0.0,
+   "today": 0,
+   "last3": 0,
+   "growth": -100,
+   "baseline": 0.14,
+   "pv": true,
+   "sample": "",
+   "sources": {
+    "ptt": 0,
+    "yt": 0
+   },
+   "links": [],
+   "trend": [
     1,
     0,
     1,
@@ -5315,6 +5176,7 @@
     0,
     0,
     1,
+    0,
     0,
     0,
     0,
